@@ -1,2 +1,5 @@
-public class condo {
+/**
+ *
+ */
+public class condo extends residence {
 }

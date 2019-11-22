@@ -1,2 +1,5 @@
-public class house {
+/**
+ *
+ */
+public class house extends residence {
 }
