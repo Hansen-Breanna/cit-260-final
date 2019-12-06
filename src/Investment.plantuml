@@ -8,23 +8,29 @@ class Residence {
     -taxes: double { get set }
     -address: String { get set } - where to put?
     -interestRate: double { get set }
+    -percentageDown { get }
+    -rentPerSqFoot: double { get }
 
     +Residence()
-    +Residence(bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double, taxes: double, address: String)
+    +Residence(bedrooms: int, bathrooms: int, sqft: int,
+         purchasePrice: double, taxes: double, address: String)
 
-    +percentageDown(purchasePrice: double): double
-    +pricePerSqFt(purchasePrice: double, sqft: int): double
-    +monthlyPayment(purchasePrice: double, interestRate: double): double
-    +rentalIncome(sqft: int): double
-    +monthlyNetProfit(monthlyPayment, taxes: double, rentalIncome()): double
-    +bestDeal(): String
+    +percentageDown(): double
+    +pricePerSqFt(): double
+    +monthlyPayment(): double
+    +rentalIncome(): double
+    +monthlyNetProfit(): double
     +toString(): String
 }
 
 class House extends Residence {
-    +House()
-    +House(bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double,  taxes: double, address: String)
 
+    +House()
+    +House(bedrooms: int, bathrooms: int,
+         sqft: int, purchasePrice: double,
+         taxes: double, address: String)
+
+    +monthlyNetProfit(): double
     +toString(): String
 }
 
@@ -33,24 +39,28 @@ class Condo extends Residence {
     -amenities: String
 
     +Condo()
-    +Condo(hoaFee: double, amenities: String, bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double,  taxes: double, address: String)
+    +Condo(bedrooms: int, bathrooms: int, sqft: int,
+         purchasePrice: double, taxes: double, address: String,
+         hoaFee: double, amenities: String, )
 
-    +monthlyNetProfit(hoaFee: double, monthlyPayment, taxes: double, rentalIncome()): double
-    +toString: String
+    +monthlyNetProfit(): double
+    +toString(): String
 }
 
 class MultiPlex extends Residence {
     -units: int { get set }
-    +utilities: double { get set }
+    -utilities: double { get set }
 
     +MultiPlex()
-    +MultiPex(units: int, bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double,  taxes: double, address: String)
+    +MultiPex(units: int, bedrooms: int,
+         bathrooms: int, sqft: int,
+         purchasePrice: double, taxes: double,
+         address: String)
 
-    +rentalIncome(units: int, sqft: int): double
-    +monthlyNetProfit(utilities: double, monthlyPayment, taxes: double, rentalIncome()): double
-    +portionRentalIncome(units: int, rentalIncome()): double
+    +monthlyNetProfit(): double
     +toString(): String
 }
 
 realEstateInvestmentTool o-- Residence
+
 @enduml
