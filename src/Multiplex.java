@@ -16,10 +16,18 @@ public class Multiplex extends Residence {
 
     /**
      * Constructor
+     * @param address
+     * @param bedrooms
+     * @param bathrooms
+     * @param sqfeet
+     * @param purchasePrice
+     * @param taxes
      * @param units
      * @param utilities
      */
-    public Multiplex(int units, double utilities) {
+    public Multiplex(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes,
+                     int units, double utilities) {
+        super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.units = units;
         this.utilities = utilities;
     }
@@ -59,12 +67,16 @@ public class Multiplex extends Residence {
     /**
      * The monthlyNetProfit method
      * This method calculates the net profit after subtracting utilities, taxes, and mortgage from rental income
+     * @param monthlyPayment
+     * @param taxes
+     * @param rentalIncome
+     * @param utilities
      * @return netProfit
      */
     @Override
-    public double monthlyNetProfit() {
-        var netProfit = 0;
-        return netProfit;
+    public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double utilities) {
+        double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes + utilities);
+        return monthlyNetProfit;
     }
 
     /**
@@ -74,6 +86,6 @@ public class Multiplex extends Residence {
      */
     @Override
     public String toString() {
-
+        return String.format(" ");
     }
 }

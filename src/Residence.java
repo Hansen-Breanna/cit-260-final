@@ -6,7 +6,7 @@ public class Residence {
     //VARIABLES
     private int bedrooms;
     private double bathrooms;
-    private int sqft;
+    private int sqfeet;
     private double purchasePrice;
     private double taxes;
     private String address;
@@ -25,7 +25,7 @@ public class Residence {
     Residence() {
         bedrooms = 0;
         bathrooms = 0;
-        sqft = 0;
+        sqfeet = 0;
         purchasePrice = 0;
         taxes = 0;
         address = null;
@@ -37,20 +37,17 @@ public class Residence {
      * @param address
      * @param bedrooms
      * @param bathrooms
-     * @param sqft
+     * @param sqfeet
      * @param purchasePrice
      * @param taxes
-     * @param interestRate
      */
-    Residence(String address, int bedrooms, int bathrooms, int sqft, double purchasePrice, double taxes,
-              double interestRate) {
+    Residence(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes) {
+        this.address = address;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
-        this.sqft = sqft;
+        this.sqfeet = sqfeet;
         this.purchasePrice = purchasePrice;
         this.taxes = taxes;
-        this.address = address;
-        this.interestRate = interestRate;
     }
 
     //Methods
@@ -73,8 +70,8 @@ public class Residence {
      * @param sqFt
      * @return pricePerSqFt
      */
-    public double pricePerSqFt(double purchasePrice, int sqFt) {
-        double pricePerSqFt = purchasePrice / sqFt;
+    public double pricePerSqFt(double purchasePrice, int sqfeett) {
+        double pricePerSqFt = purchasePrice / sqfeet;
         return pricePerSqFt;
     }
 
@@ -97,12 +94,12 @@ public class Residence {
      * The rentalIncome method
      * This method calculates the possible rental income based on the square footage of the residence and a base
      * rent per square foot unit of .70.
-     * @param sqFt
+     * @param sqfeet
      * @param RENT_PER_SQFT
      * @return
      */
-    public double rentalIncome(int sqFt, double RENT_PER_SQFT) {
-        double rentalIncome = sqFt * RENT_PER_SQFT;
+    public double rentalIncome(int sqfeet, double RENT_PER_SQFT) {
+        double rentalIncome = sqfeet * RENT_PER_SQFT;
         return rentalIncome;
     }
 
@@ -123,6 +120,7 @@ public class Residence {
      * The String method
      * This method returns the String representation of a residence.
      */
+    @Override
     public String toString() {
         return String.format(" ");
     }
@@ -179,14 +177,14 @@ public class Residence {
      * Return sqft
      * @return
      */
-    public int getSqft() { return sqft; }
+    public int getSqfeet() { return sqfeet; }
 
     /**
      * Set sqft
      * @param sqft
      */
-    public void setSqft(int sqft) {
-        this.sqft = sqft;
+    public void setSqfeet(int sqfeet) {
+        this.sqfeet = sqfeet;
     }
 
     /**

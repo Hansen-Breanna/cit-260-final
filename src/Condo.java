@@ -3,8 +3,34 @@
  */
 public class Condo extends Residence {
 
-    private double hoaFee = 0;
-    private String amenities = "null";
+    private double hoaFee;
+    private String amenities;
+
+    /**
+     * Default constructor
+     */
+    Condo() {
+        hoaFee = 0;
+        amenities = "null;"
+    }
+
+    /**
+     * Constructor
+     * @param hoaFee
+     * @param amenities
+     * @param bedrooms
+     * @param bathrooms
+     * @param sqfeet
+     * @param purchasePrice
+     * @param taxes
+     * @param address
+     */
+    Condo(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes, double hoaFee,
+          String amenities) {
+        super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
+        this.hoaFee = hoaFee;
+        this.amenities = amenities;
+    }
 
     /**
      * Return hoaFee
@@ -31,33 +57,13 @@ public class Condo extends Residence {
     }
 
     /**
-     * Set units
+     * Set amenities
      * @param amenities
      */
     public void setAmenities(String amenities) {
         this.amenities = amenities;
     }
 
-    /**
-     * Default constructor
-     */
-    public static Condo();
-
-    /**
-     * Constructor
-     * @param hoaFee
-     * @param amenities
-     * @param bedrooms
-     * @param bathrooms
-     * @param sqFt
-     * @param purchasePrice
-     * @param taxes
-     * @param address
-     */
-    public static Condo(double hoaFee, String amenities, int bedrooms, int bathrooms, int sqFt, double purchasePrice,
-                        double taxes, String address);
-
-    @Override
     //Overrides from Residence class to account for hoaFee
     /**
      * The monthlyNetProfit method
@@ -69,15 +75,19 @@ public class Condo extends Residence {
      * @param hoaFee
      * @return monthlyNetProfit
      */
+    @Override
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
-        return rentalIncome - (monthlyPayment + taxes + hoaFee);
+        double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes + hoaFee);
+        return monthlyNetProfit;
     }
 
-    @Override
     /**
      * The String method
      * This method display the data about each property as a string in a table
      * @return String
      */
-    public String toString();
+    @Override
+    public String toString() {
+        return String.format(" ");
+    }
 }
