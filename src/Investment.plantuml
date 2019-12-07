@@ -12,8 +12,7 @@ class Residence {
     -rentPerSqFoot: double { get }
 
     +Residence()
-    +Residence(bedrooms: int, bathrooms: int, sqft: int,
-         purchasePrice: double, taxes: double, address: String)
+    +Residence(bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double, taxes: double, address: String)
 
     +percentageDown(): double
     +pricePerSqFt(): double
@@ -24,11 +23,11 @@ class Residence {
 }
 
 class House extends Residence {
+    -acreage: double { get set }
 
     +House()
-    +House(bedrooms: int, bathrooms: int,
-         sqft: int, purchasePrice: double,
-         taxes: double, address: String)
+    +House(bedrooms: int, bathrooms: int, sqft: int,
+    purchasePrice: double, taxes: double, address: String)
 
     +monthlyNetProfit(): double
     +toString(): String
@@ -39,23 +38,8 @@ class Condo extends Residence {
     -amenities: String
 
     +Condo()
-    +Condo(bedrooms: int, bathrooms: int, sqft: int,
-         purchasePrice: double, taxes: double, address: String,
-         hoaFee: double, amenities: String, )
-
-    +monthlyNetProfit(): double
-    +toString(): String
-}
-
-class MultiPlex extends Residence {
-    -units: int { get set }
-    -utilities: double { get set }
-
-    +MultiPlex()
-    +MultiPex(units: int, bedrooms: int,
-         bathrooms: int, sqft: int,
-         purchasePrice: double, taxes: double,
-         address: String)
+    +Condo(bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double,
+    taxes: double, address: String, hoaFee: double, amenities: String)
 
     +monthlyNetProfit(): double
     +toString(): String
