@@ -1,5 +1,5 @@
 /**
- *
+ * Simple model of a house
  */
 public class House extends Residence {
 
@@ -9,7 +9,7 @@ public class House extends Residence {
      * Return acreage
      * @return
      */
-    public String getAcreage() {
+    public double getAcreage() {
         return acreage;
     }
 
@@ -17,14 +17,16 @@ public class House extends Residence {
      * Set acreage
      * @param acreage
      */
-    public void setAcreage(String acreage) {
+    public void setAcreage(double acreage) {
         this.acreage = acreage;
     }
 
     /**
      * Default constructor
      */
-    public static House();
+    House() {
+        acreage = 0;
+    }
 
     /**
      * Constructor
@@ -36,7 +38,7 @@ public class House extends Residence {
      * @param purchasePrice
      * @param taxes
      */
-    public static House(String address, int bedrooms, int bathrooms, int sqfeet, double acreage, double purchasePrice,
+    House(String address, int bedrooms, int bathrooms, int sqfeet, double acreage, double purchasePrice,
                         double taxes) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.acreage = acreage;
