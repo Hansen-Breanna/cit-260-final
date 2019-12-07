@@ -21,7 +21,7 @@ public class RealEstateInvestmentTool {
 
         //Displays main menu to the user
         System.out.println("Please select an option:");
-        mainMenu();
+        new MainMenu().display();
 
         //Displays a goodbye message.
         System.out.println();

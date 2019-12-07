@@ -1,5 +1,5 @@
 /**
- * Simple model of a house
+ * Simple model of a House
  */
 public class House extends Residence {
 
@@ -26,7 +26,7 @@ public class House extends Residence {
      */
     House() {
         acreage = 0;
-    }
+    };
 
     /**
      * Constructor
