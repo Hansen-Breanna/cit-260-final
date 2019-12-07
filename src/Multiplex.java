@@ -1,31 +1,25 @@
 /**
  * Simple Model of a Multiplex
  */
-public class multiplex extends residence {
+public class Multiplex extends Residence {
 
-    /**
-     *    -units: int { get set }
-     *     +utilities: double { get set }
-     *
-     *     +MultiPlex()
-     *     +MultiPex(units: int, bedrooms: int, bathrooms: int, sqft: int, purchasePrice: double,  taxes: double, address: String)
-     */
     private int units;
     private double utilities;
 
     /**
      * Default constructor
      */
-    public multiplex() {
+    public Multiplex() {
         units = 1;
         utilities = 0;
     }
 
     /**
      * Constructor
-     * @return
+     * @param units
+     * @param utilities
      */
-    public multiplex(int units, double utilities) {
+    public Multiplex(int units, double utilities) {
         this.units = units;
         this.utilities = utilities;
     }
@@ -62,24 +56,10 @@ public class multiplex extends residence {
         this.utilities = utilities;
     }
 
-    //+percentageDown(purchasePrice: double): double
-    //+pricePerSqFt(purchasePrice: double, sqft: int): double
-    //+monthlyPayment(purchasePrice: double, interestRate: double): double
-
     /**
-     * This method calculates the rental income per each unit and adds them together for a final income amount
-     * @param units
-     * @param sqft
-     */
-    @Override
-    public rentalIncome(int units, int sqft) {
-        var income = sqft / units;
-        return income;
-    }
-
-    /**
+     * The monthlyNetProfit method
      * This method calculates the net profit after subtracting utilities, taxes, and mortgage from rental income
-     * @return
+     * @return netProfit
      */
     @Override
     public double monthlyNetProfit() {
@@ -88,17 +68,9 @@ public class multiplex extends residence {
     }
 
     /**
-     *  This method calculates the rental income for if only one unit is rented, then 2, etc.
-     * @return
-     */
-    public double portionRentalIncome() {
-        var portionIncome = 0;
-        return portionIncome;
-    }
-
-    /**
+     * The String method
      * Return a string representation of the multiplex
-     * @return
+     * @return String
      */
     @Override
     public String toString() {

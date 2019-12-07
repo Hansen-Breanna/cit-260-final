@@ -1,5 +1,5 @@
 /**
  * Test driver for residence, condo, house, and multiplex
  */
-public class realEstateInvestmentTool {
+public class RealEstateInvestmentTool {
 }
