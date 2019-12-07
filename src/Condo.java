@@ -11,7 +11,7 @@ public class Condo extends Residence {
      */
     Condo() {
         hoaFee = 0;
-        amenities = "null;"
+        amenities = "null";
     }
 
     /**
@@ -64,7 +64,6 @@ public class Condo extends Residence {
         this.amenities = amenities;
     }
 
-    //Overrides from Residence class to account for hoaFee
     /**
      * The monthlyNetProfit method
      * This method calculates the expected monthly net profit after subtracting the monthly mortgage payment, taxes,
@@ -75,7 +74,6 @@ public class Condo extends Residence {
      * @param hoaFee
      * @return monthlyNetProfit
      */
-    @Override
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
         double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes + hoaFee);
         return monthlyNetProfit;
