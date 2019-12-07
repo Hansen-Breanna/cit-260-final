@@ -26,7 +26,7 @@ class House extends Residence {
     -acreage: double { get set }
 
     +House()
-    +House( address: String, bedrooms: int, \n bathrooms: int, sqft: int, purchasePrice: double, \n taxes: double)
+    +House( address: String, bedrooms: int, \n bathrooms: int, sqft: int, acreage: double, \n purchasePrice: double, taxes: double)
 
     +monthlyNetProfit(): double
     +toString(): String

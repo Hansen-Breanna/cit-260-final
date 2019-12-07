@@ -1,6 +1,5 @@
 /**
- * This class calculates the percentageDown, pricePerSqFt, monthlyPayment, rentalIncome, and
- * monthlyNetProfit for condo objects
+ * Simple model of a Condo
  */
 public class Condo extends Residence {
 
