@@ -86,6 +86,7 @@ public class Multiplex extends Residence {
     @Override
     public String toString() {
 
+        //Table header
         System.out.format("%-30s  %-5s   %-4s   %-5s   %-6s   %-8s   %-6s   %-9s   %-7s   %-6s   %-6s   %-6s   %-4s%n",
                 "Address", "Units", "Beds", "Baths", "SqFt", "Price", "Taxes", "Utilities", "$ Down", "$/SqFt", "Payment", "Income",
                 "Profit");
