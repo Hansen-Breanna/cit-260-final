@@ -29,7 +29,7 @@ public class Residence {
         purchasePrice = 0;
         taxes = 0;
         address = null;
-        interestRate = 0;
+        interestRate = .04375;
     }
 
     /**
@@ -59,8 +59,7 @@ public class Residence {
      * @return purchasePrice
      */
     public double downPayment(double purchasePrice, double PERCENT_DOWN) {
-        double downPayment =  purchasePrice * PERCENT_DOWN;
-        return downPayment;
+        return purchasePrice * PERCENT_DOWN;
     }
 
     /**
@@ -71,8 +70,7 @@ public class Residence {
      * @return pricePerSqFt
      */
     public double pricePerSqFt(double purchasePrice, int sqfeett) {
-        double pricePerSqFt = purchasePrice / sqfeet;
-        return pricePerSqFt;
+        return purchasePrice / sqfeet;
     }
 
     /**
@@ -86,8 +84,7 @@ public class Residence {
     public double monthlyPayment(double purchasePrice, double interestRate, double loanPeriod) {
         double termInMonths = loanPeriod / 12;
         double monthlyRate = interestRate / 12;
-        double monthlyPayment = (purchasePrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, termInMonths));
-        return monthlyPayment;
+        return (purchasePrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, termInMonths));
     }
 
     /**
@@ -99,8 +96,7 @@ public class Residence {
      * @return
      */
     public double rentalIncome(int sqfeet, double RENT_PER_SQFT) {
-        double rentalIncome = sqfeet * RENT_PER_SQFT;
-        return rentalIncome;
+        return sqfeet * RENT_PER_SQFT;
     }
 
     /**
@@ -112,8 +108,7 @@ public class Residence {
      * @return
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome) {
-        double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes);
-        return monthlyNetProfit;
+        return rentalIncome - (monthlyPayment + taxes);
     }
 
     /**

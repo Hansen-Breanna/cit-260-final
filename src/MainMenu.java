@@ -29,11 +29,16 @@ public class MainMenu extends Menu {
 
     @Override
     protected boolean handleMenuSelection(char key) {
-        if (key == 'X') {
+        if (key == 'X' || key =='x') {
             return false;
         }
-        else {
+        else if (key == '2') {
+            // Display the number title
             System.out.println(key);
+            return true;
+        }
+        else {
+            System.out.println("Enter valid selection for Main Menu.");
             return true;
         }
     }
