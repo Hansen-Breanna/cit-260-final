@@ -29,7 +29,7 @@ public class Residence {
         purchasePrice = 0;
         taxes = 0;
         address = null;
-        interestRate = .04375;
+        interestRate = 4.375;
     }
 
     /**
