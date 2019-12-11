@@ -17,6 +17,7 @@ public class Multiplex extends Residence {
     /**
      * Constructor
      * @param address
+     * @param units
      * @param bedrooms
      * @param bathrooms
      * @param sqfeet
@@ -25,8 +26,8 @@ public class Multiplex extends Residence {
      * @param units
      * @param utilities
      */
-    public Multiplex(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes,
-                     int units, double utilities) {
+    public Multiplex(String address, int units, int bedrooms, double bathrooms, int sqfeet, double purchasePrice,
+                     double taxes, double utilities) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.units = units;
         this.utilities = utilities;

@@ -41,7 +41,7 @@ public class Residence {
      * @param purchasePrice
      * @param taxes
      */
-    Residence(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes) {
+    Residence(String address, int bedrooms, double bathrooms, int sqfeet, double purchasePrice, double taxes) {
         this.address = address;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;

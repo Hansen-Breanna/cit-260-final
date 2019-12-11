@@ -1,6 +1,5 @@
 import menu.Menu;
 import menu.MenuItem;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -62,12 +61,13 @@ public class MainMenu extends Menu {
                         //This line ends the loop
                         valid = true;
                         System.out.format("Your new interest rate is " + obj.getInterestRate() + "%%" + "%n");
-                        //Delay printing main menu
-                        delay(3000);
 
                         //It returns to main menu by default, but this displays a message to user
                         //I need to look into how to store/return the newRate to Residence
                         System.out.println("\nReturning to the Main Menu...");
+
+                        //Delay printing main menu
+                        delay(2000);
                     }
                     return true;
                     //This will make sure that it will not accept non-numbers as input, and will loop
@@ -82,19 +82,13 @@ public class MainMenu extends Menu {
             return true;
         } else if (key == '3') {
             // Display the sub menu title and options
-            //1. House
-            //2. Condo
-            //3. Multiplex
-            System.out.println("Which type of property would you like to add?");
-            //new AddMenu().display();
+            new AddMenu().display();
+            prompt("Which type of property would you like to add?");
             return true;
         } else if (key == '4') {
             // Display the sub menu title and options
-            //1. House
-            //2. Condo
-            //3. Multiplex
-            System.out.println("Which type of property would you like to remove?");
-            //new RemoveMenu().display();
+            new RemoveMenu().display();
+            prompt("Which type of property would you like to remove?");
             return true;
         } else {
             System.out.println("Enter valid selection for Main Menu.");
