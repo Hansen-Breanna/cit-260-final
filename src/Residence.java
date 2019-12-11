@@ -11,7 +11,7 @@ public class Residence {
     private double taxes;
     private String address;
     private double interestRate;
-    private double loanPeriod;
+    private int loanPeriod;
     private double monthlyPayment;
     private double rentalIncome;
     private final double PERCENT_DOWN = 0.2;
@@ -69,7 +69,7 @@ public class Residence {
      * @param sqFt
      * @return pricePerSqFt
      */
-    public double pricePerSqFt(double purchasePrice, int sqfeett) {
+    public double pricePerSqFt(double purchasePrice, int sqfeet) {
         return purchasePrice / sqfeet;
     }
 
@@ -81,10 +81,10 @@ public class Residence {
      * @param loanPeriod
      * @return monthlyPayment
      */
-    public double monthlyPayment(double purchasePrice, double interestRate, double loanPeriod) {
-        double termInMonths = loanPeriod / 12;
-        double monthlyRate = interestRate / 12;
-        return (purchasePrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, termInMonths));
+    public double monthlyPayment(double purchasePrice, double interestRate, int loanPeriod) {
+        double termInMonths = loanPeriod * 12;
+        double monthlyRate = (interestRate / 100) / 12;
+        return (purchasePrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -termInMonths));
     }
 
     /**
@@ -108,7 +108,7 @@ public class Residence {
      * @return
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome) {
-        return rentalIncome - (monthlyPayment + taxes);
+        return rentalIncome - (monthlyPayment + (taxes / 12));
     }
 
     /**
@@ -175,8 +175,8 @@ public class Residence {
     public int getSqfeet() { return sqfeet; }
 
     /**
-     * Set sqft
-     * @param sqft
+     * Set SqFeet
+     * @param
      */
     public void setSqfeet(int sqfeet) {
         this.sqfeet = sqfeet;
@@ -230,4 +230,15 @@ public class Residence {
         this.interestRate = interestRate;
     }
 
+    /**
+     * Return PERCENTAGE_DOWN
+     * @return
+     */
+    public double getPERCENT_DOWN() { return PERCENT_DOWN;}
+
+    /**
+     * Return RENT_PER_SQFT
+     * @return
+     */
+    public double getRENT_PER_SQFT() { return RENT_PER_SQFT; }
 }

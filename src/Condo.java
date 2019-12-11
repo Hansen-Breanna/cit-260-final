@@ -75,7 +75,7 @@ public class Condo extends Residence {
      * @return monthlyNetProfit
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
-        double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes + hoaFee);
+        double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
         return monthlyNetProfit;
     }
 

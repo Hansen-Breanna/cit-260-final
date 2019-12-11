@@ -75,7 +75,7 @@ public class Multiplex extends Residence {
      * @return netProfit
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double utilities) {
-        double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes + utilities);
+        double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + utilities);
         return monthlyNetProfit;
     }
 
