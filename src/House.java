@@ -38,7 +38,7 @@ public class House extends Residence {
      * @param purchasePrice
      * @param taxes
      */
-    House(String address, int bedrooms, int bathrooms, int sqfeet, double acreage, double purchasePrice,
+    House(String address, int bedrooms, double bathrooms, int sqfeet, double acreage, double purchasePrice,
                         double taxes) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.acreage = acreage;
