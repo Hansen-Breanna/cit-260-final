@@ -83,12 +83,10 @@ public class MainMenu extends Menu {
         } else if (key == '3') {
             // Display the sub menu title and options
             new AddMenu().display();
-            prompt("Which type of property would you like to add?");
             return true;
         } else if (key == '4') {
             // Display the sub menu title and options
             new RemoveMenu().display();
-            prompt("Which type of property would you like to remove?");
             return true;
         } else {
             System.out.println("Enter valid selection for Main Menu.");

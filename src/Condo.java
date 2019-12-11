@@ -25,7 +25,7 @@ public class Condo extends Residence {
      * @param taxes
      * @param address
      */
-    Condo(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes, double hoaFee,
+    Condo(String address, int bedrooms, double bathrooms, int sqfeet, double purchasePrice, double taxes, double hoaFee,
           String amenities) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.hoaFee = hoaFee;
@@ -75,7 +75,7 @@ public class Condo extends Residence {
      * @return monthlyNetProfit
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
-        double monthlyNetProfit = rentalIncome - (monthlyPayment + taxes + hoaFee);
+        double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
         return monthlyNetProfit;
     }
 
