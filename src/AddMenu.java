@@ -1,9 +1,5 @@
-import com.sun.tools.javac.Main;
 import menu.Menu;
 import menu.MenuItem;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  *
@@ -62,7 +58,6 @@ public class AddMenu extends Menu {
 
                 Multiplex newMulti = new Multiplex(address, numUnits, numBeds, numBaths, numSqft, purPrice, homeTaxes,
                         utilitiesCost);
-
             //Save data to file
             return true;
         } else if (key == '4') {
@@ -72,6 +67,5 @@ public class AddMenu extends Menu {
             System.out.println("Enter valid selection.");
             return true;
         }
-
     }
 }

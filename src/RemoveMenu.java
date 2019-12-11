@@ -1,9 +1,5 @@
-import com.sun.tools.javac.Main;
 import menu.Menu;
 import menu.MenuItem;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  *
@@ -53,6 +49,5 @@ public class RemoveMenu extends Menu {
             System.out.println("Enter valid selection.");
             return true;
         }
-
     }
 }
