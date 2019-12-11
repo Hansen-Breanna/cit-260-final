@@ -29,7 +29,7 @@ public class Residence {
         purchasePrice = 0;
         taxes = 0;
         address = null;
-        interestRate = .04375;
+        interestRate = 4.375;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Residence {
      * @param purchasePrice
      * @param taxes
      */
-    Residence(String address, int bedrooms, int bathrooms, int sqfeet, double purchasePrice, double taxes) {
+    Residence(String address, int bedrooms, double bathrooms, int sqfeet, double purchasePrice, double taxes) {
         this.address = address;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
