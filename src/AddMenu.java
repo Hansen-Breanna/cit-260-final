@@ -1,10 +1,7 @@
-import com.sun.tools.javac.Main;
 import menu.Menu;
 import menu.MenuItem;
-
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+
 
 /**
  *
@@ -76,13 +73,15 @@ public class AddMenu extends Menu {
 
             //Save data to file
             return true;
-        } else if (key == '3') {
+        } else if (key == '3') {  //multiplex
 
                 //Create ArrayList for multiplexes
                 ArrayList<String> multiplex = new ArrayList<>();
 
                 //Display prompts for Multiplex
+                Multiplex newBuilding = new Multiplex();
                 String address = prompt("Enter address: ", true);
+                newBuilding.setAddress(address);
                 String units = prompt("Enter number of units: ", true);
                 int numUnits = Integer.parseInt(units);
                 String beds = prompt("Enter number of bedrooms: ", true);
@@ -123,7 +122,6 @@ public class AddMenu extends Menu {
                 //Add new multiplex to ArrayList
                 //multiplex.add(newMulti);
 
-            //Save data to file
             return true;
         } else if (key == '4') {
             new MainMenu().display();
