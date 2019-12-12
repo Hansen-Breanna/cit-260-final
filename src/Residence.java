@@ -88,7 +88,7 @@ public class Residence {
     }
 
     /**
-     * The rentalIncome method
+     * The rentalIncome megit pullthod
      * This method calculates the possible rental income based on the square footage of the residence and a base
      * rent per square foot unit of .70.
      * @param sqfeet
