@@ -21,7 +21,7 @@ public class MainMenu extends Menu {
     protected MenuItem[] getMenuItems() {
         MenuItem[] menuItems = new MenuItem[]{
                 new MenuItem('1', "Change interest rate (default is 4.375%)"),
-                new MenuItem('2', "View all prroperties"),
+                new MenuItem('2', "View all properties"),
                 new MenuItem('3', "Add property"),
                 new MenuItem('4', "Remove Property"),
                 new MenuItem('X', "Exit"),
@@ -79,6 +79,10 @@ public class MainMenu extends Menu {
         } else if (key == '2') {
             // Display all properties
             System.out.println("Display all listed properties...");
+
+            //Open files containing property information and display in a table
+            //Use Storage Class
+
             return true;
         } else if (key == '3') {
             // Display the sub menu title and options

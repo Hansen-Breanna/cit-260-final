@@ -68,6 +68,7 @@ public class AddMenu extends Menu {
             House newHouse = new House(address, numBeds, numBaths, numSqft, lotSize, purPrice, homeTaxes);
 
             //Save data to file
+
             return true;
         } else if (key == '2') {
             //Display prompts for Condo
