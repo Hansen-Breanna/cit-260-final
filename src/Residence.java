@@ -231,6 +231,22 @@ public class Residence {
     }
 
     /**
+     * Return loanPeriod
+     * @return
+     */
+    public int getLoanPeriod() {
+        return loanPeriod;
+    }
+
+    /**
+     * Set loanPeriod
+     * @param loanPeriod
+     */
+    public void setLoanPeriod(int loanPeriod) {
+        this.loanPeriod = loanPeriod;
+    }
+
+    /**
      * Return PERCENTAGE_DOWN
      * @return
      */

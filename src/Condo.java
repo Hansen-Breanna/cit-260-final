@@ -86,6 +86,7 @@ public class Condo extends Residence {
      */
     @Override
     public String toString() {
+
         return String.format(" ");
     }
 }
