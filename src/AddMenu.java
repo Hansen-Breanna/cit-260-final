@@ -73,7 +73,7 @@ public class AddMenu extends Menu {
 
             //Save data to file
             return true;
-        } else if (key == '3') {
+        } else if (key == '3') {  //multiplex
 
             //If multiplex data file doesn't exist, create it
 
