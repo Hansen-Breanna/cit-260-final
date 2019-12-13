@@ -23,9 +23,9 @@ public class Residence {
     //TODO loan period static?
     private int loanPeriod;
 	//Required percentage down for investment property
-    private final double PERCENT_DOWN = 0.2;
+    private final static double PERCENT_DOWN = 0.2;
 	//Number to multiply square footage by to calculate rental income
-    private final double RENT_PER_SQFT = 0.7;
+    private final static double RENT_PER_SQFT = 0.7;
 
     //CONSTRUCTORS
     /**
