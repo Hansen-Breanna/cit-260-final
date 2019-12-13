@@ -34,13 +34,13 @@ public class MainMenu extends Menu {
         if (key == 'X' || key == 'x') {
             return false;
         } else if (key == '1') {
-            //Display prompt for changing interest rate
-            //Set a local variable, since I couldn't figure out how to get the MainMenu to call Residence class
+            //Create a new Residence object
             Residence obj = new Residence();
             //Needed a boolean condition for the while loop
             boolean valid = false;
 
-            //Keeps current interest rate display out of the loop
+            //Keeps current interest rate display out of the loop so it doesn't display if user has to re-enter
+            //also pulls the interestRate from the new Residence object & displays it
             System.out.format("%nCurrent loan interest rate is: " + (obj.getInterestRate()) + "%%");
 
             //Sets up a try-catch in a while loop, so it will loop again if it catches InputMismatchException
@@ -49,6 +49,7 @@ public class MainMenu extends Menu {
                     var input = new Scanner(System.in);
                     //Initial prompt for new interest rate
                     System.out.format("%n" + "Enter a new interest rate percent (example: 5.25): ");
+                    //Saves the input and passes that into the object's InterestRate setter
                     double newRate = input.nextDouble();
                     obj.setInterestRate(newRate);
 
@@ -60,10 +61,10 @@ public class MainMenu extends Menu {
                     else {
                         //This line ends the loop
                         valid = true;
+                        //This display will return the new rate that was passed in
                         System.out.format("Your new interest rate is " + obj.getInterestRate() + "%%" + "%n");
 
                         //It returns to main menu by default, but this displays a message to user
-                        //I need to look into how to store/return the newRate to Residence
                         System.out.println("\nReturning to the Main Menu...");
 
                         //Delay printing main menu
