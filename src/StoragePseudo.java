@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Provide methods to store and load data from files.
+ * Provides methods to store and load data from files
  */
-public class Storage {
-
+public class StoragePseudo {
     /**
      * Store the data in the specified file
      * @param filename The name of the file where the data are to be stored.
@@ -23,15 +22,16 @@ public class Storage {
             for (Residence obj: data) {
                 if (obj instanceof House) {
                     House h = (House) obj;
-                    out.format("%s|%s|%d\n", "house", obj.getResidentield(), h.getHouseField());
+                    out.format("%s|%s|%d\n", "house", obj.getBathrooms(), h.getBedrooms());
                 } else if (obj instanceof Condo) {
                     Condo c = (Condo) obj;
-                    out.format("%s|%s|%f\n", "condo", obj.getResidenceField(), c.getCondoField());
+                   // out.format("%s|%s|%f\n", "condo", obj.getBathrooms(), c.getCondoField());
                 } else if (obj instanceof Multiplex) {
                     Multiplex m = (Multiplex) obj;
-                    out.format("%s|%s|%f\n", "condo", obj.getResidenceField(), m.getMultiplexField());
+                    //TODO fix field
+                    //out.format("%s|%s|%f\n", "multiplex", obj.getBathrooms(), m.getCondoField());
                 } else {
-                    out.format("%s|%s\n", "residence", obj.getResidenceField());
+                    out.format("%s|%s\n", "residence", obj.getBathrooms());
                 }
             }
         } catch(IOException exception) {
@@ -63,7 +63,8 @@ public class Storage {
                 if (fields[0].equals("residence")) {
                     Residence r = new Residence();
                     if (fields.length > 1) {
-                        r.setResidenceField(fields[1]);
+                        double numBathrooms= Double.parseDouble(fields[1]);
+                        r.setBathrooms(numBathrooms);
                     }
                     newData.add(r);
                 //if the first field has the house class, adds it to its own array
@@ -72,9 +73,12 @@ public class Storage {
                     if (fields.length < 3) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
+                    //TODO fix field order
+
                     House h = new House();
-                    h.setResidenceField(fields[1]);
-                    h.setHouseField(Integer.parseInt(fields[2]));
+                    double numBathrooms= Double.parseDouble(fields[1]);
+                    h.setBathrooms(numBathrooms);
+                    h.setAcreage(Double.parseDouble(fields[2]));
                     newData.add(h);
                 //if the first field has the condo class, adds it to its own array
                 } else if (fields[0].equals("condo")) {
@@ -82,8 +86,11 @@ public class Storage {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     Condo c = new Condo();
-                    c.setParentField(fields[1]);
-                    c.setChildField(Double.parseDouble(fields[2]));
+                    double numBathrooms= Double.parseDouble(fields[1]);
+                    c.setBathrooms(numBathrooms);
+
+                    //TODO get the rest of the fields
+                    // c.setChildField(Double.parseDouble(fields[2]));
                     newData.add(c);
 
                 //if the first field has the multiplex class, adds it to its own array
@@ -92,8 +99,11 @@ public class Storage {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     Multiplex m = new Multiplex();
-                    m.setParentField(fields[1]);
-                    m.setChildField(Double.parseDouble(fields[2]));
+                    double numBathrooms= Double.parseDouble(fields[1]);
+                    m.setBathrooms(numBathrooms);
+
+                    //TODO get the rest of the fields
+                    // c.setChildField(Double.parseDouble(fields[2]));
                     newData.add(m);
                 } else {
                     throw new IOException(String.format("Invalid record type '%s' on line %d",fields[0], lineNumber));

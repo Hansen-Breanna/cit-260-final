@@ -164,7 +164,7 @@ public class Residence {
      * Set bathrooms
      * @param bathrooms
      */
-    public void setBathrooms(int bathrooms) {
+    public void setBathrooms(double bathrooms) {
         this.bathrooms = bathrooms;
     }
 
