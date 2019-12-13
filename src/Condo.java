@@ -3,7 +3,9 @@
  */
 public class Condo extends Residence {
 
+	//Yearly home owner association fee for investment property
     private double hoaFee;
+	//List of investment property amenities. Pool, tennis courts, etc.
     private String amenities;
 
     /**
@@ -75,10 +77,27 @@ public class Condo extends Residence {
      * @return monthlyNetProfit
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
-        double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
+        //Equation for calculating monthly net profit
+		double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
+		//Return value
         return monthlyNetProfit;
     }
 
+	/**
+	* The header Method
+	* This method returns the header for the Condo table
+	*/
+	@Override
+	public String header() {
+		//Return string representation of the Multiplex table header
+		//TODO change table header from House format to Condo
+		return String.format("%nCondo Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   %-9s   %-9s" +
+				"   %-8s%n-------------------------------------------------   ----   -----   " +
+				"------   -----------   ---------   -----------   -------   ---------   " +
+				"---------   --------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes",
+				"$ Down", "$/SqFt", "Payment", "Income", "Profit");
+	}
+	
     /**
      * The String method
      * This method display the data about each property as a string in a table
@@ -86,7 +105,6 @@ public class Condo extends Residence {
      */
     @Override
     public String toString() {
-
         return String.format(" ");
     }
 }

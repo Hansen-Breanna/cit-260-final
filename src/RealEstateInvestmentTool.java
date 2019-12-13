@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import static menu.Menu.delay;
-
 /**
  * Test driver for residence, condo, house, and multiplex
  */
@@ -24,7 +22,6 @@ public class RealEstateInvestmentTool {
         new MainMenu().display();
 
         //Displays a goodbye message.
-        System.out.println();
         System.out.println("Goodbye...");
     }
 }

@@ -3,6 +3,7 @@
  */
 public class House extends Residence {
 
+	//Lot size in acres of investment property
     private double acreage = 0;
 
     /**
@@ -44,9 +45,23 @@ public class House extends Residence {
         this.acreage = acreage;
     }
 
+	/**
+	* The header Method
+	* This method returns the header for the House table
+	*/
+	@Override
+	public String header() {
+		//Return string representation of the House table header
+		return String.format("%nHouse Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   %-9s   %-9s" +
+				"   %-8s%n-------------------------------------------------   ----   -----   " +
+				"------   -----------   ---------   -----------   -------   ---------   " +
+				"---------   --------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes",
+				"$ Down", "$/SqFt", "Payment", "Income", "Profit");
+	}
+	
     /**
      * The String method
-     * This method display the data about each property as a string in a table
+     * This method displays the data about each property as a string in a table
      * @return String
      */
     @Override

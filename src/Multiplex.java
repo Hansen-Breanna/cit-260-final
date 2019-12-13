@@ -78,19 +78,29 @@ public class Multiplex extends Residence {
         double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + utilities);
         return monthlyNetProfit;
     }
+	
+	/**
+	* The header Method
+	* This method returns the header for the Multiplex table
+	*/
+	@Override
+	public String header() {
+		//Return string representation of the Multiplex table header
+		return String.format("%nMultiplex Properties List%n%-50s  %-5s   %-4s   %-5s   %-6s   %-11s   %-9s   %-9s   %-10s    %-7s   %-9s   %-9s" +
+				"   %-8s%n-------------------------------------------------   -----   ----   -----   " +
+				"------   -----------   ---------   ---------   -----------   -------   ---------   " +
+				"---------   --------%n", "Address", "Units", "Beds", "Baths", "SqFt", "Price", "Taxes",
+				"Utilities", "$ Down", "$/SqFt", "Payment", "Income", "Profit");
+	}
 
     /**
      * The String method
-     * Return a string representation of the multiplex
+     * Return a string representation of the Multiplex
      * @return String
      */
     @Override
     public String toString() {
-
-        return String.format("%nMultiplex Properties List%n%-50s  %-5s   %-4s   %-5s   %-6s   %-11s   %-9s   %-9s   %-10s    %-7s   %-9s   %-9s" +
-                        "   %-8s%n-------------------------------------------------   -----   ----   -----   " +
-                        "------   -----------   ---------   ---------   -----------   -------   ---------   " +
-                        "---------   --------%n", "Address", "Units", "Beds", "Baths", "SqFt", "Price", "Taxes",
-                        "Utilities", "$ Down", "$/SqFt", "Payment", "Income", "Profit");
+		//Retuirns the string for each object of a Multiplex to the table
+		return String.format(" ");
     }
 }

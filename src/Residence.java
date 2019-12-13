@@ -4,25 +4,37 @@
 public class Residence {
 
     //VARIABLES
-    private int bedrooms;
-    private double bathrooms;
-    private int sqfeet;
-    private double purchasePrice;
-    private double taxes;
+	//Street address of residence
     private String address;
+	//Number of bedrooms in residence
+    private int bedrooms;
+	//Number of bathrooms in residence
+    private double bathrooms;
+	//Size of residence in square feet
+    private int sqfeet;
+	//Listing purchase price of residence
+    private double purchasePrice;
+	//Yearly homeowner taxes of residence
+    private double taxes;
+	//Loan interest rate
     private double interestRate;
+	//Loan time period in years
     private int loanPeriod;
+	//Monthly payment calculated from monthlyPayment method
     private double monthlyPayment;
+	//Rental income calculated from rentalIncome method
     private double rentalIncome;
+	//Required percentage down for investment property
     private final double PERCENT_DOWN = 0.2;
+	//Number to multiply square footage by to calculate rental income
     private final double RENT_PER_SQFT = 0.7;
 
     //CONSTRUCTORS
-
     /**
      * Default Constructor
      */
     Residence() {
+		//default values of following variables
         bedrooms = 0;
         bathrooms = 0;
         sqfeet = 0;
@@ -59,17 +71,19 @@ public class Residence {
      * @return purchasePrice
      */
     public double downPayment(double purchasePrice, double PERCENT_DOWN) {
+		//Calculate and return down payment
         return purchasePrice * PERCENT_DOWN;
     }
 
     /**
      * The pricePerSqFt method
-     * This method calculates the price per square foot of the residence based on the purchase price and size.
+     * This method calculates the price per square foot of the residence by dividing purchasePrice by sqfeet.
      * @param purchasePrice
      * @param sqFt
      * @return pricePerSqFt
      */
     public double pricePerSqFt(double purchasePrice, int sqfeet) {
+		//Calculate and return pricePerSqFt
         return purchasePrice / sqfeet;
     }
 
@@ -82,38 +96,55 @@ public class Residence {
      * @return monthlyPayment
      */
     public double monthlyPayment(double purchasePrice, double interestRate, int loanPeriod) {
-        double termInMonths = loanPeriod * 12;
+        //Multiply years by 12 to get total months
+		double termInMonths = loanPeriod * 12;
+		//Divide interest rate by hundred to get fraction. 
+		//Divide by 12 to get monthly interest rate
         double monthlyRate = (interestRate / 100) / 12;
+		//Calculate and return  monthly payment by multiplying purchasePrice and monthlyRate
+		//Divide by (1 - Math.pow(1 + monthlyRate, -termInMonths)
         return (purchasePrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -termInMonths));
     }
 
     /**
-     * The rentalIncome megit pullthod
-     * This method calculates the possible rental income based on the square footage of the residence and a base
+     * The rentalIncome method
+     * This method calculates the possible rental income by multiplying square feet by RENT_PER_SQFT
      * rent per square foot unit of .70.
      * @param sqfeet
      * @param RENT_PER_SQFT
      * @return
      */
     public double rentalIncome(int sqfeet, double RENT_PER_SQFT) {
+		//Calculate and return  possible rental income
         return sqfeet * RENT_PER_SQFT;
     }
 
     /**
      * The monthlyNetProfit method
-     * The method calculates the net profit after subtracting the taxes and mortgage payment from the rental income.
+     * The method calculates the net profit by subtracting (taxes / 12) and mortgage payment from the rental income.
      * @param monthlyPayment
      * @param taxes
      * @param rentalIncome
      * @return
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome) {
+		//Calculate and return rentalIncome
         return rentalIncome - (monthlyPayment + (taxes / 12));
     }
+	
+	/**
+	* The header Method
+	* This method returns the header for a property display table
+	*/
+	public String header() {
+		//Return string representation of table header
+		return String.format(" ");
+	}
 
     /**
      * The String method
      * This method returns the String representation of a residence.
+	 * @return
      */
     @Override
     public String toString() {
@@ -175,7 +206,7 @@ public class Residence {
     public int getSqfeet() { return sqfeet; }
 
     /**
-     * Set SqFeet
+     * Set sqfeet
      * @param
      */
     public void setSqfeet(int sqfeet) {
@@ -245,16 +276,22 @@ public class Residence {
     public void setLoanPeriod(int loanPeriod) {
         this.loanPeriod = loanPeriod;
     }
+	
+	//TODO create monthlyPayment and rentalIncome getters and setters
 
     /**
      * Return PERCENTAGE_DOWN
      * @return
      */
-    public double getPERCENT_DOWN() { return PERCENT_DOWN;}
+    public double getPERCENT_DOWN() { 
+		return PERCENT_DOWN;
+	}
 
     /**
      * Return RENT_PER_SQFT
      * @return
      */
-    public double getRENT_PER_SQFT() { return RENT_PER_SQFT; }
+    public double getRENT_PER_SQFT() { 
+		return RENT_PER_SQFT; 
+	}
 }
