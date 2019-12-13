@@ -31,35 +31,39 @@ public class Storage {
                 if (obj instanceof House) {
                     //Info stored for House objects-same as Residence + acreage
                     House h = (House) obj;
-                    out.format("%s|%s|%d\n", "house", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-                            h.getAcreage(), obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(),
-                            obj.rentalIncome(), obj.monthlyNetProfit());
+                    //TODO input parameters for methods in format
+//                    out.format("%s|%s|%d\n", "house", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
+//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
+//                            h.getAcreage(), obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(),
+//                            obj.rentalIncome(), obj.monthlyNetProfit());
 
                 } else if (obj instanceof Condo) {
                     //Info stored for Condo objects-same as Residence + hoaFee & amenities
                     Condo c = (Condo) obj;
-                    out.format("%s|%s|%f\n", "condo", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-                            c.getHoaFee(), c.getAmenities(), obj.downPayment(), obj.pricePerSqFt(),
-                            obj.monthlyPayment(), obj.rentalIncome(),
-                            obj.monthlyNetProfit());
+                    //TODO input parameters for methods in format
+//                    out.format("%s|%s|%f\n", "condo", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
+//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
+//                            c.getHoaFee(), c.getAmenities(), obj.downPayment(), obj.pricePerSqFt(),
+//                            obj.monthlyPayment(), obj.rentalIncome(),
+//                            obj.monthlyNetProfit());
 
                 } else if (obj instanceof Multiplex) {
                     //Info saved for Multiplex-same as Residence + units & utilities
                     Multiplex m = (Multiplex) obj;
-                    out.format("%s|%s|%f\n", "multiplex", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-                            m.getUnits(), m.getUtilities(), obj.downPayment(), obj.pricePerSqFt(),
-                            obj.monthlyPayment(), obj.rentalIncome(),
-                            obj.monthlyNetProfit());
+                    //TODO input parameters for methods in format
+//                    out.format("%s|%s|%f\n", "multiplex", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
+//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
+//                            m.getUnits(), m.getUtilities(), obj.downPayment(), obj.pricePerSqFt(),
+//                            obj.monthlyPayment(), obj.rentalIncome(),
+//                            obj.monthlyNetProfit());
 
                 } else {
                     //In case of not House, Condo or Multiplex, will be saved in file as Residence object
-                    out.format("%s|%s\n", "residence", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-                            obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(), obj.rentalIncome(),
-                            obj.monthlyNetProfit());
+                    //TODO input parameters for methods in format
+//                    out.format("%s|%s\n", "residence", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
+//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
+//                            obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(), obj.rentalIncome(),
+//                            obj.monthlyNetProfit());
                 }
             }
         } catch (IOException exception) {
@@ -107,54 +111,54 @@ public class Storage {
                         // 4: sqfeet, 5: purchasePrice, 6: taxes, 7: interest rate
                         //plus $Down, $/SqFt, monthlyPayment, monthlyIncome, monthlyNetProfit
 
-                        //Load the address from the file
-                        //TODO check field is correct
-                        String loadAddress = fields[1];
-                        r.setAddress(loadAddress);
-
-                        //Load the bedrooms from the file
-                        int numBedrooms = Integer.parseInt(fields[2]);
-                        r.setBedrooms(numBedrooms);
-
-                        //Load the bathrooms from the file
-                        double numBathrooms = Double.parseDouble(fields[3]);
-                        r.setBathrooms(numBathrooms);
-
-                        //Load sqfeet from the file
-                        int numSqFt = Integer.parseInt(fields[4]);
-                        r.setSqfeet(numSqFt);
-
-                        //Load purchasePrice from the file
-                        double loadPrice = Double.parseDouble(fields[5]);
-                        r.setPurchasePrice(loadPrice);
-
-                        //Load taxes from the file
-                        double numTaxes = Double.parseDouble(fields[6]);
-                        r.setTaxes(numTaxes);
-
-                        //Load interestRate from the file
-                        double loadRate = Double.parseDouble(fields[7]);
-                        r.setInterestRate(loadRate);
-
-                        //Load interestRate from the file
-                        double loadRate = Double.parseDouble(fields[8]);
-                        r.setInterestRate(loadRate);
-
-                        //Load pricePerSqFt from the file
-                        double loadSqFtPrice = Double.parseDouble(fields[9]);
-                        r.pricePerSqFt(loadSqFtPrice);
-
-                        //Load monthlyPayment from the file
-                        double loadPayment = Double.parseDouble(fields[10]);
-                        r.monthlyPayment(loadPayment);
-
-                        //Load monthlyIncome from the file
-                        double loadIncome = Double.parseDouble(fields[11]);
-                        r.rentalIncome(loadIncome);
-
-                        //Load monthlyNetProfit from the file
-                        double loadProfit = Double.parseDouble(fields[12]);
-                        r.monthlyNetProfit(loadProfit);
+//                        //Load the address from the file
+//                        //TODO add correct field for String
+//                        String loadAddress = " ";
+//                        r.setAddress(loadAddress);
+//
+//                        //Load the bedrooms from the file
+//                        int numBedrooms = Integer.parseInt(fields[2]);
+//                        r.setBedrooms(numBedrooms);
+//
+//                        //Load the bathrooms from the file
+//                        double numBathrooms = Double.parseDouble(fields[3]);
+//                        r.setBathrooms(numBathrooms);
+//
+//                        //Load sqfeet from the file
+//                        int numSqFt = Integer.parseInt(fields[4]);
+//                        r.setSqfeet(numSqFt);
+//
+//                        //Load purchasePrice from the file
+//                        double loadPrice = Double.parseDouble(fields[5]);
+//                        r.setPurchasePrice(loadPrice);
+//
+//                        //Load taxes from the file
+//                        double numTaxes = Double.parseDouble(fields[6]);
+//                        r.setTaxes(numTaxes);
+//
+//                        //Load interestRate from the file
+//                        double loadRate = Double.parseDouble(fields[7]);
+//                        r.setInterestRate(loadRate);
+//
+//                        //Load interestRate from the file
+//                        loadRate = Double.parseDouble(fields[8]);
+//                        r.setInterestRate(loadRate);
+//
+//                        //Load pricePerSqFt from the file
+//                        double loadSqFtPrice = Double.parseDouble(fields[9]);
+//                        //r.pricePerSqFt(loadSqFtPrice);
+//
+//                        //Load monthlyPayment from the file
+//                        double loadPayment = Double.parseDouble(fields[10]);
+//                        //r.monthlyPayment(loadPayment);
+//
+//                        //Load monthlyIncome from the file
+//                        double loadIncome = Double.parseDouble(fields[11]);
+//                        //r.rentalIncome(loadIncome);
+//
+//                        //Load monthlyNetProfit from the file
+//                        double loadProfit = Double.parseDouble(fields[12]);
+//                        //r.monthlyNetProfit(loadProfit);
                     }
                     newData.add(r);
                     //if the first field has the house class, adds it to its own array
