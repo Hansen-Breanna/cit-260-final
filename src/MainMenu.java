@@ -94,6 +94,29 @@ public class MainMenu extends Menu {
                         //Delay printing main menu
                         delay(2000);
                     }
+
+                    //Prompt to enter loan period
+                    String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
+                    obj.setLoanPeriod(Integer.parseInt(loanPeriod));
+
+                    if (obj.getLoanPeriod() < 1 || obj.getLoanPeriod() > 30) {
+                        System.out.println("The rate must be a positive value that is between 1 and 30.\n");
+                    }
+                    //If the input fits within the requested values
+                    else {
+                        //This line ends the loop
+                        valid = true;
+                        //This display will return the new rate that was passed in
+                        System.out.format("Your new loan period is $d.\n" + obj.getLoanPeriod());
+
+                        //Let user know main menu will reload
+                        //TODO look into how to store/return the loanPeriod to Residence
+                        System.out.println("\nReturning to the Main Menu...");
+
+                        //Delay printing main menu
+                        delay(2000);
+                    }
+
                     return true;
                     //This will make sure that it will not accept non-numbers as input, and will loop
                 } catch (InputMismatchException ex) {
@@ -102,10 +125,10 @@ public class MainMenu extends Menu {
             }
 		//If user enters 2, this block runs
         } else if (key == '2') {
+            //Run loadData method
+            //Write all data from file into tables by property types
             // Display all properties
             System.out.println("Display all listed properties...");
-            //Open files containing property information
-            //Write all data from file into tables by property types
             return true;
 		//If user enters 3, this block runs
         } else if (key == '3') {

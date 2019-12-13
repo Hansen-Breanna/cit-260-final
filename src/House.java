@@ -40,8 +40,8 @@ public class House extends Residence {
      * @param purchasePrice
      * @param taxes
      */
-    House(String address, int bedrooms, double bathrooms, int sqfeet, double acreage, double purchasePrice,
-                        double taxes) {
+    House(String address, int bedrooms, double bathrooms, int sqfeet, double purchasePrice,
+                        double taxes, double acreage) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.acreage = acreage;
     }
@@ -54,10 +54,10 @@ public class House extends Residence {
 	public String tableHeader() {
 		//Return string representation of the House table header
 		return String.format("%nHouse Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
-                        "%-9s   %-9s   %-8s%n-------------------------------------------------   ----   -----   " +
-				"------   -----------   ---------   -----------   -------   ---------   ---------   --------%n",
-                "Address", "Beds", "Baths", "SqFt", "Price", "Taxes", "$ Down", "$/SqFt", "Payment", "Income",
-                "Profit");
+                        "%-9s   %-9s   %-8s   %-7s%n-------------------------------------------------   ----   " +
+                        "-----   ------   -----------   ---------   -----------   -------   ---------   ---------   " +
+                        "--------   -------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes", "$ Down",
+                "$/SqFt", "Payment", "Income", "Profit", "Acreage");
 	}
 	
     /**

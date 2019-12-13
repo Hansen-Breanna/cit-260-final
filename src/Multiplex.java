@@ -29,8 +29,8 @@ public class Multiplex extends Residence {
      * @param units
      * @param utilities
      */
-    public Multiplex(String address, int units, int bedrooms, double bathrooms, int sqfeet, double purchasePrice,
-                     double taxes, double utilities) {
+    public Multiplex(String address, int bedrooms, double bathrooms, int sqfeet, double purchasePrice,
+                     double taxes, int units, double utilities) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.units = units;
         this.utilities = utilities;
@@ -83,11 +83,12 @@ public class Multiplex extends Residence {
 	@Override
 	public String tableHeader() {
 		//Return string representation of the Multiplex table header
-		return String.format("%nMultiplex Properties List%n%-50s  %-5s   %-4s   %-5s   %-6s   %-11s   %-9s   %-9s   " +
-                        "%-10s    %-7s   %-9s   %-9s   %-8s%n-------------------------------------------------   " +
-                        "-----   ----   -----   ------   -----------   ---------   ---------   -----------   " +
-                        "-------   ---------   ---------   --------%n", "Address", "Units", "Beds", "Baths", "SqFt",
-                "Price", "Taxes", "Utilities", "$ Down", "$/SqFt", "Payment", "Income", "Profit");
+		return String.format("%nMultiplex Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   " +
+                        "%-10s    %-7s   %-9s   %-9s   %-8s   %-5s   %-9s%n" +
+                        "-------------------------------------------------   ----   -----   ------   -----------   " +
+                        "---------   -----------   -------   ---------   ---------   --------   -----   " +
+                        "---------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes", "$ Down", "$/SqFt",
+                "Payment", "Income", "Profit", "Units", "Utilities");
 	}
 
     /**

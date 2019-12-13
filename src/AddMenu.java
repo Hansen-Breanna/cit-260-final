@@ -53,91 +53,150 @@ public class AddMenu extends Menu {
             return false;
         //Else if user enters 1, this block runs
         } else if (key == '1') {
+
+            //Load data from file and create ArrayList
+
+            //Somehow pull in Residence to get interest rate and loan period?
+            Residence newRes = new Residence();
+
+            //Display prompts for Residence variables from method. Store values in array
+            final int NUMBER_OF_INDEXES = 6;
+            String[] userInput = readNumbers(NUMBER_OF_INDEXES);
+
             //Display prompts for House
-            String address = prompt("Enter address: ", true);
-            String beds = prompt("Enter number of bedrooms: ", true);
-            int numBeds = Integer.parseInt(beds);
-            String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
-            double numBaths = Double.parseDouble(baths);
-            String sqft = prompt("Enter square footage (ex. 1500): ", true);
-            int numSqft = Integer.parseInt(sqft);
-            String lot = prompt("Enter acreage (ex. 0.25): ", true);
-            double lotSize = Double.parseDouble(lot);
-            String price = prompt("Enter purchase price (ex. 200000): ", true);
-            double purPrice = Double.parseDouble(baths);
-            String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
-            double homeTaxes = Double.parseDouble(baths);
+            String acreage = prompt("Enter acreage (ex. 0.25): ", true);
+            double acreageSize = Double.parseDouble(acreage);
 
             //Create new House instance
-            House newHouse = new House(address, numBeds, numBaths, numSqft, lotSize, purPrice, homeTaxes);
+            House newHouse = new House(userInput[0], userInput[1], userInput[2], userInput[3], userInput[4],
+                    userInput[5], acreageSize);
 
-            //Save data to file
+            //Add new House to ArrayList
+
+            //Run storeData method to write to file
+
+            //Display that property has been added
+            System.out.println("\nHouse at " + newHouse.getAddress() + " has been added.");
+
+            //Delay new list printout
+            delay(2000);
+
+            //Call tableHeader method to display table header
+            System.out.println(newHouse.tableHeader());
+
+            //For loop printing out all Condos on the ArrayList using the following format. Make another method?
+            //Run methods from Residence class inside for loop? Make another method?
+            double downPayment = newRes.downPayment(newHouse.getPurchasePrice(), newRes.getPERCENT_DOWN());
+            double pricePerSqft = newRes.pricePerSqFt(newHouse.getPurchasePrice(), newHouse.getSqfeet());
+            double rentalIncome = newRes.rentalIncome(newHouse.getSqfeet(), newRes.getRENT_PER_SQFT());
+            double mortgage = newRes.monthlyPayment(newHouse.getPurchasePrice(), newRes.getInterestRate(),
+                    newRes.getLoanPeriod());
+            double profit = newHouse.monthlyNetProfit(mortgage, newHouse.getTaxes(), rentalIncome,
+                    newHouse.getAcreage());
+
+            //Return polymorphic String of each property in data file for table with code below as layout
+            System.out.println(newHouse.toString());
+            //TODO Change to House references
+//            System.out.format("%-50s  %-5d   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,9.2f  $%-,10.2f   " +
+//                            "$%-,7.2f  $%-,9.2f  $%-,9.2f  $%-,8.2f%n", newMulti.getAddress(), newMulti.getUnits(),
+//                    newMulti.getBedrooms(), newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(),
+//                    newMulti.getTaxes(), newMulti.getUtilities(), downPayment, pricePerSqft, mortgage, rentalIncome,
+//                    profit);
+
+            //Delay displaying Main Menu so user has time to read House list
+            delay(7000);
 
             return true;
         //Else if user enters 2, this block runs
         } else if (key == '2') {
+
+            //Load data from file and create ArrayList
+
+            //Somehow pull in Residence to get interest rate and loan period?
+            Residence newRes = new Residence();
+
+            //Display prompts for Residence variables from method. Store values in array
+            final int NUMBER_OF_INDEXES = 6;
+            String[] userInput = readNumbers(NUMBER_OF_INDEXES);
+
             //Display prompts for Condo
-            String address = prompt("Enter address: ", true);
-            String beds = prompt("Enter number of bedrooms: ", true);
-            int numBeds = Integer.parseInt(beds);
-            String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
-            double numBaths = Double.parseDouble(baths);
-            String sqft = prompt("Enter square footage (ex. 1500): ", true);
-            int numSqft = Integer.parseInt(sqft);
-            String price = prompt("Enter purchase price (ex. 200000): ", true);
-            double purPrice = Double.parseDouble(baths);
-            String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
-            double homeTaxes = Double.parseDouble(baths);
             String hoa = prompt("Enter HOA monthly fee (ex. 50): ", true);
             double hoaFee = Double.parseDouble(hoa);
             String amenities = prompt("Enter amenities (ex. pool, tennis court): ", true);
 
-            Condo newCondo = new Condo(address, numBeds, numBaths, numSqft, purPrice, homeTaxes, hoaFee, amenities);
+            Condo newCondo = new Condo(userInput[0], userInput[1], userInput[2], userInput[3], userInput[4],
+                    userInput[5], hoaFee, amenities);
 
-            //Save data to file
+            //Add new Condo to ArrayList
+
+            //Run storeData method to write to file
+
+            //Display that property has been added
+            System.out.println("\nCondo at " + newCondo.getAddress() + " has been added.");
+
+            //Delay new list printout
+            delay(2000);
+
+            //Call tableHeader method to display table header
+            System.out.println(newCondo.tableHeader());
+
+            //For loop printing out all Condos on the ArrayList using the following format. Make another method?
+            //Run methods from Residence class inside for loop? Make another method?
+            double downPayment = newRes.downPayment(newCondo.getPurchasePrice(), newRes.getPERCENT_DOWN());
+            double pricePerSqft = newRes.pricePerSqFt(newCondo.getPurchasePrice(), newCondo.getSqfeet());
+            double rentalIncome = newRes.rentalIncome(newCondo.getSqfeet(), newRes.getRENT_PER_SQFT());
+            double mortgage = newRes.monthlyPayment(newCondo.getPurchasePrice(), newRes.getInterestRate(),
+                    newRes.getLoanPeriod());
+            double profit = newCondo.monthlyNetProfit(mortgage, newCondo.getTaxes(), rentalIncome,
+                    newCondo.getHoaFee());
+
+            //Return polymorphic String of each property in data file for table with code below as layout
+            System.out.println(newCondo.toString());
+            //TODO change to Condo references
+//            System.out.format("%-50s  %-5d   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,9.2f  $%-,10.2f   " +
+//                            "$%-,7.2f  $%-,9.2f  $%-,9.2f  $%-,8.2f%n", newMulti.getAddress(), newMulti.getUnits(),
+//                    newMulti.getBedrooms(), newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(),
+//                    newMulti.getTaxes(), newMulti.getUtilities(), downPayment, pricePerSqft, mortgage, rentalIncome,
+//                    profit);
+
+            //Delay displaying Main Menu so user has time to read Condo list
+            delay(7000);
+
             return true;
         //Else if user enters 3, this block runs
         } else if (key == '3') {  //multiplex
 
-            //Run Storage array method
+            //Load data from file and create ArrayList
 
-            //Somehow pull in Residence to get interest rate?
+            //Somehow pull in Residence to get interest rate and loan period?
             Residence newRes = new Residence();
 
-            //Create new Multiplex
-            Multiplex newMulti = new Multiplex();
+            //Display prompts for Residence variables from method. Store values in array
+            final int NUMBER_OF_INDEXES = 6;
+            String[] userInput = readNumbers(NUMBER_OF_INDEXES);
 
             //Display prompts for Multiplex and set values for each variable. Make a method?
-            String address = prompt("Enter address: ", true);
-            newMulti.setAddress(address);
             String units = prompt("Enter number of units: ", true);
-            newMulti.setUnits(Integer.parseInt(units));
-            String beds = prompt("Enter number of bedrooms: ", true);
-            newMulti.setBedrooms(Integer.parseInt(beds));
-            String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
-            newMulti.setBathrooms(Double.parseDouble(baths));
-            String sqft = prompt("Enter square footage (ex. 1500): ", true);
-            newMulti.setSqfeet(Integer.parseInt(sqft));
-            String price = prompt("Enter purchase price (ex. 200000): ", true);
-            newMulti.setPurchasePrice(Double.parseDouble(price));
-            String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
-            newMulti.setTaxes(Double.parseDouble(taxes));
+            int numUnits = Integer.parseInt(units);
             String utilities = prompt("Enter monthly utilities (ex 225): ", true);
-            newMulti.setUtilities(Double.parseDouble(utilities));
+            double utilitiesCost = Double.parseDouble(utilities);
 
-            //Set loan period from same Menu prompt 1 when interest rate is changed?
-            String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
-            newRes.setLoanPeriod(Integer.parseInt(loanPeriod));
+            //Create new Multiplex
+            Multiplex newMulti = new Multiplex(userInput[0], userInput[1], userInput[2], userInput[3], userInput[4],
+                    userInput[5], numUnits, utilitiesCost);
 
             //Add new multiplex to ArrayList
 
-            //Save Arraylist to file
+            //Run storeData method to write to file
 
             //Display that property has been added
             System.out.println("\nMultiplex at " + newMulti.getAddress() + " has been added.");
 
             //Delay new list printout
             delay(2000);
+
+            //Call tableHeader method to display table header
+            System.out.println(newMulti.tableHeader());
 
             //For loop printing out all multiplexes on the ArrayList using the following format. Make another method?
             //Run methods from Residence class inside for loop? Make another method?
@@ -148,9 +207,6 @@ public class AddMenu extends Menu {
                     newRes.getLoanPeriod());
             double profit = newMulti.monthlyNetProfit(mortgage, newMulti.getTaxes(), rentalIncome,
                     newMulti.getUtilities());
-
-            //Call tableHeader method to display table header
-            System.out.println(newMulti.tableHeader());
 
             //Return polymorphic String of each property in data file for table with code below as layout
             System.out.println(newMulti.toString());
@@ -175,5 +231,36 @@ public class AddMenu extends Menu {
             System.out.println("Enter valid selection.");
             return true;
         }
+    }
+
+    /**
+     * The readNumbers method
+     * This method returns an array of values the user inputted for Residence variables
+     * @param NUMBER_OF_INDEXES
+     * @return
+     */
+    private static String[] readNumbers(int NUMBER_OF_INDEXES) {
+        String[] userValues = new String[NUMBER_OF_INDEXES];
+
+        //Display prompts for Residence properties
+        String address = prompt("Enter address: ", true);
+        userValues[0] = address;
+        String beds = prompt("Enter number of bedrooms: ", true);
+        int numBeds = Integer.parseInt(beds);
+        userValues[1] = numBeds;
+        String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
+        double numBaths = Double.parseDouble(baths);
+        userValues[2] = numBaths;
+        String sqft = prompt("Enter square footage (ex. 1500): ", true);
+        int resSqFt = Integer.parseInt(sqft);
+        userValues[3] = resSqFt;
+        String price = prompt("Enter purchase price (ex. 200000): ", true);
+        double purPrice = Double.parseDouble(price);
+        userValues[4] = purPrice;
+        String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
+        double homeTaxes = Double.parseDouble(taxes);
+        userValues[5] = homeTaxes;
+        //Return array of user inputted values
+        return userValues;
     }
 }
