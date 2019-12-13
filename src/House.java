@@ -26,6 +26,7 @@ public class House extends Residence {
      * Default constructor
      */
     House() {
+        //default value of acreage
         acreage = 0;
     };
 
@@ -50,13 +51,13 @@ public class House extends Residence {
 	* This method returns the header for the House table
 	*/
 	@Override
-	public String header() {
+	public String tableHeader() {
 		//Return string representation of the House table header
-		return String.format("%nHouse Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   %-9s   %-9s" +
-				"   %-8s%n-------------------------------------------------   ----   -----   " +
-				"------   -----------   ---------   -----------   -------   ---------   " +
-				"---------   --------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes",
-				"$ Down", "$/SqFt", "Payment", "Income", "Profit");
+		return String.format("%nHouse Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
+                        "%-9s   %-9s   %-8s%n-------------------------------------------------   ----   -----   " +
+				"------   -----------   ---------   -----------   -------   ---------   ---------   --------%n",
+                "Address", "Beds", "Baths", "SqFt", "Price", "Taxes", "$ Down", "$/SqFt", "Payment", "Income",
+                "Profit");
 	}
 	
     /**
@@ -66,7 +67,7 @@ public class House extends Residence {
      */
     @Override
     public String toString() {
+        //String of each object in arraylist that is a house
         return String.format(" ");
     }
-
 }

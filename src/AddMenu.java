@@ -1,9 +1,8 @@
 import menu.Menu;
 import menu.MenuItem;
-import java.util.ArrayList;
 
 /**
- * Submenu for option on MainMenu
+ * Submenu for option Add Property on MainMenu
  */
 public class AddMenu extends Menu {
     /**
@@ -25,11 +24,13 @@ public class AddMenu extends Menu {
     }
 
     /**
+     * The getMenuItems method
      * Return array MenuItems
      * @return
      */
     @Override
     protected MenuItem[] getMenuItems() {
+        //Array of Add Property menu items
         MenuItem[] menuItems = new MenuItem[]{
                 new MenuItem('1', "House"),
                 new MenuItem('2', "Condo"),
@@ -46,8 +47,11 @@ public class AddMenu extends Menu {
      */
     @Override
     protected boolean handleMenuSelection(char key) {
+        //If user enters X, this block runs and menu quits
         if (key == 'X' || key == 'x') {
+            //Exits program
             return false;
+        //Else if user enters 1, this block runs
         } else if (key == '1') {
             //Display prompts for House
             String address = prompt("Enter address: ", true);
@@ -70,6 +74,7 @@ public class AddMenu extends Menu {
             //Save data to file
 
             return true;
+        //Else if user enters 2, this block runs
         } else if (key == '2') {
             //Display prompts for Condo
             String address = prompt("Enter address: ", true);
@@ -91,13 +96,10 @@ public class AddMenu extends Menu {
 
             //Save data to file
             return true;
+        //Else if user enters 3, this block runs
         } else if (key == '3') {  //multiplex
 
-            //Check if data file exists
-
-            //If data file doesn't exist, create it
-
-            //Pull in ArrayList from file
+            //Run Storage array method
 
             //Somehow pull in Residence to get interest rate?
             Residence newRes = new Residence();
@@ -113,9 +115,7 @@ public class AddMenu extends Menu {
             String beds = prompt("Enter number of bedrooms: ", true);
             newMulti.setBedrooms(Integer.parseInt(beds));
             String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
-
-            // Won't let me parse it as a double???
-            newMulti.setBathrooms(Integer.parseInt(baths));
+            newMulti.setBathrooms(Double.parseDouble(baths));
             String sqft = prompt("Enter square footage (ex. 1500): ", true);
             newMulti.setSqfeet(Integer.parseInt(sqft));
             String price = prompt("Enter purchase price (ex. 200000): ", true);
@@ -139,9 +139,6 @@ public class AddMenu extends Menu {
             //Delay new list printout
             delay(2000);
 
-            //Return polymorphic String of table header
-            System.out.println(newMulti.toString());
-
             //For loop printing out all multiplexes on the ArrayList using the following format. Make another method?
             //Run methods from Residence class inside for loop? Make another method?
             double downPayment = newRes.downPayment(newMulti.getPurchasePrice(), newRes.getPERCENT_DOWN());
@@ -152,21 +149,27 @@ public class AddMenu extends Menu {
             double profit = newMulti.monthlyNetProfit(mortgage, newMulti.getTaxes(), rentalIncome,
                     newMulti.getUtilities());
 
-            //Table row layout for each property
-            System.out.format("%-50s  %-5d   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,9.2f  $%-,10.2f   " +
-                            "$%-,7.2f  $%-,9.2f  $%-,9.2f  $%-,8.2f%n", newMulti.getAddress(), newMulti.getUnits(),
-                    newMulti.getBedrooms(), newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(),
-                    newMulti.getTaxes(), newMulti.getUtilities(), downPayment, pricePerSqft, mortgage, rentalIncome,
-                    profit);
+            //Call tableHeader method to display table header
+            System.out.println(newMulti.tableHeader());
+
+            //Return polymorphic String of each property in data file for table with code below as layout
+            System.out.println(newMulti.toString());
+//            System.out.format("%-50s  %-5d   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,9.2f  $%-,10.2f   " +
+//                            "$%-,7.2f  $%-,9.2f  $%-,9.2f  $%-,8.2f%n", newMulti.getAddress(), newMulti.getUnits(),
+//                    newMulti.getBedrooms(), newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(),
+//                    newMulti.getTaxes(), newMulti.getUtilities(), downPayment, pricePerSqft, mortgage, rentalIncome,
+//                    profit);
 
             //Delay displaying Main Menu so user has time to read MultiPlex list
             delay(7000);
 
             return true;
+        //Else if user enters 4, this block runs
         } else if (key == '4') {
             //Display Main Menu
             new MainMenu().display();
             return true;
+        //Else user enters anything else, this block runs
         } else {
             //Display statement and display Main Menu again
             System.out.println("Enter valid selection.");

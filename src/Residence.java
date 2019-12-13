@@ -17,13 +17,11 @@ public class Residence {
 	//Yearly homeowner taxes of residence
     private double taxes;
 	//Loan interest rate
+    //TODO interest rate static?
     private double interestRate;
 	//Loan time period in years
+    //TODO loan period static?
     private int loanPeriod;
-	//Monthly payment calculated from monthlyPayment method
-    private double monthlyPayment;
-	//Rental income calculated from rentalIncome method
-    private double rentalIncome;
 	//Required percentage down for investment property
     private final double PERCENT_DOWN = 0.2;
 	//Number to multiply square footage by to calculate rental income
@@ -34,7 +32,7 @@ public class Residence {
      * Default Constructor
      */
     Residence() {
-		//default values of following variables
+		//default values for bedrooms, bathrooms, sqfeet, purchasePrice, taxes, address, interestRate, and loanPeriod.
         bedrooms = 0;
         bathrooms = 0;
         sqfeet = 0;
@@ -42,6 +40,7 @@ public class Residence {
         taxes = 0;
         address = null;
         interestRate = 4.375;
+        loanPeriod = 30;
     }
 
     /**
@@ -79,7 +78,7 @@ public class Residence {
      * The pricePerSqFt method
      * This method calculates the price per square foot of the residence by dividing purchasePrice by sqfeet.
      * @param purchasePrice
-     * @param sqFt
+     * @param sqfeet
      * @return pricePerSqFt
      */
     public double pricePerSqFt(double purchasePrice, int sqfeet) {
@@ -133,10 +132,11 @@ public class Residence {
     }
 	
 	/**
-	* The header Method
+	* The tableHeader Method
 	* This method returns the header for a property display table
+     * @return
 	*/
-	public String header() {
+	public String tableHeader() {
 		//Return string representation of table header
 		return String.format(" ");
 	}
@@ -276,8 +276,6 @@ public class Residence {
     public void setLoanPeriod(int loanPeriod) {
         this.loanPeriod = loanPeriod;
     }
-	
-	//TODO create monthlyPayment and rentalIncome getters and setters
 
     /**
      * Return PERCENTAGE_DOWN

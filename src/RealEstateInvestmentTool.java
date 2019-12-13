@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Test driver for residence, condo, house, and multiplex
  */

@@ -16,6 +16,11 @@ public class Storage {
      * @throws IOException
      */
     public static void addHouse(String filename, String[] data) throws IOException {
+        //Check if data file exists
+
+        //If data file doesn't exist, create it
+
+        //Pull in ArrayList from file
 
         if (filename == null || data == null) {
             throw new IllegalArgumentException("Inputs must not be null");

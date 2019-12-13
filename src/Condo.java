@@ -12,6 +12,7 @@ public class Condo extends Residence {
      * Default constructor
      */
     Condo() {
+        //default values for hoaFee and amenities
         hoaFee = 0;
         amenities = "null";
     }
@@ -38,33 +39,25 @@ public class Condo extends Residence {
      * Return hoaFee
      * @return
      */
-    public double getHoaFee() {
-        return hoaFee;
-    }
+    public double getHoaFee() { return hoaFee; }
 
     /**
      * Set hoaFee
      * @param hoaFee
      */
-    public void setHoaFee(double hoaFee) {
-        this.hoaFee = hoaFee;
-    }
+    public void setHoaFee(double hoaFee) { this.hoaFee = hoaFee; }
 
     /**
      * Return amenities
      * @return
      */
-    public String getAmenities() {
-        return amenities;
-    }
+    public String getAmenities() { return amenities; }
 
     /**
      * Set amenities
      * @param amenities
      */
-    public void setAmenities(String amenities) {
-        this.amenities = amenities;
-    }
+    public void setAmenities(String amenities) { this.amenities = amenities; }
 
     /**
      * The monthlyNetProfit method
@@ -79,7 +72,7 @@ public class Condo extends Residence {
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
         //Equation for calculating monthly net profit
 		double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
-		//Return value
+		//Return net profit value
         return monthlyNetProfit;
     }
 
@@ -88,14 +81,14 @@ public class Condo extends Residence {
 	* This method returns the header for the Condo table
 	*/
 	@Override
-	public String header() {
+	public String tableHeader() {
 		//Return string representation of the Multiplex table header
 		//TODO change table header from House format to Condo
-		return String.format("%nCondo Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   %-9s   %-9s" +
-				"   %-8s%n-------------------------------------------------   ----   -----   " +
-				"------   -----------   ---------   -----------   -------   ---------   " +
-				"---------   --------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes",
-				"$ Down", "$/SqFt", "Payment", "Income", "Profit");
+		return String.format("%nCondo Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
+                        "%-9s   %-9s   %-8s%n-------------------------------------------------   ----   -----   " +
+				"------   -----------   ---------   -----------   -------   ---------   ---------   --------%n",
+                "Address", "Beds", "Baths", "SqFt", "Price", "Taxes", "$ Down", "$/SqFt", "Payment", "Income",
+                "Profit");
 	}
 	
     /**
