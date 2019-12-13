@@ -20,7 +20,7 @@ public class AddMenu extends Menu {
      */
     @Override
     protected String getDescription() {
-        return "Choose a type of property to add.";
+        return "Choose a menu option.";
     }
 
     /**
@@ -32,9 +32,9 @@ public class AddMenu extends Menu {
     protected MenuItem[] getMenuItems() {
         //Array of Add Property menu items
         MenuItem[] menuItems = new MenuItem[]{
-                new MenuItem('1', "House"),
-                new MenuItem('2', "Condo"),
-                new MenuItem('3', "Multiplex"),
+                new MenuItem('1', "Add House"),
+                new MenuItem('2', "Add Condo"),
+                new MenuItem('3', "Add Multiplex"),
                 new MenuItem('4', "Return to Main Menu"),
         };
         return menuItems;
@@ -65,11 +65,11 @@ public class AddMenu extends Menu {
 
             //Display prompts for House
             String acreage = prompt("Enter acreage (ex. 0.25): ", true);
-            double acreageSize = Double.parseDouble(acreage);
 
             //Create new House instance
-            House newHouse = new House(userInput[0], userInput[1], userInput[2], userInput[3], userInput[4],
-                    userInput[5], acreageSize);
+            House newHouse = new House(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
+                    Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
+                    Double.parseDouble(acreage));
 
             //Add new House to ArrayList
 
@@ -91,8 +91,7 @@ public class AddMenu extends Menu {
             double rentalIncome = newRes.rentalIncome(newHouse.getSqfeet(), newRes.getRENT_PER_SQFT());
             double mortgage = newRes.monthlyPayment(newHouse.getPurchasePrice(), newRes.getInterestRate(),
                     newRes.getLoanPeriod());
-            double profit = newHouse.monthlyNetProfit(mortgage, newHouse.getTaxes(), rentalIncome,
-                    newHouse.getAcreage());
+            double profit = newHouse.monthlyNetProfit(mortgage, newHouse.getTaxes(), rentalIncome);
 
             //Return polymorphic String of each property in data file for table with code below as layout
             System.out.println(newHouse.toString());
@@ -124,8 +123,9 @@ public class AddMenu extends Menu {
             double hoaFee = Double.parseDouble(hoa);
             String amenities = prompt("Enter amenities (ex. pool, tennis court): ", true);
 
-            Condo newCondo = new Condo(userInput[0], userInput[1], userInput[2], userInput[3], userInput[4],
-                    userInput[5], hoaFee, amenities);
+            Condo newCondo = new Condo(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
+                    Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
+                    hoaFee, amenities);
 
             //Add new Condo to ArrayList
 
@@ -182,8 +182,9 @@ public class AddMenu extends Menu {
             double utilitiesCost = Double.parseDouble(utilities);
 
             //Create new Multiplex
-            Multiplex newMulti = new Multiplex(userInput[0], userInput[1], userInput[2], userInput[3], userInput[4],
-                    userInput[5], numUnits, utilitiesCost);
+            Multiplex newMulti = new Multiplex(userInput[0], Integer.parseInt(userInput[1]),
+                    Double.parseDouble(userInput[2]), Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
+                    Double.parseDouble(userInput[5]), numUnits, utilitiesCost);
 
             //Add new multiplex to ArrayList
 
@@ -246,20 +247,15 @@ public class AddMenu extends Menu {
         String address = prompt("Enter address: ", true);
         userValues[0] = address;
         String beds = prompt("Enter number of bedrooms: ", true);
-        int numBeds = Integer.parseInt(beds);
-        userValues[1] = numBeds;
+        userValues[1] = beds;
         String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
-        double numBaths = Double.parseDouble(baths);
-        userValues[2] = numBaths;
+        userValues[2] = baths;
         String sqft = prompt("Enter square footage (ex. 1500): ", true);
-        int resSqFt = Integer.parseInt(sqft);
-        userValues[3] = resSqFt;
+        userValues[3] = sqft;
         String price = prompt("Enter purchase price (ex. 200000): ", true);
-        double purPrice = Double.parseDouble(price);
-        userValues[4] = purPrice;
+        userValues[4] = price;
         String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
-        double homeTaxes = Double.parseDouble(taxes);
-        userValues[5] = homeTaxes;
+        userValues[5] = taxes;
         //Return array of user inputted values
         return userValues;
     }
