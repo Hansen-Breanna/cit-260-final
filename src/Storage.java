@@ -34,7 +34,7 @@ public class Storage {
                     out.format("%s|%s|%d\n", "house", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
                             obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
                             h.getAcreage(), obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(),
-                            obj.rentalIncome(), obj.monthlyNetProfit();
+                            obj.rentalIncome(), obj.monthlyNetProfit());
 
                 } else if (obj instanceof Condo) {
                     //Info stored for Condo objects-same as Residence + hoaFee & amenities
@@ -43,7 +43,7 @@ public class Storage {
                             obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
                             c.getHoaFee(), c.getAmenities(), obj.downPayment(), obj.pricePerSqFt(),
                             obj.monthlyPayment(), obj.rentalIncome(),
-                            obj.monthlyNetProfit();
+                            obj.monthlyNetProfit());
 
                 } else if (obj instanceof Multiplex) {
                     //Info saved for Multiplex-same as Residence + units & utilities
@@ -52,14 +52,14 @@ public class Storage {
                             obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
                             m.getUnits(), m.getUtilities(), obj.downPayment(), obj.pricePerSqFt(),
                             obj.monthlyPayment(), obj.rentalIncome(),
-                            obj.monthlyNetProfit();
+                            obj.monthlyNetProfit());
 
                 } else {
                     //In case of not House, Condo or Multiplex, will be saved in file as Residence object
                     out.format("%s|%s\n", "residence", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
                             obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
                             obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(), obj.rentalIncome(),
-                            obj.monthlyNetProfit();
+                            obj.monthlyNetProfit());
                 }
             }
         } catch (IOException exception) {
@@ -108,7 +108,8 @@ public class Storage {
                         //plus $Down, $/SqFt, monthlyPayment, monthlyIncome, monthlyNetProfit
 
                         //Load the address from the file
-                        String loadAddress = ;
+                        //TODO check field is correct
+                        String loadAddress = fields[1];
                         r.setAddress(loadAddress);
 
                         //Load the bedrooms from the file
