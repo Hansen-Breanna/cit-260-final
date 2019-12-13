@@ -28,8 +28,8 @@ public class Storage {
         }
     }
 
-    /** Writes the data for the condo object to the condo file
-     *
+    /**
+     * Writes the data for the condo object to the condo file
      * @param filename
      * @param data
      * @throws IOException
@@ -47,7 +47,8 @@ public class Storage {
         }
     }
 
-    /** Writes the data for the multiplex object to the multiplex file
+    /**
+     * Writes the data for the multiplex object to the multiplex file
      *
      * @param filename
      * @param data
@@ -91,12 +92,14 @@ public class Storage {
 
         return convertListToArray(rawData);
     }
+
     public static String[] convertListToArray(ArrayList<String> data) {
         // convert arraylist to array
         String[] strings = new String[data.size()];
-        for (int i=0; i < data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             strings[i] = data.get(i);
         }
 
         return strings;
+    }
 }
