@@ -36,7 +36,7 @@ public class MainMenu extends Menu {
     protected MenuItem[] getMenuItems() {
 		//Array of main menu items
         MenuItem[] menuItems = new MenuItem[]{
-                new MenuItem('1', "Change interest rate (default is 4.375%)"),
+                new MenuItem('1', "Change interest rate and loan period"),
                 new MenuItem('2', "View all properties"),
                 new MenuItem('3', "Add property"),
                 new MenuItem('4', "Remove Property"),
@@ -69,7 +69,6 @@ public class MainMenu extends Menu {
             //Sets up a try-catch in a while loop, so it will loop again if it catches InputMismatchException
             while (!valid) {
                 try {
-                    var input = new Scanner(System.in);
                     //Initial prompt for new interest rate
                     String newRate = prompt("Enter a new interest rate percent (example: 5.25): ",
                             true);

@@ -277,19 +277,4 @@ public class Residence {
         this.loanPeriod = loanPeriod;
     }
 
-    /**
-     * Return PERCENTAGE_DOWN
-     * @return
-     */
-    public double getPERCENT_DOWN() { 
-		return PERCENT_DOWN;
-	}
-
-    /**
-     * Return RENT_PER_SQFT
-     * @return
-     */
-    public double getRENT_PER_SQFT() { 
-		return RENT_PER_SQFT; 
-	}
 }
