@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Test driver for residence, condo, house, and multiplex
  */
@@ -9,6 +11,12 @@ public class RealEstateInvestmentTool {
      */
     public static void main(String[] args) {
 
+        try {
+            ArrayList<Residence> data = new ArrayList<>();
+            Storage.storeData("data.txt", data);
+        } catch(Exception ex) {
+            //TODO
+        }
         //Welcome message
         System.out.println("Welcome to the Property Investment Tool.");
 

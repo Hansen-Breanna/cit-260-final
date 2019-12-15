@@ -17,11 +17,11 @@ public class Residence {
 	//Yearly homeowner taxes of residence
     private double taxes;
 	//Loan interest rate
-    //TODO interest rate static?
-    private double interestRate;
+    //TODO interest rate static? change to public?
+    public double interestRate = 4.375;
 	//Loan time period in years
-    //TODO loan period static?
-    private int loanPeriod;
+    //TODO loan period static? change to public?
+    public int loanPeriod = 30;
 	//Required percentage down for investment property
     private final static double PERCENT_DOWN = 0.2;
 	//Number to multiply square footage by to calculate rental income
@@ -39,8 +39,6 @@ public class Residence {
         purchasePrice = 0;
         taxes = 0;
         address = null;
-        interestRate = 4.375;
-        loanPeriod = 30;
     }
 
     /**

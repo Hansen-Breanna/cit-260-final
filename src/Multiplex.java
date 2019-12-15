@@ -96,9 +96,21 @@ public class Multiplex extends Residence {
      * Return a string representation of the Multiplex
      * @return String
      */
-    @Override
-    public String toString() {
+    //@Override
+    public String toString(Multiplex newMulti) {
+
+        Double downPayment = super.downPayment(newMulti.getPurchasePrice(), .20);
+        Double pricePerSqFoot = super.pricePerSqFt(newMulti.getPurchasePrice(), newMulti.getSqfeet());
+        Double monthlyPayment = super.monthlyPayment(newMulti.getPurchasePrice(), super.getInterestRate(),
+                super.getLoanPeriod());
+        Double rentalIncome = super.rentalIncome(newMulti.getSqfeet(), .70);
+        Double netProfit = super.monthlyNetProfit(monthlyPayment, rentalIncome, newMulti.getTaxes());
+
 		//Returns the string for each object of a Multiplex to the table
-		return String.format(" ");
+		return String.format("%-50s  %-5d   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,9.2f  $%-,10.2f   " +
+                            "$%-,7.2f  $%-,9.2f  $%-,9.2f  $%-,8.2f%n", newMulti.getAddress(), newMulti.getUnits(),
+                    newMulti.getBedrooms(), newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(),
+                    newMulti.getTaxes(), newMulti.getUtilities(), downPayment, pricePerSqFoot, monthlyPayment,
+                rentalIncome, netProfit);
     }
 }

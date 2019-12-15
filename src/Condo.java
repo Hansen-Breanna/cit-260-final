@@ -97,8 +97,8 @@ public class Condo extends Residence {
      * This method display the data about each property as a string in a table
      * @return String
      */
-    @Override
-    public String toString() {
+    //@Override
+    public String toString(Condo newCondo) {
         return String.format(" ");
     }
 }

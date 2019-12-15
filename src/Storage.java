@@ -27,43 +27,49 @@ public class Storage {
         // type parentField child-field
         try (PrintWriter out = new PrintWriter(filename)) {
             for (Residence obj : data) {
+
+                //TODO get interest rate?
+                //Residence method calculations
+                Double downPayment = obj.downPayment(obj.getPurchasePrice(), .20);
+                Double pricePerSqFoot = obj.pricePerSqFt(obj.getPurchasePrice(), obj.getSqfeet());
+                Double monthlyPayment = obj.monthlyPayment(obj.getPurchasePrice(),
+                         4.375, obj.getLoanPeriod());
+                Double rentalIncome = obj.rentalIncome(obj.getSqfeet(), .70);
+                Double netProfit = obj.monthlyNetProfit(monthlyPayment, rentalIncome, obj.getTaxes());
+
                 //This will make sure each object type is getting saved with same order before it adds class variables
                 if (obj instanceof House) {
                     //Info stored for House objects-same as Residence + acreage
                     House h = (House) obj;
                     //TODO input parameters for methods in format
-//                    out.format("%s|%s|%d\n", "house", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-//                            h.getAcreage(), obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(),
-//                            obj.rentalIncome(), obj.monthlyNetProfit());
-
+                    out.format("%s|%s|%d|%f|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f|\n", "House", obj.getAddress(),
+                            obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
+                            obj.getTaxes(), obj.getInterestRate(), h.getAcreage(), downPayment, pricePerSqFoot,
+                            monthlyPayment, rentalIncome, netProfit);
                 } else if (obj instanceof Condo) {
                     //Info stored for Condo objects-same as Residence + hoaFee & amenities
                     Condo c = (Condo) obj;
                     //TODO input parameters for methods in format
-//                    out.format("%s|%s|%f\n", "condo", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-//                            c.getHoaFee(), c.getAmenities(), obj.downPayment(), obj.pricePerSqFt(),
-//                            obj.monthlyPayment(), obj.rentalIncome(),
-//                            obj.monthlyNetProfit());
-
+                    out.format("%s|%s|%d|%f|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f|%f|\n", "Condo", obj.getAddress(),
+                            obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
+                            obj.getTaxes(), obj.getInterestRate(), c.getHoaFee(), c.getAmenities(), downPayment,
+                            pricePerSqFoot, monthlyPayment, rentalIncome, netProfit);
                 } else if (obj instanceof Multiplex) {
                     //Info saved for Multiplex-same as Residence + units & utilities
                     Multiplex m = (Multiplex) obj;
                     //TODO input parameters for methods in format
-//                    out.format("%s|%s|%f\n", "multiplex", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-//                            m.getUnits(), m.getUtilities(), obj.downPayment(), obj.pricePerSqFt(),
-//                            obj.monthlyPayment(), obj.rentalIncome(),
-//                            obj.monthlyNetProfit());
+                    out.format("\"%s|%s|%d|%f|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f|\n", "Multiplex", obj.getAddress(),
+                            obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
+                            obj.getTaxes(), obj.getInterestRate(), m.getUnits(), m.getUtilities(), downPayment,
+                            pricePerSqFoot, monthlyPayment, rentalIncome, netProfit);
 
                 } else {
                     //In case of not House, Condo or Multiplex, will be saved in file as Residence object
                     //TODO input parameters for methods in format
-//                    out.format("%s|%s\n", "residence", obj.getAddress(), obj.getBedrooms(), obj.getBathrooms(),
-//                            obj.getSqfeet(), obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(),
-//                            obj.downPayment(), obj.pricePerSqFt(), obj.monthlyPayment(), obj.rentalIncome(),
-//                            obj.monthlyNetProfit());
+                    out.format("%s|%s|%d|%f|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f|\n", "residence", obj.getAddress(),
+                            obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
+                            obj.getTaxes(), obj.getInterestRate(), downPayment, pricePerSqFoot, monthlyPayment,
+                            rentalIncome, netProfit);
                 }
             }
         } catch (IOException exception) {
@@ -79,22 +85,23 @@ public class Storage {
      * @throws IOException
      */
     public static ArrayList<Residence> loadData(String filename) throws IOException {
-        ArrayList<Residence> newData = new ArrayList<>();
 
-        //Check if file exists. If not, create file.
         if (filename == null || filename.trim().length() == 0) {
             throw new IllegalArgumentException("Inputs must not be null");
         }
 
+        //Check if file exists and if it is readable
         File file = new File(filename);
-        if (file.exists() == false || file.canRead() == false) {
+        if(file.exists() == false || file.canRead() == false) {
             throw new IOException("Cannot find or read file");
         }
+
+        ArrayList<Residence> newData = new ArrayList<>();
 
         //Initialize line number
         int lineNumber = 0;
 
-        try (Scanner input = new Scanner(new File(filename))) {
+        try (Scanner input = new Scanner(file)) {
             while (input.hasNextLine()) {
                 String line = input.nextLine().trim();
                 lineNumber += 1;
