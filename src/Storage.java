@@ -168,10 +168,10 @@ public class Storage {
 //                        //r.monthlyNetProfit(loadProfit);
                     }
                     newData.add(r);
-                    //if the first field has the house class, adds it to its own array
-                } else if (fields[0].equals("house")) {
+                    //if the first field has the House class, adds it to its own array
+                } else if (fields[0].equals("House")) {
                     // house|first child value|1
-                    //Should have 9 fields, including [0] for "house" --plus 5 more for method calculations
+                    //Should have 9 fields, including [0] for "House" --plus 5 more for method calculations
                     if (fields.length < 14) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
@@ -184,8 +184,8 @@ public class Storage {
                     //Repeat same as Residence, but adding in acreage
 
                     //if the first field has the condo class, adds it to its own array
-                } else if (fields[0].equals("condo")) {
-                    //Should have 10 fields, including [0] for "condo" --plus 5 more for method calculations
+                } else if (fields[0].equals("Condo")) {
+                    //Should have 10 fields, including [0] for "Condo" --plus 5 more for method calculations
                     if (fields.length < 15) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
@@ -198,8 +198,8 @@ public class Storage {
                     //Repeat same as Residence, but adding in hoaFee and amenities
 
                     //if the first field has the multiplex class, adds it to its own array
-                } else if (fields[0].equals("multiplex")) {
-                    //Should have 10 fields, including [0] for "multiplex" --plus 5 more for method calculations
+                } else if (fields[0].equals("Multiplex")) {
+                    //Should have 10 fields, including [0] for "Multiplex" --plus 5 more for method calculations
                     if (fields.length < 15) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
