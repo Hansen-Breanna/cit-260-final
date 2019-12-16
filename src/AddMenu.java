@@ -53,24 +53,24 @@ public class AddMenu extends Menu {
         if (key == 'X' || key == 'x') {
             //Exits program
             return false;
-        //Else if user enters 1, this block runs
+            //Else if user enters 1, this block runs
         } else if (key == '1') {
             addRes("House");
             return true;
-        //Else if user enters 2, this block runs
+            //Else if user enters 2, this block runs
         } else if (key == '2') {
             addRes("Condo");
             return true;
-        //Else if user enters 3, this block runs
+            //Else if user enters 3, this block runs
         } else if (key == '3') {  //multiplex
             addRes("Multiplex");
             return true;
-        //Else if user enters 4, this block runs
+            //Else if user enters 4, this block runs
         } else if (key == '4') {
             //Display Main Menu
             new MainMenu().display();
             return true;
-        //Else user enters anything else, this block runs
+            //Else user enters anything else, this block runs
         } else {
             //Display statement and display Main Menu again
             System.out.println("Enter valid selection.");

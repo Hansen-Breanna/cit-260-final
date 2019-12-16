@@ -18,10 +18,10 @@ public class Residence {
     private double taxes;
 	//Loan interest rate
     //TODO interest rate static? change to public?
-    public double interestRate = 4.375;
+    public static double interestRate = 4.375;
 	//Loan time period in years
     //TODO loan period static? change to public?
-    public int loanPeriod = 30;
+    public static int loanPeriod = 30;
 	//Required percentage down for investment property
     private final static double PERCENT_DOWN = 0.2;
 	//Number to multiply square footage by to calculate rental income

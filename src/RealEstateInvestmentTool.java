@@ -11,6 +11,14 @@ public class RealEstateInvestmentTool {
      */
     public static void main(String[] args) {
 
+        //TODO add comments
+        try {
+            ArrayList<Residence> data = new ArrayList<>();
+            Storage.storeData("data.txt", data);
+        } catch(Exception ex) {
+            //TODO
+        }
+
         //Welcome message
         System.out.println("Welcome to the Property Investment Tool.");
 
