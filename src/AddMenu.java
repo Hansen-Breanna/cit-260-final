@@ -82,7 +82,6 @@ public class AddMenu extends Menu {
      *
      * @return
      */
-
     private static boolean addRes(String type) {
         //Load data from file and create ArrayList
         ArrayList<Residence> newData = new ArrayList<>();
@@ -118,12 +117,12 @@ public class AddMenu extends Menu {
 
         //TODO Add new property type to ArrayList
 
+        //Run storeData method to write to file
         try {
             Storage.storeData("data.txt", newData);
         } catch(IOException ex) {
             //TODO
         }
-        //Run storeData method to write to file
 
         //Display that property has been added
         System.out.println("\n" + type + " at " + userInput[0] + " has been added.");
