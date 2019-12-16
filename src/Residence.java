@@ -14,8 +14,8 @@ public class Residence {
     private int loanPeriod;
     private double monthlyPayment;
     private double rentalIncome;
-    private final double PERCENT_DOWN = 0.2;
-    private final double RENT_PER_SQFT = 0.7;
+    private final static double PERCENT_DOWN = 0.2;
+    private final static double RENT_PER_SQFT = 0.7;
 
     //CONSTRUCTORS
 
@@ -66,7 +66,7 @@ public class Residence {
      * The pricePerSqFt method
      * This method calculates the price per square foot of the residence based on the purchase price and size.
      * @param purchasePrice
-     * @param sqFt
+     * @param sqfeet
      * @return pricePerSqFt
      */
     public double pricePerSqFt(double purchasePrice, int sqfeet) {
