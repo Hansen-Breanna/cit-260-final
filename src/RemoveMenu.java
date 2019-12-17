@@ -102,64 +102,30 @@ public class RemoveMenu extends Menu {
         }
 
         try {
-            int count = 0;
-            switch (type) {
-                case "House":
-                    House newHouse = new House();
-                    System.out.println(newHouse.tableHeader());
-                    for (Residence residence: residenceData) {
-                        count ++;
-                        if (residence instanceof House) {
-                            System.out.print(count + ". ");
-                            House h = (House) residence;
-                            System.out.println(h.toString());
-                        }
-                    }
-                    break;
-                case "Condo":
-                    Condo newCondo = new Condo();
-                    System.out.println(newCondo.tableHeader());
-                    for (Residence residence: residenceData) {
-                        count ++;
-                        if (residence instanceof Condo) {
-                            System.out.print(count + ". ");
-                            Condo c = (Condo) residence;
-                            System.out.println(c.toString());
-                        }
-                    }
-                    break;
-                case "Multiplex":
-                    Multiplex newMulti = new Multiplex();
-                    System.out.println(newMulti.tableHeader());
-                    for (Residence residence: residenceData) {
-                        count ++;
-                        if (residence instanceof Multiplex) {
-                            System.out.print(count + ". ");
-                            Multiplex m = (Multiplex) residence;
-                            System.out.println(m.toString());
-                        }
-                    }
-                    break;
-            }
+            tableType(residenceData, type);
+
             //Prompts user to choose a property to delete.
             System.out.println();
-            String choose = Menu.prompt("Which property would you like to delete?", true);
-            int pickedNumber = Integer.parseInt(choose);
-            //TODO do number format exception for pickedNumber?
-            //Asks user to confirm their selection, loops choice if no is selected
-            String choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
-            if (choice.charAt(0) == 'Y' || choice.charAt(0) == 'y') {
-                //remove selected data
-                int number = pickedNumber - 1;
-                residenceData.remove(number);
-                //Displays new table and saves to file
-                System.out.println(residenceData.toString());
-            } else if (choice == "N" || choice == "n") {
-                //prompt again
-            } else {
-                //Display statement and display Main Menu again
-                System.out.println("Enter valid selection.");
-            }
+            String choice = "";
+                do {
+                    String choose = Menu.prompt("Which property would you like to delete?", true);
+                    int pickedNumber = Integer.parseInt(choose);
+                    //TODO do number format exception for pickedNumber?
+                    //Asks user to confirm their selection, loops choice if no is selected
+                    choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
+                    if (choice.charAt(0) == 'Y' || choice.charAt(0) == 'y') {
+                        //remove selected data
+                        int number = pickedNumber - 1;
+                        residenceData.remove(number);
+                        //Displays new table and saves to file
+
+                    } else if (choice.charAt(0) == 'N' || choice.charAt(0) == 'n') {
+                        //continue through to while
+                    } else {
+                        //Display statement and display Main Menu again
+                        System.out.println("Enter valid selection.");
+                    }
+                } while (choice.charAt(0) != 'Y' || choice.charAt(0) != 'y');
 
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
@@ -168,4 +134,45 @@ public class RemoveMenu extends Menu {
         }
     }
 
+    public static void tableType(ArrayList<Residence> residenceData, String type) {
+        int count = 0;
+        switch (type) {
+            case "House":
+                House newHouse = new House();
+                System.out.println(newHouse.tableHeader());
+                for (Residence residence: residenceData) {
+                    count ++;
+                    if (residence instanceof House) {
+                        System.out.print(count + ". ");
+                        House h = (House) residence;
+                        System.out.println(h.toString());
+                    }
+                }
+                break;
+            case "Condo":
+                Condo newCondo = new Condo();
+                System.out.println(newCondo.tableHeader());
+                for (Residence residence: residenceData) {
+                    count ++;
+                    if (residence instanceof Condo) {
+                        System.out.print(count + ". ");
+                        Condo c = (Condo) residence;
+                        System.out.println(c.toString());
+                    }
+                }
+                break;
+            case "Multiplex":
+                Multiplex newMulti = new Multiplex();
+                System.out.println(newMulti.tableHeader());
+                for (Residence residence: residenceData) {
+                    count ++;
+                    if (residence instanceof Multiplex) {
+                        System.out.print(count + ". ");
+                        Multiplex m = (Multiplex) residence;
+                        System.out.println(m.toString());
+                    }
+                }
+                break;
+        }
+    }
 }

@@ -1,10 +1,8 @@
 //imports
 import menu.Menu;
 import menu.MenuItem;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * Method creates Main Menu to display to user
