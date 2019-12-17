@@ -73,8 +73,8 @@ public class RemoveMenu extends Menu {
             //Else if user enters 4, this block runs
         } else if (key == '4') {
             //Display Main Menu
-            new MainMenu().display();
-            return true;
+            MainMenu mmenu = new MainMenu();
+            return mmenu.display();
             //Else user enters anything other than above options, main menu prints again
         } else {
             System.out.println("Enter valid selection.");

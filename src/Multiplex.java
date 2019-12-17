@@ -83,7 +83,7 @@ public class Multiplex extends Residence {
 	@Override
 	public String tableHeader() {
 		//Return string representation of the Multiplex table header
-        return String.format("%Multiplex Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s" +
+        return String.format("%nMultiplex Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s" +
                         "   %-9s   %-9s   %-8s   %-5s   %-9s%n--------------------------------------------------   " +
                         "----   -----   ------   -----------   ---------   -----------   -------   ---------   " +
                         "---------   --------   -----   ---------%n", "Address", "Beds", "Baths", "SqFt", "Price",
@@ -107,7 +107,7 @@ public class Multiplex extends Residence {
 
 		//Returns the string for each object of a Multiplex to the table
 		return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f   $%-,9.2f   $%-,10.2f   $%-,7.2f   $%-,9.2f" +
-                        "   $%-,9.2f  $%-,8.2f   $%-,8.2d   $-,8.2f%n", newMulti.getAddress(), newMulti.getBedrooms(),
+                        "   $%-,9.2f  $%-,8.2f   %-5d   %-9f%n ", newMulti.getAddress(), newMulti.getBedrooms(),
                 newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(), newMulti.getTaxes(),
                 downPayment, pricePerSqFoot, monthlyPayment, rentalIncome, netProfit, newMulti.getUnits(),
                 newMulti.getUtilities());

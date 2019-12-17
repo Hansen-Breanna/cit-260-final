@@ -133,13 +133,13 @@ public class MainMenu extends Menu {
         } else if (key == '3') {
             // Display the Add Menu description and options
            AddMenu menu =  new AddMenu();
-           menu.display();
-            return true;
+           boolean rval =  menu.display();
+           return rval;
 		//If user enters 4, this block runs
         } else if (key == '4') {
             // Display the Remove Menu title and options
-            new RemoveMenu().display();
-            return true;
+            RemoveMenu rmenu = new RemoveMenu();
+            return rmenu.display();
 		//Else user enters anything other than above options, main menu prints again
         } else {
             System.out.println("Enter valid selection for Main Menu.");

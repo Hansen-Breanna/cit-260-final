@@ -78,7 +78,7 @@ public abstract class Menu {
      * menu is closed and returns to whatever called
      * it.
      */
-    public void display() {
+    public boolean display() {
         
         boolean keepGoing = true;
         
@@ -122,6 +122,7 @@ public abstract class Menu {
 
             System.out.println();
         }
+        return keepGoing;
     }
     
     

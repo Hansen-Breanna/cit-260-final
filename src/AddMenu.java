@@ -68,8 +68,8 @@ public class AddMenu extends Menu {
             //Else if user enters 4, this block runs
         } else if (key == '4') {
             //Display Main Menu
-            new MainMenu().display();
-            return true;
+            MainMenu mmenu = new MainMenu();
+            return mmenu.display();
             //Else user enters anything else, this block runs
         } else {
             //Display statement and display Main Menu again
