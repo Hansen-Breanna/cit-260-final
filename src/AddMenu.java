@@ -171,20 +171,76 @@ public class AddMenu extends Menu {
     private static String[] readNumbers(int NUMBER_OF_INDEXES) {
         String[] userValues = new String[NUMBER_OF_INDEXES];
 
-        //Display prompts for Residence properties
-        //TODO validate each type entered is correct
-        String address = prompt("Enter address: ", true);
-        userValues[0] = address;
-        String beds = prompt("Enter number of bedrooms: ", true);
-        userValues[1] = beds;
-        String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
-        userValues[2] = baths;
-        String sqft = prompt("Enter square footage (ex. 1500): ", true);
-        userValues[3] = sqft;
-        String price = prompt("Enter purchase price (ex. 200000): ", true);
-        userValues[4] = price;
-        String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
-        userValues[5] = taxes;
+        try {
+            //Display prompts for Residence properties
+            //TODO validate each type entered is correct
+            boolean checkVal = false;
+
+            //Address
+            String address = prompt("Enter address: ", true);
+            userValues[0] = address;
+            //Bedrooms
+            do {
+                String beds = prompt("Enter number of bedrooms: ", true);
+                try {
+                    Integer checkBeds = Integer.parseInt(beds);
+                    userValues[1] = beds;
+                    checkVal = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Input an integer.");
+                }
+            } while (checkVal == false);
+            //Bathrooms
+            do {
+                checkVal = false;
+                String baths = prompt("Enter number of bathrooms (ex. 1.5): ", true);
+                try {
+                    double checkBaths = Double.parseDouble(baths);
+                    userValues[2] = baths;
+                    checkVal = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Input a number.");
+                }
+            } while (checkVal == false);
+            //Square footage
+            do {
+                checkVal = false;
+                String sqft = prompt("Enter square footage (ex. 1500): ", true);
+                try {
+                    Integer checkSqFt = Integer.parseInt(sqft);
+                    userValues[3] = sqft;
+                    checkVal = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Input an integer.");
+                }
+            } while (checkVal == false);
+            //Price
+            do {
+                checkVal = false;
+                String price = prompt("Enter purchase price (ex. 200000): ", true);
+                try {
+                    double checkPrice = Double.parseDouble(price);
+                    userValues[4] = price;
+                    checkVal = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Input a number.");
+                }
+            } while (checkVal == false);
+            //Taxes
+            do {
+                checkVal = false;
+                String taxes = prompt("Enter yearly homeowner's taxes (ex 1500): ", true);
+                try {
+                    double checkTaxes = Double.parseDouble(taxes);
+                    userValues[5] = taxes;
+                    checkVal = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Input a number.");
+                }
+            } while (checkVal == false);
+        } catch (Exception ex) {
+            System.err.println("Error: input must be an integer.");
+        }
         //Return array of user inputted values
         return userValues;
     }
@@ -194,13 +250,22 @@ public class AddMenu extends Menu {
      * @return
      */
     private static House addHouse(String[] userInput) {
+        boolean checkDouble = false;
+        House newHouse = new House();
         //Display prompts for House
-        String acreage = prompt("Enter acreage (ex. 0.25): ", true);
-
-        //Create new House instance
-        House newHouse = new House(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
-                Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
-                Double.parseDouble(acreage));
+        do {
+            try {
+                String acreage = prompt("Enter acreage (ex. 0.25): ", true);
+                double checkAcreage = Double.parseDouble(acreage);
+                //Create new House instance
+                newHouse = new House(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
+                        Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
+                        checkAcreage);
+                checkDouble = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Input a number.");
+            }
+        } while (checkDouble == false);
         return newHouse;
     }
 
@@ -209,16 +274,22 @@ public class AddMenu extends Menu {
      * @return
      */
     private static Condo addCondo(String[] userInput) {
-
-        //Display prompts for Condo
-        String hoa = prompt("Enter HOA monthly fee (ex. 50): ", true);
-        double hoaFee = Double.parseDouble(hoa);
-        String amenities = prompt("Enter amenities (ex. pool, tennis court): ", true);
-
-        Condo newCondo = new Condo(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
-                Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
-                hoaFee, amenities);
-
+        boolean checkDouble = false;
+        Condo newCondo = new Condo();
+        do {
+            try {
+                //Display prompts for Condo
+                String hoa = prompt("Enter HOA monthly fee (ex. 50): ", true);
+                double checkHoa = Double.parseDouble(hoa);
+                String amenities = prompt("Enter amenities (ex. pool, tennis court): ", true);
+                newCondo = new Condo(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
+                        Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
+                        checkHoa, amenities);
+                checkDouble = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Input a number.");
+            }
+        } while (checkDouble == false);
         return newCondo;
     }
 
@@ -228,17 +299,25 @@ public class AddMenu extends Menu {
      */
     private static Multiplex addMultiplex(String[] userInput) {
 
+        boolean checkVal = false;
+        Multiplex newMulti = new Multiplex();
         //Display prompts for Multiplex and set values for each variable. Make a method?
-        String units = prompt("Enter number of units: ", true);
-        int numUnits = Integer.parseInt(units);
-        String utilities = prompt("Enter monthly utilities (ex 225): ", true);
-        double utilitiesCost = Double.parseDouble(utilities);
-
-        //Create new Multiplex
-        Multiplex newMulti = new Multiplex(userInput[0], Integer.parseInt(userInput[1]),
-                Double.parseDouble(userInput[2]), Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
-                Double.parseDouble(userInput[5]), numUnits, utilitiesCost);
-
+        do {
+            try {
+                //Units
+                String units = prompt("Enter number of units: ", true);
+                int numUnits = Integer.parseInt(units);
+                String utilities = prompt("Enter monthly utilities (ex 225): ", true);
+                double utilitiesCost = Double.parseDouble(utilities);
+                //Create new Multiplex
+                newMulti = new Multiplex(userInput[0], Integer.parseInt(userInput[1]),
+                        Double.parseDouble(userInput[2]), Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
+                        Double.parseDouble(userInput[5]), numUnits, utilitiesCost);
+                checkVal = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Input a number.");
+            }
+        } while (checkVal == false);
         return newMulti;
     }
 }
