@@ -61,7 +61,7 @@ public class Storage {
      * @return The list of objects loaded from the file.
      * @throws IOException
      */
-    public static ArrayList<Residence> loadData(String filename) throws IOException {
+    public static ArrayList<Residence> loadData(String filename) throws IOException, FileIsEmptyException {
 
         if (filename == null || filename.trim().length() == 0) {
             throw new IllegalArgumentException("Inputs must not be null");
@@ -86,11 +86,14 @@ public class Storage {
                 //Splits the data per line after the | symbol
                 //if the first field has the parent class, adds it to its own array
                 String[] fields = line.split("\\|");
+                if (fields.length <= 0) {
+                    throw new FileIsEmptyException("File is empty." + lineNumber);
+                }
                 if (fields[0].equals("House")) {
                     // House|first child value|1
                     //Should have 9 fields, including [0] for "House" --plus 5 more for method calculations
-                    if (fields.length < 9) {
-                        throw new IOException("Invalid record format on line " + lineNumber);
+                    if (fields.length < 8) {
+                        throw new IOException("Invalid record format on line." + lineNumber);
                     }
                     House h = new House();
                     //This is the correct order--Address, Bedrooms, Bathrooms, Sqfeet, PurchasePrice, Taxes,
@@ -107,17 +110,15 @@ public class Storage {
                     h.setPurchasePrice(Double.parseDouble(fields[5]));
                     //Load taxes from the file
                     h.setTaxes(Double.parseDouble(fields[6]));
-                    //Load interestRate from the file
-                    h.setInterestRate(Double.parseDouble(fields[7]));
                     //Load acreage from the file
-                    h.setAcreage(Double.parseDouble(fields[8]));
+                    h.setAcreage(Double.parseDouble(fields[7]));
 
                     newData.add(h);
 
                     //if the first field has the Condo class, adds it to its own array
                 } else if (fields[0].equals("Condo")) {
                     //Should have 10 fields, including [0] for "Condo"
-                    if (fields.length < 10) {
+                    if (fields.length < 9) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     Condo c = new Condo();
@@ -135,19 +136,17 @@ public class Storage {
                     c.setPurchasePrice(Double.parseDouble(fields[5]));
                     //Load taxes from the file
                     c.setTaxes(Double.parseDouble(fields[6]));
-                    //Load interestRate from the file
-                    c.setInterestRate(Double.parseDouble(fields[7]));
                     //Load HoaFee from the file
-                    c.setHoaFee(Double.parseDouble(fields[8]));
+                    c.setHoaFee(Double.parseDouble(fields[7]));
                     //Load Amenities from the file
-                    c.setAmenities(fields[9]);
+                    c.setAmenities(fields[8]);
 
                     newData.add(c);
 
                     //if the first field has the Multiplex class, adds it to its own array
                 } else if (fields[0].equals("Multiplex")) {
                     //Should have 10 fields, including [0] for "Multiplex"
-                    if (fields.length < 10) {
+                    if (fields.length < 9) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     Multiplex m = new Multiplex();
@@ -165,12 +164,10 @@ public class Storage {
                     m.setPurchasePrice(Double.parseDouble(fields[5]));
                     //Load taxes from the file
                     m.setTaxes(Double.parseDouble(fields[6]));
-                    //Load interestRate from the file
-                    m.setInterestRate(Double.parseDouble(fields[7]));
                     //Load units from the file
-                    m.setUnits(Integer.parseInt(fields[8]));
+                    m.setUnits(Integer.parseInt(fields[7]));
                     //Load utilities from the file
-                    m.setUtilities(Double.parseDouble(fields[9]));
+                    m.setUtilities(Double.parseDouble(fields[8]));
 
                     newData.add(m);
 
@@ -178,8 +175,7 @@ public class Storage {
                     throw new IOException(String.format("Invalid record type '%s' on line %d", fields[0], lineNumber));
                 }
             }
-        } catch (
-                NumberFormatException exception) {
+        } catch (NumberFormatException ex) {
             throw new IOException("Invalid number format on line " + lineNumber);
         }
 

@@ -25,6 +25,7 @@ public class RemoveMenu extends Menu {
      */
     @Override
     protected String getDescription() {
+        System.out.println();
         return "Choose a type of property to remove.";
     }
 
@@ -88,9 +89,19 @@ public class RemoveMenu extends Menu {
      * @param type of residence as a string
      */
     public void removeProperty(String type) {
+        //Load data from file and create ArrayList
+        ArrayList<Residence> residenceData = new ArrayList<>();
+        try {
+            residenceData = Storage.loadData("data.txt");
+            //DebugUtils.Write(newData);
+        } catch (FileIsEmptyException fiee) {
+            //Do nothing - Catch if file is empty
+        } catch (Exception ex) {
+            System.err.println("Error loading file: " + ex.getMessage());
+            System.exit(1);
+        }
 
         try {
-            ArrayList<Residence> residenceData = Storage.loadData("filename");
             int count = 0;
             switch (type) {
                 case "House":
@@ -99,32 +110,39 @@ public class RemoveMenu extends Menu {
                     for (Residence residence: residenceData) {
                         count ++;
                         if (residence instanceof House) {
-                            System.out.print(count);
-                            System.out.println(residenceData.get(count).toString());
+                            System.out.print(count + ". ");
+                            House h = (House) residence;
+                            System.out.println(h.toString());
                         }
                     }
+                    break;
                 case "Condo":
                     Condo newCondo = new Condo();
                     System.out.println(newCondo.tableHeader());
                     for (Residence residence: residenceData) {
                         count ++;
                         if (residence instanceof Condo) {
-                            System.out.print(count);
-                            System.out.println(residenceData.get(count).toString());
+                            System.out.print(count + ". ");
+                            Condo c = (Condo) residence;
+                            System.out.println(c.toString());
                         }
                     }
+                    break;
                 case "Multiplex":
                     Multiplex newMulti = new Multiplex();
                     System.out.println(newMulti.tableHeader());
                     for (Residence residence: residenceData) {
                         count ++;
-                        if (residence instanceof Condo) {
-                            System.out.print(count);
-                            System.out.println(residenceData.get(count).toString());
+                        if (residence instanceof Multiplex) {
+                            System.out.print(count + ". ");
+                            Multiplex m = (Multiplex) residence;
+                            System.out.println(m.toString());
                         }
                     }
+                    break;
             }
             //Prompts user to choose a property to delete.
+            System.out.println();
             String choose = Menu.prompt("Which property would you like to delete?", true);
             //Asks user to confirm their selection, loops choice if no is selected
             String choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
@@ -146,7 +164,7 @@ public class RemoveMenu extends Menu {
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
         } catch (IOException ex) {
-            System.out.println("Could not find file ");
+            System.out.println("Could not find file.");
         }
     }
 

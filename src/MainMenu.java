@@ -1,6 +1,8 @@
 //imports
 import menu.Menu;
 import menu.MenuItem;
+
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -124,17 +126,13 @@ public class MainMenu extends Menu {
             }
 		//If user enters 2, this block runs
         } else if (key == '2') {
-            //Run loadData method
-            //Write all data from file into tables by property types
-            // Display all properties
-            System.out.println("Display all listed properties...");
+            displayAll();
             return true;
-		//If user enters 3, this block runs
+            //If user enters 3, this block runs
         } else if (key == '3') {
             // Display the Add Menu description and options
            AddMenu menu =  new AddMenu();
-           boolean rval =  menu.display();
-           return rval;
+           return menu.display();
 		//If user enters 4, this block runs
         } else if (key == '4') {
             // Display the Remove Menu title and options
@@ -146,5 +144,52 @@ public class MainMenu extends Menu {
             return true;
         }
         return true;
+    }
+
+    public static void displayAll() {
+        //Load data from file and create ArrayList
+        ArrayList<Residence> newData = new ArrayList<>();
+        try {
+            newData = Storage.loadData("data.txt");
+            //DebugUtils.Write(newData);
+        } catch (FileIsEmptyException fiee) {
+            //Do nothing - Catch if file is empty
+        } catch (Exception ex) {
+            System.err.println("Error loading file: " + ex.getMessage());
+            System.exit(1);
+        }
+
+        //Create instance for each subclass type of property
+        House newHouse = new House();
+        Condo newCondo = new Condo();
+        Multiplex newMultiplex = new Multiplex();
+
+        //Call tableHeader method to display table header and loop printing list of type of property.
+        //House
+        System.out.println(newHouse.tableHeader());
+        for (Residence r : newData) {
+            if (r instanceof House) {
+                House h = (House) r;
+                System.out.println(h.toString());
+            }
+        }
+
+        //Condo
+        System.out.println(newCondo.tableHeader());
+        for (Residence r : newData) {
+            if (r instanceof Condo) {
+                Condo c = (Condo) r;
+                System.out.println(c.toString());
+            }
+        }
+
+        //Multiplex
+        System.out.println(newMultiplex.tableHeader());
+        for (Residence r : newData) {
+            if (r instanceof Multiplex) {
+                Multiplex m = (Multiplex) r;
+                System.out.println(m.toString());
+            }
+        }
     }
 }

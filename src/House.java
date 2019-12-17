@@ -53,7 +53,7 @@ public class House extends Residence {
     @Override
     public String tableHeader() {
         //Return string representation of the House table header
-        return String.format("%nHouse Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
+        return String.format("\nHouse Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
                         "%-9s   %-9s   %-8s   %-7s%n--------------------------------------------------   ----   " +
                         "-----   ------   -----------   ---------   -----------   -------   ---------   ---------   " +
                         "--------   -------%n", "Address", "Beds", "Baths", "SqFt", "Price", "Taxes", "$ Down",
@@ -65,20 +65,19 @@ public class House extends Residence {
      * This method displays the data about each property as a string in a table
      * @return String
      */
-    //@Override
-    public String toString(House newHouse) {
-        Double downPayment = super.downPayment(newHouse.getPurchasePrice(), PERCENT_DOWN);
-        Double pricePerSqFoot = super.pricePerSqFt(newHouse.getPurchasePrice(), newHouse.getSqfeet());
-        Double monthlyPayment = super.monthlyPayment(newHouse.getPurchasePrice(), super.getInterestRate(),
-                super.getLoanPeriod());
-        Double rentalIncome = super.rentalIncome(newHouse.getSqfeet(), RENT_PER_SQFT);
-        Double netProfit = super.monthlyNetProfit(monthlyPayment, rentalIncome, newHouse.getTaxes());
+    @Override
+    public String toString() {
+        Double downPayment = super.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
+        Double pricePerSqFoot = super.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
+        Double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
+                this.getLoanPeriod());
+        Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
+        Double netProfit = this.monthlyNetProfit(monthlyPayment, rentalIncome, this.getTaxes());
 
         //String of each object in arraylist that is a house
         return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f  " +
-                        "$%-,9.2f  $%-,8.2f   %-7.2f%n", newHouse.getAddress(), newHouse.getBedrooms(), newHouse.getBathrooms(),
-                newHouse.getSqfeet(), newHouse.getPurchasePrice(), newHouse.getTaxes(), downPayment, pricePerSqFoot,
-                monthlyPayment, rentalIncome, netProfit, newHouse.getAcreage());
-        //TODO rent per square feet?
+                        "$%-,9.2f  $%-,8.2f   %-7.2f", this.getAddress(), this.getBedrooms(), this.getBathrooms(),
+                this.getSqfeet(), this.getPurchasePrice(), this.getTaxes(), downPayment, pricePerSqFoot,
+                monthlyPayment, rentalIncome, netProfit, this.getAcreage());
     }
 }

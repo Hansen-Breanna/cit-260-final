@@ -84,19 +84,13 @@ public class AddMenu extends Menu {
      */
     private static boolean addRes(String type) {
 
-        //TODO add comments
-        try {
-            ArrayList<Residence> data = new ArrayList<>();
-            Storage.storeData("data.txt", data);
-        } catch(Exception ex) {
-            //TODO
-        }
-
         //Load data from file and create ArrayList
         ArrayList<Residence> newData = new ArrayList<>();
         try {
             newData = Storage.loadData("data.txt");
-            DebugUtils.Write(newData);
+            //DebugUtils.Write(newData);
+        } catch (FileIsEmptyException fiee) {
+            //Do nothing - Catch if file is empty
         } catch (Exception ex) {
             System.err.println("Error loading file: " + ex.getMessage());
             System.exit(1);
@@ -107,18 +101,35 @@ public class AddMenu extends Menu {
         Condo newCondo = new Condo();
         Multiplex newMultiplex = new Multiplex();
 
-        //Call tableHeader method to display table header
-        //TODO For loop printing out all Condos on the ArrayList using the following format.
+        //Call tableHeader method to display table header and loop printing list of type of property.
         if (type == "House") {
             System.out.println(newHouse.tableHeader());
+            for (Residence r : newData) {
+                if (r instanceof House) {
+                    House h = (House) r;
+                    System.out.println(h.toString());
+                }
+            }
+            System.out.println();
         } else if (type == "Condo") {
             System.out.println(newCondo.tableHeader());
+            for (Residence r : newData) {
+                if (r instanceof Condo) {
+                    Condo c = (Condo) r;
+                    System.out.println(c.toString());
+                }
+            }
+            System.out.println();
         } else {
             System.out.println(newMultiplex.tableHeader());
+            for (Residence r : newData) {
+                if (r instanceof Multiplex) {
+                    Multiplex m = (Multiplex) r;
+                    System.out.println(m.toString());
+                }
+            }
+            System.out.println();
         }
-
-        //Somehow pull in Residence to get interest rate and loan period?
-        Residence newResidence = new Residence();
 
         //Display prompts for Residence variables from method. Store values in array
         final int NUMBER_OF_INDEXES = 6;
@@ -135,8 +146,6 @@ public class AddMenu extends Menu {
             newData.add(newMultiplex);
         }
 
-        //TODO Add new property type to ArrayList
-
         //Run storeData method to write to file
         try {
             Storage.storeData("data.txt", newData);
@@ -147,24 +156,9 @@ public class AddMenu extends Menu {
         //Display that property has been added
         System.out.println("\n" + type + " at " + userInput[0] + " has been added.");
 
-        //Delay new list printout
+        //Delay displaying Main Menu
         delay(2000);
 
-        //Call tableHeader method to display table header
-        //TODO For loop printing out all Condos on the ArrayList using the following format.
-        if (type == "House") {
-            System.out.println(newHouse.tableHeader());
-            System.out.println(newHouse.toString(newHouse));
-        } else if (type == "Condo") {
-            System.out.println(newCondo.tableHeader());
-            System.out.println(newCondo.toString(newCondo));
-        } else if (type == "Multiplex") {
-            System.out.println(newMultiplex.tableHeader());
-            System.out.println(newMultiplex.toString(newMultiplex));
-        }
-
-        //Delay displaying Main Menu so user has time to read House list
-        delay(7000);
         return true;
     }
 
