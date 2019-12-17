@@ -113,19 +113,19 @@ public class RemoveMenu extends Menu {
                     //TODO do number format exception for pickedNumber?
                     //Asks user to confirm their selection, loops choice if no is selected
                     choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
-                    if (choice.charAt(0) == 'Y' || choice.charAt(0) == 'y') {
+                    if (choice.toUpperCase().charAt(0) == 'Y') {
                         //remove selected data
                         int number = pickedNumber - 1;
                         residenceData.remove(number);
                         //Displays new table and saves to file
 
-                    } else if (choice.charAt(0) == 'N' || choice.charAt(0) == 'n') {
+                    } else if (choice.toUpperCase().charAt(0) == 'N') {
                         //continue through to while
                     } else {
                         //Display statement and display Main Menu again
                         System.out.println("Enter valid selection.");
                     }
-                } while (choice.charAt(0) == 'N' || choice.charAt(0) == 'n');
+                } while (choice.toUpperCase().charAt(0) != 'Y');
 
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
@@ -135,41 +135,39 @@ public class RemoveMenu extends Menu {
     }
 
     public static void tableType(ArrayList<Residence> residenceData, String type) {
+        int count = 0;
         switch (type) {
             case "House":
-                int countHouse = 0;
                 House newHouse = new House();
                 System.out.println(newHouse.tableHeader());
                 for (Residence residence: residenceData) {
+                    count ++;
                     if (residence instanceof House) {
-                        countHouse ++;
-                        System.out.print(countHouse + ". ");
+                        System.out.print(count + ". ");
                         House h = (House) residence;
                         System.out.println(h.toString());
                     }
                 }
                 break;
             case "Condo":
-                int countCondo = 0;
                 Condo newCondo = new Condo();
                 System.out.println(newCondo.tableHeader());
                 for (Residence residence: residenceData) {
+                    count ++;
                     if (residence instanceof Condo) {
-                        countCondo ++;
-                        System.out.print(countCondo + ". ");
+                        System.out.print(count + ". ");
                         Condo c = (Condo) residence;
                         System.out.println(c.toString());
                     }
                 }
                 break;
             case "Multiplex":
-                int countMultiplex = 0;
                 Multiplex newMulti = new Multiplex();
                 System.out.println(newMulti.tableHeader());
                 for (Residence residence: residenceData) {
+                    count ++;
                     if (residence instanceof Multiplex) {
-                        countMultiplex ++;
-                        System.out.print(countMultiplex + ". ");
+                        System.out.print(count + ". ");
                         Multiplex m = (Multiplex) residence;
                         System.out.println(m.toString());
                     }
