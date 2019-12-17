@@ -125,7 +125,7 @@ public class RemoveMenu extends Menu {
                         //Display statement and display Main Menu again
                         System.out.println("Enter valid selection.");
                     }
-                } while (choice.charAt(0) != 'Y' || choice.charAt(0) != 'y');
+                } while (choice.charAt(0) == 'N' || choice.charAt(0) == 'n');
 
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
@@ -135,39 +135,41 @@ public class RemoveMenu extends Menu {
     }
 
     public static void tableType(ArrayList<Residence> residenceData, String type) {
-        int count = 0;
         switch (type) {
             case "House":
+                int countHouse = 0;
                 House newHouse = new House();
                 System.out.println(newHouse.tableHeader());
                 for (Residence residence: residenceData) {
-                    count ++;
                     if (residence instanceof House) {
-                        System.out.print(count + ". ");
+                        countHouse ++;
+                        System.out.print(countHouse + ". ");
                         House h = (House) residence;
                         System.out.println(h.toString());
                     }
                 }
                 break;
             case "Condo":
+                int countCondo = 0;
                 Condo newCondo = new Condo();
                 System.out.println(newCondo.tableHeader());
                 for (Residence residence: residenceData) {
-                    count ++;
                     if (residence instanceof Condo) {
-                        System.out.print(count + ". ");
+                        countCondo ++;
+                        System.out.print(countCondo + ". ");
                         Condo c = (Condo) residence;
                         System.out.println(c.toString());
                     }
                 }
                 break;
             case "Multiplex":
+                int countMultiplex = 0;
                 Multiplex newMulti = new Multiplex();
                 System.out.println(newMulti.tableHeader());
                 for (Residence residence: residenceData) {
-                    count ++;
                     if (residence instanceof Multiplex) {
-                        System.out.print(count + ". ");
+                        countMultiplex ++;
+                        System.out.print(countMultiplex + ". ");
                         Multiplex m = (Multiplex) residence;
                         System.out.println(m.toString());
                     }
