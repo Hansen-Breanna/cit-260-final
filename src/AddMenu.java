@@ -96,6 +96,7 @@ public class AddMenu extends Menu {
         ArrayList<Residence> newData = new ArrayList<>();
         try {
             newData = Storage.loadData("data.txt");
+            DebugUtils.Write(newData);
         } catch (Exception ex) {
             System.err.println("Error loading file: " + ex.getMessage());
             System.exit(1);
