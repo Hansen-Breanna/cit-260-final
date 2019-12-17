@@ -84,6 +84,14 @@ public class AddMenu extends Menu {
      */
     private static boolean addRes(String type) {
 
+        //TODO add comments
+        try {
+            ArrayList<Residence> data = new ArrayList<>();
+            Storage.storeData("data.txt", data);
+        } catch(Exception ex) {
+            //TODO
+        }
+
         //Load data from file and create ArrayList
         ArrayList<Residence> newData = new ArrayList<>();
         try {
@@ -104,7 +112,7 @@ public class AddMenu extends Menu {
             System.out.println(newHouse.tableHeader());
         } else if (type == "Condo") {
             System.out.println(newCondo.tableHeader());
-        } else if (type == "Multiplex") {
+        } else {
             System.out.println(newMultiplex.tableHeader());
         }
 
@@ -121,11 +129,9 @@ public class AddMenu extends Menu {
         } else if (type == "Condo") {
             newCondo = addCondo(userInput);
             newData.add(newCondo);
-        } else if (type == "Multiplex") {
+        } else {
             newMultiplex = addMultiplex(userInput);
             newData.add(newMultiplex);
-        } else {
-            //TODO
         }
 
         //TODO Add new property type to ArrayList

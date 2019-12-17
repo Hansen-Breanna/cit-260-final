@@ -132,7 +132,8 @@ public class MainMenu extends Menu {
 		//If user enters 3, this block runs
         } else if (key == '3') {
             // Display the Add Menu description and options
-            new AddMenu().display();
+           AddMenu menu =  new AddMenu();
+           menu.display();
             return true;
 		//If user enters 4, this block runs
         } else if (key == '4') {

@@ -119,7 +119,7 @@ public abstract class Menu {
             if (userInput != null && userInput.length() > 0) {
                 keepGoing = handleMenuSelection(userInput.charAt(0));
             }
-            
+
             System.out.println();
         }
     }
