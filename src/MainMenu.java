@@ -11,7 +11,7 @@ public class MainMenu extends Menu {
 
 	/**
 	* Returns the title "Main Menu" to user
-	* @return
+	* @return string
 	*/
     @Override
     protected String getTitle() {
@@ -20,7 +20,7 @@ public class MainMenu extends Menu {
 
 	/**
 	* Returns null since there is no description for this menu
-	* @return
+	* @return null
 	*/
     @Override
     protected String getDescription() {
@@ -30,7 +30,7 @@ public class MainMenu extends Menu {
 	/**
      * The getMenuItems method
 	* Method returns an array of Menu Items
-	* @return
+	* @return array
 	*/
     @Override
     protected MenuItem[] getMenuItems() {
@@ -44,10 +44,10 @@ public class MainMenu extends Menu {
         };
         return menuItems;
     }
-	
-	/** 
+
+	/**
 	* Return boolean value to decide whether menu runs again or not
-	* @return 
+	* @return boolean
 	*/
     @Override
     protected boolean handleMenuSelection(char key) {
@@ -62,9 +62,11 @@ public class MainMenu extends Menu {
             //Needed a boolean condition for the while loop
             boolean valid = false;
 
-            //Keeps current interest rate display out of the loop so it doesn't display if user has to re-enter
-            //also pulls the interestRate from the new Residence object & displays it
+            //Keeps current interest rate and loan period display out of the loop so it doesn't display if user has to re-enter
+            //Also pulls the interestRate from the new Residence object & displays it
+            System.out.println();
             System.out.format("Current loan interest rate is: %5.3f%%\n", (obj.getInterestRate()));
+            System.out.println("Current loan period in years is: " + obj.getLoanPeriod());
 
             //Sets up a try-catch in a while loop, so it will loop again if it catches InputMismatchException
             while (!valid) {
@@ -85,37 +87,28 @@ public class MainMenu extends Menu {
                         valid = true;
                         //This display will return the new rate that was passed in
                         System.out.format("Your new interest rate is: %5.3f%%\n", (obj.getInterestRate()));
+                    }
+
+                    //Prompt to enter loan period
+                    String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
+                    obj.setLoanPeriod(Integer.parseInt(loanPeriod));
+
+                    if (obj.getLoanPeriod() < 1 || obj.getLoanPeriod() > 30) {
+                        System.out.println("The rate must be a positive value that is between 1 and 30.\n");
+                    }
+                    //If the input fits within the requested values
+                    else {
+                        //This line ends the loop
+                        valid = true;
+                        //This display will return the new rate that was passed in
+                        System.out.format("Your new loan period is: " + obj.getLoanPeriod());
 
                         //Let user know main menu will reload
-                        //TODO look into how to store/return the newRate to Residence
-                        System.out.println("\nReturning to the Main Menu...");
+                        System.out.println("Returning to the Main Menu...");
 
                         //Delay printing main menu
                         delay(2000);
                     }
-
-//                    //Prompt to enter loan period
-//                    String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
-//                    obj.setLoanPeriod(Integer.parseInt(loanPeriod));
-//
-//                    if (obj.getLoanPeriod() < 1 || obj.getLoanPeriod() > 30) {
-//                        System.out.println("The rate must be a positive value that is between 1 and 30.\n");
-//                    }
-//                    //If the input fits within the requested values
-//                    else {
-//                        //This line ends the loop
-//                        valid = true;
-//                        //This display will return the new rate that was passed in
-//                        System.out.format("Your new loan period is $d.\n" + obj.getLoanPeriod());
-//
-//                        //Let user know main menu will reload
-//                        //TODO look into how to store/return the loanPeriod to Residence
-//                        System.out.println("\nReturning to the Main Menu...");
-//
-//                        //Delay printing main menu
-//                        delay(2000);
-//                    }
-
                     return true;
                     //This will make sure that it will not accept non-numbers as input, and will loop
                 } catch (InputMismatchException ex) {

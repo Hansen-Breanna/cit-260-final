@@ -1,3 +1,4 @@
+//imports
 import menu.Menu;
 import menu.MenuItem;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class AddMenu extends Menu {
     /**
      * Return null
-     * @return
+     * @return String
      */
     @Override
     protected String getTitle() {
@@ -18,7 +19,7 @@ public class AddMenu extends Menu {
 
     /**
      * Return string description
-     * @return
+     * @return String
      */
     @Override
     protected String getDescription() {
@@ -28,7 +29,7 @@ public class AddMenu extends Menu {
     /**
      * The getMenuItems method
      * Return array MenuItems
-     * @return
+     * @return array
      */
     @Override
     protected MenuItem[] getMenuItems() {
@@ -45,7 +46,7 @@ public class AddMenu extends Menu {
     /**
      * Handle user selection from Main Menu
      * @param key
-     * @return
+     * @return boolean
      */
     @Override
     protected boolean handleMenuSelection(char key) {
@@ -79,8 +80,9 @@ public class AddMenu extends Menu {
     }
 
     /**
-     *
-     * @return
+     * The addRes method
+     * This method add an instance of Residence and subclass to the ArrayList in data.txt
+     * @return boolean
      */
     private static boolean addRes(String type) {
 
@@ -88,7 +90,6 @@ public class AddMenu extends Menu {
         ArrayList<Residence> newData = new ArrayList<>();
         try {
             newData = Storage.loadData("data.txt");
-            //DebugUtils.Write(newData);
         } catch (FileIsEmptyException fiee) {
             //Do nothing - Catch if file is empty
         } catch (Exception ex) {
@@ -102,6 +103,7 @@ public class AddMenu extends Menu {
         Multiplex newMultiplex = new Multiplex();
 
         //Call tableHeader method to display table header and loop printing list of type of property.
+        //House header and list
         if (type == "House") {
             System.out.println(newHouse.tableHeader());
             for (Residence r : newData) {
@@ -111,6 +113,7 @@ public class AddMenu extends Menu {
                 }
             }
             System.out.println();
+        //Condo header and list
         } else if (type == "Condo") {
             System.out.println(newCondo.tableHeader());
             for (Residence r : newData) {
@@ -120,6 +123,7 @@ public class AddMenu extends Menu {
                 }
             }
             System.out.println();
+        //Multiplex header and list
         } else {
             System.out.println(newMultiplex.tableHeader());
             for (Residence r : newData) {
@@ -135,6 +139,7 @@ public class AddMenu extends Menu {
         final int NUMBER_OF_INDEXES = 6;
         String[] userInput = readNumbers(NUMBER_OF_INDEXES);
 
+        //Display prompts for each type of residence and add instance to array list
         if (type == "House") {
             newHouse = addHouse(userInput);
             newData.add(newHouse);
@@ -150,7 +155,7 @@ public class AddMenu extends Menu {
         try {
             Storage.storeData("data.txt", newData);
         } catch(IOException ex) {
-            //TODO
+            System.out.println("Could not write data to file.");
         }
 
         //Display that property has been added
@@ -166,11 +171,13 @@ public class AddMenu extends Menu {
      * The readNumbers method
      * This method returns an array of values the user inputted for Residence variables
      * @param NUMBER_OF_INDEXES
-     * @return
+     * @return array
      */
     private static String[] readNumbers(int NUMBER_OF_INDEXES) {
+        //Create initial array
         String[] userValues = new String[NUMBER_OF_INDEXES];
 
+        //Display all Residence prompts to user, validate, and add to array
         try {
             //Display prompts for Residence properties
             //TODO validate each type entered is correct
@@ -241,13 +248,15 @@ public class AddMenu extends Menu {
         } catch (Exception ex) {
             System.err.println("Error: input must be an integer.");
         }
+
         //Return array of user inputted values
         return userValues;
     }
 
     /**
-     *
-     * @return
+     *The addHouse method
+     * Displays prompts specific to houses and creates new instance
+     * @return House
      */
     private static House addHouse(String[] userInput) {
         boolean checkDouble = false;
@@ -266,11 +275,14 @@ public class AddMenu extends Menu {
                 System.out.println("Input a number.");
             }
         } while (checkDouble == false);
+
+        //Return instance
         return newHouse;
     }
 
     /**
-     *
+     *The addCondo method
+     * Displays prompts specific to condos and creates new instance
      * @return
      */
     private static Condo addCondo(String[] userInput) {
@@ -294,7 +306,8 @@ public class AddMenu extends Menu {
     }
 
     /**
-     *
+     * The addMultiplex method
+     * Displays prompts specific to multiplexes and creates new instance
      * @return
      */
     private static Multiplex addMultiplex(String[] userInput) {
