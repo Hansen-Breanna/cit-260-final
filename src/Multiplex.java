@@ -3,13 +3,16 @@
  */
 public class Multiplex extends Residence {
 
+    //Number of units in Multiplex
     private int units;
+    //Amount of utilities landlord would pay - can be 0
     private double utilities;
 
     /**
      * Default constructor
      */
     public Multiplex() {
+        //default values for units and utilities
         units = 1;
         utilities = 0;
     }
@@ -26,8 +29,8 @@ public class Multiplex extends Residence {
      * @param units
      * @param utilities
      */
-    public Multiplex(String address, int units, int bedrooms, double bathrooms, int sqfeet, double purchasePrice,
-                     double taxes, double utilities) {
+    public Multiplex(String address, int bedrooms, double bathrooms, int sqfeet, double purchasePrice,
+                     double taxes, int units, double utilities) {
         super(address, bedrooms, bathrooms, sqfeet, purchasePrice, taxes);
         this.units = units;
         this.utilities = utilities;
@@ -37,33 +40,25 @@ public class Multiplex extends Residence {
      * Return units
      * @return
      */
-    public int getUnits() {
-        return units;
-    }
+    public int getUnits() { return units; }
 
     /**
      * Set units
      * @param units
      */
-    public void setUnits(int units) {
-        this.units = units;
-    }
+    public void setUnits(int units) { this.units = units; }
 
     /**
      * Return utilities
      * @return
      */
-    public double getUtilities() {
-        return utilities;
-    }
+    public double getUtilities() { return utilities; }
 
     /**
      * Set utilities
      * @param utilities
      */
-    public void setUtilities(double utilities) {
-        this.utilities = utilities;
-    }
+    public void setUtilities(double utilities) { this.utilities = utilities; }
 
     /**
      * The monthlyNetProfit method
@@ -75,22 +70,46 @@ public class Multiplex extends Residence {
      * @return netProfit
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double utilities) {
+        //Equation for calculating monthly net profit
         double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + utilities);
+        //Return net profit value
         return monthlyNetProfit;
     }
 
     /**
-     * The String method
-     * Return a string representation of the multiplex
-     * @return String
+     * The header Method
+     * This method returns the header for the Multiplex table
      */
     @Override
-    public String toString() {
+    public String tableHeader() {
+        //Return string representation of the Multiplex table header
+        return String.format("%Multiplex Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s" +
+                        "   %-9s   %-9s   %-8s   %-5s   %-9s%n--------------------------------------------------   " +
+                        "----   -----   ------   -----------   ---------   -----------   -------   ---------   " +
+                        "---------   --------   -----   ---------%n", "Address", "Beds", "Baths", "SqFt", "Price",
+                "Taxes", "$ Down", "$/SqFt", "Payment", "Income", "Profit", "Units", "Utilities");
+    }
 
-        return String.format("%nMultiplex Properties List%n%-50s  %-5s   %-4s   %-5s   %-6s   %-11s   %-9s   %-9s   %-10s    %-7s   %-9s   %-9s" +
-                        "   %-8s%n-------------------------------------------------   -----   ----   -----   " +
-                        "------   -----------   ---------   ---------   -----------   -------   ---------   " +
-                        "---------   --------%n", "Address", "Units", "Beds", "Baths", "SqFt", "Price", "Taxes",
-                        "Utilities", "$ Down", "$/SqFt", "Payment", "Income", "Profit");
+    /**
+     * The String method
+     * Return a string representation of the Multiplex
+     * @return String
+     */
+    //@Override
+    public String toString(Multiplex newMulti) {
+
+        Double downPayment = super.downPayment(newMulti.getPurchasePrice(), PERCENT_DOWN);
+        Double pricePerSqFoot = super.pricePerSqFt(newMulti.getPurchasePrice(), newMulti.getSqfeet());
+        Double monthlyPayment = super.monthlyPayment(newMulti.getPurchasePrice(), super.getInterestRate(),
+                super.getLoanPeriod());
+        Double rentalIncome = super.rentalIncome(newMulti.getSqfeet(), RENT_PER_SQFT);
+        Double netProfit = super.monthlyNetProfit(monthlyPayment, rentalIncome, newMulti.getTaxes());
+
+        //Returns the string for each object of a Multiplex to the table
+        return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f   $%-,9.2f   $%-,10.2f   $%-,7.2f   $%-,9.2f" +
+                        "   $%-,9.2f  $%-,8.2f   $%-,8.2d   $-,8.2f%n", newMulti.getAddress(), newMulti.getBedrooms(),
+                newMulti.getBathrooms(), newMulti.getSqfeet(), newMulti.getPurchasePrice(), newMulti.getTaxes(),
+                downPayment, pricePerSqFoot, monthlyPayment, rentalIncome, netProfit, newMulti.getUnits(),
+                newMulti.getUtilities());
     }
 }
