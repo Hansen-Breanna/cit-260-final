@@ -127,6 +127,8 @@ public class RemoveMenu extends Menu {
                     }
                 } while (choice.toUpperCase().charAt(0) != 'Y');
 
+            MainMenu.displayAll();
+
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
         } catch (IOException ex) {
