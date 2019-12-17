@@ -144,19 +144,19 @@ public class RemoveMenu extends Menu {
             //Prompts user to choose a property to delete.
             System.out.println();
             String choose = Menu.prompt("Which property would you like to delete?", true);
+            int pickedNumber = Integer.parseInt(choose);
+            //TODO do number format exception for pickedNumber?
             //Asks user to confirm their selection, loops choice if no is selected
             String choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
-            if (choice == "Y" || choice == "y") {
+            if (choice.charAt(0) == 'Y' || choice.charAt(0) == 'y') {
                 //remove selected data
-                int number = Integer.parseInt(choose);
+                int number = pickedNumber - 1;
                 residenceData.remove(number);
                 //Displays new table and saves to file
                 System.out.println(residenceData.toString());
-
-            }else if (choice == "N" || choice == "n") {
+            } else if (choice == "N" || choice == "n") {
                 //prompt again
-            }
-            else {
+            } else {
                 //Display statement and display Main Menu again
                 System.out.println("Enter valid selection.");
             }
