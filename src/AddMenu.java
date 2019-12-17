@@ -83,6 +83,7 @@ public class AddMenu extends Menu {
      * @return
      */
     private static boolean addRes(String type) {
+
         //Load data from file and create ArrayList
         ArrayList<Residence> newData = new ArrayList<>();
         try {
@@ -92,6 +93,21 @@ public class AddMenu extends Menu {
             System.exit(1);
         }
 
+        //Create instance for each subclass type of property
+        House newHouse = new House();
+        Condo newCondo = new Condo();
+        Multiplex newMultiplex = new Multiplex();
+
+        //Call tableHeader method to display table header
+        //TODO For loop printing out all Condos on the ArrayList using the following format.
+        if (type == "House") {
+            System.out.println(newHouse.tableHeader());
+        } else if (type == "Condo") {
+            System.out.println(newCondo.tableHeader());
+        } else if (type == "Multiplex") {
+            System.out.println(newMultiplex.tableHeader());
+        }
+
         //Somehow pull in Residence to get interest rate and loan period?
         Residence newResidence = new Residence();
 
@@ -99,9 +115,6 @@ public class AddMenu extends Menu {
         final int NUMBER_OF_INDEXES = 6;
         String[] userInput = readNumbers(NUMBER_OF_INDEXES);
 
-        House newHouse = new House();
-        Condo newCondo = new Condo();
-        Multiplex newMultiplex = new Multiplex();
         if (type == "House") {
             newHouse = addHouse(userInput);
             newData.add(newHouse);
@@ -141,8 +154,6 @@ public class AddMenu extends Menu {
         } else if (type == "Multiplex") {
             System.out.println(newMultiplex.tableHeader());
             System.out.println(newMultiplex.toString(newMultiplex));
-        } else {
-            //TODO add an error message?
         }
 
         //Delay displaying Main Menu so user has time to read House list

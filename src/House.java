@@ -67,11 +67,11 @@ public class House extends Residence {
      */
     //@Override
     public String toString(House newHouse) {
-        Double downPayment = super.downPayment(newHouse.getPurchasePrice(), .20);
+        Double downPayment = super.downPayment(newHouse.getPurchasePrice(), PERCENT_DOWN);
         Double pricePerSqFoot = super.pricePerSqFt(newHouse.getPurchasePrice(), newHouse.getSqfeet());
         Double monthlyPayment = super.monthlyPayment(newHouse.getPurchasePrice(), super.getInterestRate(),
                 super.getLoanPeriod());
-        Double rentalIncome = super.rentalIncome(newHouse.getSqfeet(), .70);
+        Double rentalIncome = super.rentalIncome(newHouse.getSqfeet(), RENT_PER_SQFT);
         Double netProfit = super.monthlyNetProfit(monthlyPayment, rentalIncome, newHouse.getTaxes());
 
         //String of each object in arraylist that is a house

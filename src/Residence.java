@@ -17,15 +17,13 @@ public class Residence {
 	//Yearly homeowner taxes of residence
     private double taxes;
 	//Loan interest rate
-    //TODO interest rate static? change to public?
-    public static double interestRate = 4.375;
+    protected static double interestRate = 4.375;
 	//Loan time period in years
-    //TODO loan period static? change to public?
-    public static int loanPeriod = 30;
+    protected static int loanPeriod = 30;
 	//Required percentage down for investment property
-    private final static double PERCENT_DOWN = 0.2;
+    protected final static double PERCENT_DOWN = 0.2;
 	//Number to multiply square footage by to calculate rental income
-    private final static double RENT_PER_SQFT = 0.7;
+    protected final static double RENT_PER_SQFT = 0.7;
 
     //CONSTRUCTORS
 
@@ -275,16 +273,4 @@ public class Residence {
     public void setLoanPeriod(int loanPeriod) {
         this.loanPeriod = loanPeriod;
     }
-
-    /**
-     * Return PERCENTAGE_DOWN
-     * @return
-     */
-    public double getPERCENT_DOWN() { return PERCENT_DOWN;}
-
-    /**
-     * Return RENT_PER_SQFT
-     * @return
-     */
-    public double getRENT_PER_SQFT() { return RENT_PER_SQFT; }
 }

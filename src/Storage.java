@@ -32,31 +32,27 @@ public class Storage {
                 if (obj instanceof House) {
                     //Info stored for House objects-same as Residence + acreage
                     House h = (House) obj;
-                    //TODO input parameters for methods in format
                     out.format("%s|%s|%d|%f|%d|%f|%f|%f|\n", "House", obj.getAddress(),
                             obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
-                            obj.getTaxes(), obj.getInterestRate(), h.getAcreage());
+                            obj.getTaxes(), h.getAcreage());
                 } else if (obj instanceof Condo) {
                     //Info stored for Condo objects-same as Residence + hoaFee & amenities
                     Condo c = (Condo) obj;
-                    //TODO input parameters for methods in format
-                    out.format("%s|%s|%d|%f|%d|%f|%f|%f|%f|\n", "Condo", obj.getAddress(),
+                    out.format("%s|%s|%d|%f|%d|%f|%f|%f|%s|\n", "Condo", obj.getAddress(),
                             obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
-                            obj.getTaxes(), obj.getInterestRate(), c.getHoaFee(), c.getAmenities());
+                            obj.getTaxes(), c.getHoaFee(), c.getAmenities());
                 } else if (obj instanceof Multiplex) {
                     //Info saved for Multiplex-same as Residence + units & utilities
                     Multiplex m = (Multiplex) obj;
-                    //TODO input parameters for methods in format
-                    out.format("\"%s|%s|%d|%f|%d|%f|%f|%f|%f|\n", "Multiplex", obj.getAddress(),
+                    out.format("%s|%s|%d|%f|%d|%f|%f|%d|%f|\n", "Multiplex", obj.getAddress(),
                             obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
-                            obj.getTaxes(), obj.getInterestRate(), m.getUnits(), m.getUtilities());
-
+                            obj.getTaxes(), m.getUnits(), m.getUtilities());
                 } else {
                     //In case of not House, Condo or Multiplex, will be saved in file as Residence object
                     //TODO input parameters for methods in format
                     out.format("%s|%s|%d|%f|%d|%f|%f|\n", "residence", obj.getAddress(),
                             obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(), obj.getPurchasePrice(),
-                            obj.getTaxes(), obj.getInterestRate());
+                            obj.getTaxes());
                 }
             }
         } catch (IOException exception) {
@@ -97,116 +93,192 @@ public class Storage {
                 //if the first field has the parent class, adds it to its own array
                 String[] fields = line.split("\\|");
                 if (fields[0].equals("Residence")) {
-                    //Should have 7 fields, including [0] for "residence" --plus 5 more for method calculations
+                    //Should have 8 fields, including [0] for "residence"
                     Residence r = new Residence();
-                    if (fields.length > 12) {
+                    if (fields.length > 8) {
                         throw new IOException("Invalid record format on line " + lineNumber);
-
-                        //This is the correct order with their field #--0: type, 1: address, 2: bedrooms, 3: bathrooms,
-                        // 4: sqfeet, 5: purchasePrice, 6: taxes, 7: interest rate, 8: $Down, 9: $/SqFt,
-                        // 10: monthlyPayment, 11: monthlyIncome, 12: monthlyNetProfit
-
-//                        //Load the address from the file
-//                        //TODO add correct field for String
-//                        String loadAddress = fields[1];
-//                        r.setAddress(loadAddress);
-//
-//                        //Load the bedrooms from the file
-//                        int numBedrooms = Integer.parseInt(fields[2]);
-//                        r.setBedrooms(numBedrooms);
-//
-//                        //Load the bathrooms from the file
-//                        double numBathrooms = Double.parseDouble(fields[3]);
-//                        r.setBathrooms(numBathrooms);
-//
-//                        //Load sqfeet from the file
-//                        int numSqFt = Integer.parseInt(fields[4]);
-//                        r.setSqfeet(numSqFt);
-//
-//                        //Load purchasePrice from the file
-//                        double loadPrice = Double.parseDouble(fields[5]);
-//                        r.setPurchasePrice(loadPrice);
-//
-//                        //Load taxes from the file
-//                        double numTaxes = Double.parseDouble(fields[6]);
-//                        r.setTaxes(numTaxes);
-//
-//                        //Load interestRate from the file
-//                        double loadRate = Double.parseDouble(fields[7]);
-//                        r.setInterestRate(loadRate);
-//
-//                        //Load interestRate from the file
-//                        loadRate = Double.parseDouble(fields[8]);
-//                        r.setInterestRate(loadRate);
-//
-//                        //Load pricePerSqFt from the file
-//                        double loadSqFtPrice = Double.parseDouble(fields[9]);
-//                        //r.pricePerSqFt(loadSqFtPrice);
-//
-//                        //Load monthlyPayment from the file
-//                        double loadPayment = Double.parseDouble(fields[10]);
-//                        //r.monthlyPayment(loadPayment);
-//
-//                        //Load monthlyIncome from the file
-//                        double loadIncome = Double.parseDouble(fields[11]);
-//                        //r.rentalIncome(loadIncome);
-//
-//                        //Load monthlyNetProfit from the file
-//                        double loadProfit = Double.parseDouble(fields[12]);
-//                        //r.monthlyNetProfit(loadProfit);
                     }
+
+                    //This is the correct order with their field #--0: type, 1: address, 2: bedrooms, 3: bathrooms,
+                    // 4: sqfeet, 5: purchasePrice, 6: taxes, 7: interest rate
+
+                    //Load the address from the file --already a String, doesn't need parsing
+                    String loadAddress = fields[1];
+                    r.setAddress(loadAddress);
+
+                    //Load the bedrooms from the file
+                    int numBedrooms = Integer.parseInt(fields[2]);
+                    r.setBedrooms(numBedrooms);
+
+                    //Load the bathrooms from the file
+                    double numBathrooms = Double.parseDouble(fields[3]);
+                    r.setBathrooms(numBathrooms);
+
+                    //Load sqfeet from the file
+                    int numSqFt = Integer.parseInt(fields[4]);
+                    r.setSqfeet(numSqFt);
+
+                    //Load purchasePrice from the file
+                    double loadPrice = Double.parseDouble(fields[5]);
+                    r.setPurchasePrice(loadPrice);
+
+                    //Load taxes from the file
+                    double numTaxes = Double.parseDouble(fields[6]);
+                    r.setTaxes(numTaxes);
+
+                    //Load interestRate from the file
+                    double loadRate = Double.parseDouble(fields[7]);
+                    r.setInterestRate(loadRate);
+
                     newData.add(r);
+
+
                     //if the first field has the House class, adds it to its own array
                 } else if (fields[0].equals("House")) {
-                    // house|first child value|1
+                    // House|first child value|1
                     //Should have 9 fields, including [0] for "House" --plus 5 more for method calculations
-                    if (fields.length < 14) {
+                    if (fields.length < 9) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     House h = new House();
-                    //This is the correct order
-                    //1: obj.getAddress()--field[1], etc, 2: obj.getBedrooms(), 3: obj.getBathrooms(),
-                    // 4: obj.getSqfeet(), 5: obj.getPurchasePrice(), 6: obj.getTaxes(), 7: obj.getInterestRate(),
-                    // 8: h.getAcreage()), 9: $Down, 10: $/SqFt, 12: monthlyPayment, 13: monthlyIncome,
-                    // 14: monthlyNetProfit
+                    //This is the correct order--same as Residence, but adding in acreage
+                    //obj.getAddress()--field[1], etc, obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(),
+                    // obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(), h.getAcreage());
 
-                    //Repeat same as Residence, but adding in acreage
+                    //Load the address from the file --already a String, doesn't need parsing
+                    String loadAddress = fields[1];
+                    h.setAddress(loadAddress);
 
-                    //if the first field has the condo class, adds it to its own array
+                    //Load the bedrooms from the file
+                    int numBedrooms = Integer.parseInt(fields[2]);
+                    h.setBedrooms(numBedrooms);
+
+                    //Load the bathrooms from the file
+                    double numBathrooms = Double.parseDouble(fields[3]);
+                    h.setBathrooms(numBathrooms);
+
+                    //Load sqfeet from the file
+                    int numSqFt = Integer.parseInt(fields[4]);
+                    h.setSqfeet(numSqFt);
+
+                    //Load purchasePrice from the file
+                    double loadPrice = Double.parseDouble(fields[5]);
+                    h.setPurchasePrice(loadPrice);
+
+                    //Load taxes from the file
+                    double numTaxes = Double.parseDouble(fields[6]);
+                    h.setTaxes(numTaxes);
+
+                    //Load interestRate from the file
+                    double loadRate = Double.parseDouble(fields[7]);
+                    h.setInterestRate(loadRate);
+
+                    //Load acreage from the file
+                    double loadAcreage = Double.parseDouble(fields[8]);
+                    h.setAcreage(loadAcreage);
+
+                    newData.add(h);
+
+                    //if the first field has the Condo class, adds it to its own array
                 } else if (fields[0].equals("Condo")) {
-                    //Should have 10 fields, including [0] for "Condo" --plus 5 more for method calculations
-                    if (fields.length < 15) {
+                    //Should have 10 fields, including [0] for "Condo"
+                    if (fields.length < 10) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     Condo c = new Condo();
-                    //This is the correct order
-                    //1: obj.getAddress()--field[1], etc, 2: obj.getBedrooms(), 3: obj.getBathrooms(),
-                    // 4: obj.getSqfeet(), 5: obj.getPurchasePrice(), 6: obj.getTaxes(), 7: obj.getInterestRate(),
-                    // 8: c.getHoaFee(), 9: c.getAmenities(), 10: $Down, 11: $/SqFt, 12: monthlyPayment,
-                    // 13: monthlyIncome, 14: monthlyNetProfit
+                    //This is the correct order--same as Residence, but adding in hoaFee and amenities
+                    //obj.getAddress()--field[1], etc, obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(),
+                    // obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(), c.getHoaFee(), c.getAmenities();
 
-                    //Repeat same as Residence, but adding in hoaFee and amenities
+                    //Load the address from the file --already a String, doesn't need parsing
+                    String loadAddress = fields[1];
+                    c.setAddress(loadAddress);
 
-                    //if the first field has the multiplex class, adds it to its own array
+                    //Load the bedrooms from the file
+                    int numBedrooms = Integer.parseInt(fields[2]);
+                    c.setBedrooms(numBedrooms);
+
+                    //Load the bathrooms from the file
+                    double numBathrooms = Double.parseDouble(fields[3]);
+                    c.setBathrooms(numBathrooms);
+
+                    //Load sqfeet from the file
+                    int numSqFt = Integer.parseInt(fields[4]);
+                    c.setSqfeet(numSqFt);
+
+                    //Load purchasePrice from the file
+                    double loadPrice = Double.parseDouble(fields[5]);
+                    c.setPurchasePrice(loadPrice);
+
+                    //Load taxes from the file
+                    double numTaxes = Double.parseDouble(fields[6]);
+                    c.setTaxes(numTaxes);
+
+                    //Load interestRate from the file
+                    double loadRate = Double.parseDouble(fields[7]);
+                    c.setInterestRate(loadRate);
+
+                    //Load hoaFee from the file
+                    double loadHOA = Double.parseDouble(fields[8]);
+                    c.setHoaFee(loadHOA);
+
+                    //Load amenities from the file
+                    String loadAmenities = fields[9];
+                    c.setAmenities(loadAmenities);
+
+                    newData.add(c);
+
+                    //if the first field has the Multiplex class, adds it to its own array
                 } else if (fields[0].equals("Multiplex")) {
-                    //Should have 10 fields, including [0] for "Multiplex" --plus 5 more for method calculations
-                    if (fields.length < 15) {
+                    //Should have 10 fields, including [0] for "Multiplex"
+                    if (fields.length < 10) {
                         throw new IOException("Invalid record format on line " + lineNumber);
                     }
                     Multiplex m = new Multiplex();
                     //This is the correct order
-                    //1: obj.getAddress()--field[1], etc, 2: obj.getBedrooms(), 3: obj.getBathrooms(),
-                    // 4: obj.getSqfeet(), 5: obj.getPurchasePrice(), 6: obj.getTaxes(), 7: obj.getInterestRate(),
-                    // 8: m.getUnits(), 9: m.getUtilities(), 10: $Down, 11: $/SqFt, 12: monthlyPayment,
-                    // 13: monthlyIncome, 14: monthlyNetProfit
+                    //obj.getAddress()--field[1], etc, obj.getBedrooms(), obj.getBathrooms(), obj.getSqfeet(),
+                    // obj.getPurchasePrice(), obj.getTaxes(), obj.getInterestRate(), m.getUnits(), m.getUtilities();
 
                     //Repeat same as Residence, but adding in units and utilities
+                    //Load the address from the file --already a String, doesn't need parsing
+                    String loadAddress = fields[1];
+                    m.setAddress(loadAddress);
+
+                    //Load the bedrooms from the file
+                    int numBedrooms = Integer.parseInt(fields[2]);
+                    m.setBedrooms(numBedrooms);
+
+                    //Load the bathrooms from the file
+                    double numBathrooms = Double.parseDouble(fields[3]);
+                    m.setBathrooms(numBathrooms);
+
+                    //Load sqfeet from the file
+                    int numSqFt = Integer.parseInt(fields[4]);
+                    m.setSqfeet(numSqFt);
+
+                    //Load purchasePrice from the file
+                    double loadPrice = Double.parseDouble(fields[5]);
+                    m.setPurchasePrice(loadPrice);
+
+                    //Load taxes from the file
+                    double numTaxes = Double.parseDouble(fields[6]);
+                    m.setTaxes(numTaxes);
+
+                    //Load interestRate from the file
+                    double loadRate = Double.parseDouble(fields[7]);
+                    m.setInterestRate(loadRate);
+
+                    //Load units from the file
+                    int loadUnits = Integer.parseInt(fields[8]);
+                    m.setUnits(loadUnits);
+                    newData.add(m);
 
                 } else {
                     throw new IOException(String.format("Invalid record type '%s' on line %d", fields[0], lineNumber));
                 }
             }
-        } catch (NumberFormatException exception) {
+        } catch (
+                NumberFormatException exception) {
             throw new IOException("Invalid number format on line " + lineNumber);
         }
 
