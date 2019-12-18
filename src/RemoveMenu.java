@@ -1,7 +1,6 @@
 //imports
 import menu.Menu;
 import menu.MenuItem;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,6 +24,7 @@ public class RemoveMenu extends Menu {
      */
     @Override
     protected String getDescription() {
+        System.out.println();
         return "Choose a type of property to remove.";
     }
 
@@ -53,6 +53,14 @@ public class RemoveMenu extends Menu {
      */
     @Override
     protected boolean handleMenuSelection(char key) {
+        //Check if data file is empty
+        ArrayList<Residence> newData = Storage.returnData();
+        if (newData.size() == 0) {
+            System.out.println();
+            System.out.println("There are no properties in the list to remove.");
+            // Display the Main Menu title and options
+            new MainMenu().display();
+        }
         //If user enters X, this block runs and menu quits
         if (key == 'X' || key == 'x') {
             //Exits program
@@ -73,8 +81,8 @@ public class RemoveMenu extends Menu {
             //Else if user enters 4, this block runs
         } else if (key == '4') {
             //Display Main Menu
-            new MainMenu().display();
-            return true;
+            MainMenu mmenu = new MainMenu();
+            return mmenu.display();
             //Else user enters anything other than above options, main menu prints again
         } else {
             System.out.println("Enter valid selection.");
@@ -88,66 +96,123 @@ public class RemoveMenu extends Menu {
      * @param type of residence as a string
      */
     public void removeProperty(String type) {
+        //Load data from file and create ArrayList
+        ArrayList<Residence> residenceData = Storage.returnData();
 
         try {
-            ArrayList<Residence> residenceData = Storage.loadData("filename");
-            int count = 0;
-            switch (type) {
-                case "House":
-                    House newHouse = new House();
-                    System.out.println(newHouse.tableHeader());
-                    for (Residence residence: residenceData) {
-                        count ++;
-                        if (residence instanceof House) {
-                            System.out.print(count);
-                            System.out.println(residenceData.get(count).toString());
-                        }
-                    }
-                case "Condo":
-                    Condo newCondo = new Condo();
-                    System.out.println(newCondo.tableHeader());
-                    for (Residence residence: residenceData) {
-                        count ++;
-                        if (residence instanceof Condo) {
-                            System.out.print(count);
-                            System.out.println(residenceData.get(count).toString());
-                        }
-                    }
-                case "Multiplex":
-                    Multiplex newMulti = new Multiplex();
-                    System.out.println(newMulti.tableHeader());
-                    for (Residence residence: residenceData) {
-                        count ++;
-                        if (residence instanceof Condo) {
-                            System.out.print(count);
-                            System.out.println(residenceData.get(count).toString());
-                        }
-                    }
-            }
-            //Prompts user to choose a property to delete.
-            String choose = Menu.prompt("Which property would you like to delete?", true);
-            //Asks user to confirm their selection, loops choice if no is selected
-            String choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
-            if (choice == "Y" || choice == "y") {
-                //remove selected data
-                int number = Integer.parseInt(choose);
-                residenceData.remove(number);
-                //Displays new table and saves to file
-                System.out.println(residenceData.toString());
+            //Display table by type
+            tableType(residenceData, type);
+            System.out.println();
 
-            }else if (choice == "N" || choice == "n") {
-                //prompt again
-            }
-            else {
-                //Display statement and display Main Menu again
-                System.out.println("Enter valid selection.");
-            }
+            //Initialize variables for choosing
+            String choice = "";
+            String choose = "";
+            int pickedNumber = 0;
+
+            //Prompts user to choose a property to delete.
+                do {
+                   try {
+                       choose = Menu.prompt("Which property would you like to delete? (choose X for none or if" +
+                                       " list is empty): ",
+                               true);
+
+                       //Change choice to integer if not an X or x
+                       if (choose.toUpperCase().charAt(0) != 'X') {
+                           pickedNumber = Integer.parseInt(choose);
+                       } else {
+                           System.out.println("Property list is empty or none chosen.");
+                           return;
+                       }
+                   }catch(NumberFormatException exception){
+                       System.out.println("That is not a valid selection. Please try again.");
+                   }
+
+                    //Check to see if user enters an invalid number
+                    if ((residenceData.size() < pickedNumber) || (pickedNumber < 1)) {
+                        System.out.println("\nProperty number does not exist. Please try again.");
+                        return;
+                    }
+                    //Asks user to confirm their selection, loops choice if no is selected
+                    choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ",
+                            true);
+                    if (choice.toUpperCase().charAt(0) == 'Y') {
+                        //remove selected data
+                        int number = pickedNumber - 1;
+                        residenceData.remove(number);
+                        //Displays new table and saves to file
+
+                    } else if (choice.toUpperCase().charAt(0) == 'N') {
+                        //continue through to while
+                    } else {
+                        //Display statement and display Main Menu again
+                        System.out.println("Enter valid selection.");
+                    }
+                } while (choice.toUpperCase().charAt(0) != 'Y');
 
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
+
+            //Notifies user property is removed
+            System.out.println("Choice " + choose + "has been removed from the list.");
         } catch (IOException ex) {
-            System.out.println("Could not find file ");
+            System.out.println("Could not find file.");
         }
     }
 
+    /**
+     * The tableType method
+     * This method chooses which type of property table to display
+     * @param residenceData
+     * @param type
+     */
+    public static void tableType(ArrayList<Residence> residenceData, String type) {
+        int count = 0;
+        switch (type) {
+            case "House":
+                //Create new instance
+                House newHouse = new House();
+                //Display table header
+                System.out.println(newHouse.tableHeader());
+                //Display table data
+                for (Residence residence: residenceData) {
+                    count ++;
+                    if (residence instanceof House) {
+                        System.out.print(count + ". ");
+                        House h = (House) residence;
+                        System.out.println(h.toString());
+                    }
+                }
+                break;
+            case "Condo":
+                //Create new instance
+                Condo newCondo = new Condo();
+                //Display table header
+                System.out.println(newCondo.tableHeader());
+                //Display table data
+                for (Residence residence: residenceData) {
+                    count ++;
+                    if (residence instanceof Condo) {
+                        System.out.print(count + ". ");
+                        Condo c = (Condo) residence;
+                        System.out.println(c.toString());
+                    }
+                }
+                break;
+            case "Multiplex":
+                //Create new instance
+                Multiplex newMulti = new Multiplex();
+                //Display table header
+                System.out.println(newMulti.tableHeader());
+                //Display table data
+                for (Residence residence: residenceData) {
+                    count ++;
+                    if (residence instanceof Multiplex) {
+                        System.out.print(count + ". ");
+                        Multiplex m = (Multiplex) residence;
+                        System.out.println(m.toString());
+                    }
+                }
+                break;
+        }
+    }
 }
