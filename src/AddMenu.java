@@ -337,7 +337,7 @@ public class AddMenu extends Menu {
                 if (numUnits > 0) {
                     String utilities = prompt("Enter monthly utilities (ex 225): ", true);
                     double utilitiesCost = Double.parseDouble(utilities);
-                    if (utilitiesCost > 0) {
+                    if (utilitiesCost > -1) {
                         //Create new Multiplex
                         newMulti = new Multiplex(userInput[0], Integer.parseInt(userInput[1]),
                                 Double.parseDouble(userInput[2]), Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
