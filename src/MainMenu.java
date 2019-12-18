@@ -51,75 +51,19 @@ public class MainMenu extends Menu {
 	*/
     @Override
     protected boolean handleMenuSelection(char key) {
-		//If user enters X, this block runs and menu quits
+        //If user enters X, this block runs and menu quits
         if (key == 'X' || key == 'x') {
             //Exits program
             return false;
-		//Else if user enters 1, this block runs
+        //Else if user enters 1, this block runs
         } else if (key == '1') {
-            //Create a new Residence object to get interest rate
-            Residence obj = new Residence();
-            //Needed a boolean condition for the while loop
-            boolean valid = false;
-
-            //Keeps current interest rate and loan period display out of the loop so it doesn't display if user has to re-enter
-            //Also pulls the interestRate from the new Residence object & displays it
-            System.out.println();
-            System.out.format("Current loan interest rate is: %5.3f%%\n", (obj.getInterestRate()));
-            System.out.println("Current loan period in years is: " + obj.getLoanPeriod());
-
-            //Sets up a try-catch in a while loop, so it will loop again if it catches InputMismatchException
-            while (!valid) {
-                try {
-                    //Initial prompt for new interest rate
-                    String newRate = prompt("Enter a new interest rate percent (example: 5.25): ",
-                            true);
-                    //Passes newRate into the object's InterestRate setter
-                    obj.setInterestRate(Double.parseDouble(newRate));
-
-                    //Make sure the rate is not less than 1%, or not greater than or equal to 100%
-                    if (obj.getInterestRate() < 1 || obj.getInterestRate() >= 100) {
-                        System.out.println("The rate must be a positive value that is between 1 and 100.\n");
-                    }
-                    //If the input fits within the requested values
-                    else {
-                        //This line ends the loop
-                        valid = true;
-                        //This display will return the new rate that was passed in
-                        System.out.format("Your new interest rate is: %5.3f%%\n", (obj.getInterestRate()));
-                    }
-
-                    //Prompt to enter loan period
-                    String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
-                    obj.setLoanPeriod(Integer.parseInt(loanPeriod));
-
-                    if (obj.getLoanPeriod() < 1 || obj.getLoanPeriod() > 30) {
-                        System.out.println("The rate must be a positive value that is between 1 and 30.\n");
-                    }
-                    //If the input fits within the requested values
-                    else {
-                        //This line ends the loop
-                        valid = true;
-                        //This display will return the new rate that was passed in
-                        System.out.format("Your new loan period is: " + obj.getLoanPeriod());
-
-                        //Let user know main menu will reload
-                        System.out.println("Returning to the Main Menu...");
-
-                        //Delay printing main menu
-                        delay(2000);
-                    }
-                    return true;
-                    //This will make sure that it will not accept non-numbers as input, and will loop
-                } catch (InputMismatchException ex) {
-                    System.out.println("Your input is not valid. It must be a number.");
-                }
-            }
-		//If user enters 2, this block runs
+            changeRateAndLoan();
+            return true;
+        //If user enters 2, this block runs
         } else if (key == '2') {
             displayAll();
             return true;
-            //If user enters 3, this block runs
+        //If user enters 3, this block runs
         } else if (key == '3') {
             // Display the Add Menu description and options
            AddMenu menu =  new AddMenu();
@@ -134,9 +78,82 @@ public class MainMenu extends Menu {
             System.out.println("Enter valid selection for Main Menu.");
             return true;
         }
-        return true;
     }
 
+    public static void changeRateAndLoan() {
+        //Needed a boolean condition for the do-while loop
+        boolean validInput = false;
+
+        //Keeps current interest rate and loan period display out of the loop so it doesn't display if user has to
+        //re-enter
+        System.out.println();
+        System.out.format("Current loan interest rate is: %5.3f%%\n", Residence.interestRate);
+        System.out.println("Current loan period in years is: " + Residence.loanPeriod);
+
+        //Sets up a try-catch in a do-while loop, so interest rate option will loop again if it catches
+        // Numberformatexception
+        do {
+            try {
+                //Initial prompt for new interest rate
+                String newRate = prompt("Enter a new interest rate percent (example: 5.25): ",
+                        true);
+                double rate = Double.parseDouble(newRate);
+                Residence.interestRate = rate;
+
+                //Make sure the rate is not less than 1%, or not greater than or equal to 100%
+                if (Residence.interestRate < 1 || Residence.interestRate >= 100) {
+                    System.out.println("The rate must be a positive value that is between 1 and 100.\n");
+                }
+                //If the input fits within the requested values
+                else {
+                    //This line ends the loop
+                    validInput = true;
+                    //This display will return the new rate that was passed in
+                    System.out.format("Your new interest rate is: %5.3f%%\n", Residence.interestRate);
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("The rate must be a positive value that is between 1 and 100.\n,");
+            }
+        } while (validInput == false);
+
+        do {
+            validInput = false;
+            try {
+                //Prompt to enter loan period
+                String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
+                int loanYears = Integer.parseInt(loanPeriod);
+
+                //Make sure rate is not less than 1% or greater than/equal to 100%
+                if (Residence.loanPeriod < 1 || Residence.loanPeriod > 30) {
+                    System.out.println("The loan period must be a positive value that is between 1 and 30.\n");
+                }
+                //If the input fits within the requested values
+                else {
+                    Residence.loanPeriod = loanYears;
+                    //This line ends the loop
+                    validInput = true;
+
+                    //This display will return the new rate that was passed in
+                    System.out.format("Your new loan period is: " + Residence.loanPeriod);
+                    System.out.println();
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("The loan period must be a positive value that is between 1 and 30.");
+            }
+        } while (validInput == false);
+
+        //Let user know main menu will reload
+        System.out.println();
+        System.out.println("Returning to the Main Menu...");
+
+        //Delay printing main menu
+        delay(2000);
+    }
+
+    /**
+     * The displayAll method
+     * Print out all Residence type headers and corresponding data tables
+     */
     public static void displayAll() {
         //Load data from file and create ArrayList
         ArrayList<Residence> newData = new ArrayList<>();
