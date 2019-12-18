@@ -3,7 +3,7 @@
  */
 public class Condo extends Residence {
 
-	//Yearly home owner association fee for investment property
+	//Monthly home owner association fee for investment property
     private double hoaFee;
 	//List of investment property amenities. Pool, tennis courts, etc.
     private String amenities;
@@ -82,9 +82,8 @@ public class Condo extends Residence {
 	*/
 	@Override
 	public String tableHeader() {
-		//Return string representation of the Multiplex table header
-		//TODO change table header from House format to Condo
-		return String.format("\nCondo Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
+		//Return string representation of the Condo table header
+		return String.format("Condo Properties List%n%-50s   %-4s   %-5s   %-6s   %-11s   %-9s   %-10s    %-7s   " +
                         "%-9s   %-9s   %-8s   %-7s   %-30s%n--------------------------------------------------   " +
                         "----   -----   ------   -----------   ---------   -----------   -------   ---------   " +
                         "---------   --------   -------   ------------------------------",
@@ -106,7 +105,7 @@ public class Condo extends Residence {
         Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
         Double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getHoaFee());
 
-        //Returns the string for each object of a Multiplex to the table
+        //Returns the string for each object of a Condo to the table
         return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f  " +
                         "$%-,9.2f  $%-,7.2f   $%-7.2f   %-30s", this.getAddress(), this.getBedrooms(),
                 this.getBathrooms(), this.getSqfeet(), this.getPurchasePrice(), this.getTaxes(),

@@ -273,14 +273,4 @@ public class Residence {
     public void setLoanPeriod(int loanPeriod) {
         this.loanPeriod = loanPeriod;
     }
-
-    public String getStringValue() {
-        return " address:"+address +
-        " bedrooms:"+bedrooms +
-        " bathrooms:"+bathrooms +
-        " sqfeet:"+sqfeet +
-        " purchasePrice:"+purchasePrice +
-        " taxes:"+taxes;
-
-    }
 }

@@ -1,12 +1,8 @@
 //imports
 import menu.Menu;
 import menu.MenuItem;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Properties;
 
 /**
  * Method creates Main Menu to display to user
@@ -180,16 +176,7 @@ public class MainMenu extends Menu {
      */
     public static void displayAll() {
         //Load data from file and create ArrayList
-        ArrayList<Residence> newData = new ArrayList<>();
-        try {
-            newData = Storage.loadData("data.txt");
-            //DebugUtils.Write(newData);
-        } catch (FileIsEmptyException fiee) {
-            //Do nothing - Catch if file is empty
-        } catch (Exception ex) {
-            System.err.println("Error loading file: " + ex.getMessage());
-            System.exit(1);
-        }
+        ArrayList<Residence> newData = Storage.returnData();
 
         //Create instance for each subclass type of property
         House newHouse = new House();
@@ -207,6 +194,7 @@ public class MainMenu extends Menu {
         }
 
         //Condo
+        System.out.println();
         System.out.println(newCondo.tableHeader());
         for (Residence r : newData) {
             if (r instanceof Condo) {

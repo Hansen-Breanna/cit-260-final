@@ -1,7 +1,6 @@
 //imports
 import menu.Menu;
 import menu.MenuItem;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -57,6 +56,7 @@ public class RemoveMenu extends Menu {
         ArrayList<Residence> newData = Storage.returnData();
         if (newData.size() == 0) {
             System.out.println();
+            System.out.println("There are no properties in the list to remove.");
             // Display the Main Menu title and options
             new MainMenu().display();
         }
@@ -104,9 +104,19 @@ public class RemoveMenu extends Menu {
             //Prompts user to choose a property to delete.
             System.out.println();
             String choice = "";
+            String choose = "";
+            int pickedNumber = 0;
                 do {
-                    String choose = Menu.prompt("Which property would you like to delete?", true);
-                    int pickedNumber = Integer.parseInt(choose);
+                    choose = Menu.prompt("Which property would you like to delete? (choose X for none or if list is empty.):",
+                            true);
+                    if (choose.toUpperCase().charAt(0) != 'X') {
+                        pickedNumber = Integer.parseInt(choose);
+                    } else {
+                        System.out.println("Property list is empty or none chosen.");
+                        return;
+                    }
+
+                    //Check to see if user enters an invalid number
                     if ((residenceData.size() < pickedNumber) || (pickedNumber < 1)) {
                         System.out.println("\nProperty number does not exist. Please try again.");
                         return;
@@ -129,11 +139,20 @@ public class RemoveMenu extends Menu {
 
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);
+
+            //Notifies user property is removed
+            System.out.println("Choice " + choose + "has been removed from the list.");
         } catch (IOException ex) {
             System.out.println("Could not find file.");
         }
     }
 
+    /**
+     * The tableType method
+     * This method chooses which type of property table to display
+     * @param residenceData
+     * @param type
+     */
     public static void tableType(ArrayList<Residence> residenceData, String type) {
         int count = 0;
         switch (type) {
