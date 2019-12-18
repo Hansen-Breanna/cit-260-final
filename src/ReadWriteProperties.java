@@ -7,8 +7,8 @@ import java.util.Properties;
 public class ReadWriteProperties {
 
     private static String propertiesPath = "rateLoan.properties";
-    public int loanPeriod;
-    public double interestRate;
+    public int loanPeriod = 30;
+    public double interestRate = 4.375;
 
     /**
      * Return loanPeriod
@@ -66,8 +66,12 @@ public class ReadWriteProperties {
             // load a properties file
             prop.load(input);
             //Set values for interestRate and loanPeriod
-            setInterestRate(Double.parseDouble(prop.getProperty("interestRate")));
-            setLoanPeriod(Integer.parseInt(prop.getProperty("loanPeriod")));
+            if (prop.getProperty("interestRate") != null) {
+                setInterestRate(Double.parseDouble(prop.getProperty("interestRate")));
+            }
+            if (prop.getProperty("loanPeriod") != null) {
+                setLoanPeriod(Integer.parseInt(prop.getProperty("loanPeriod")));
+            }
         } catch (IOException ex) {
             System.out.println("Input/Output failure.");
         }
