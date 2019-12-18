@@ -90,16 +90,7 @@ public class RemoveMenu extends Menu {
      */
     public void removeProperty(String type) {
         //Load data from file and create ArrayList
-        ArrayList<Residence> residenceData = new ArrayList<>();
-        try {
-            residenceData = Storage.loadData("data.txt");
-            //DebugUtils.Write(newData);
-        } catch (FileIsEmptyException fiee) {
-            //Do nothing - Catch if file is empty
-        } catch (Exception ex) {
-            System.err.println("Error loading file: " + ex.getMessage());
-            System.exit(1);
-        }
+        ArrayList<Residence> residenceData = Storage.returnData();
 
         try {
             tableType(residenceData, type);
@@ -110,7 +101,10 @@ public class RemoveMenu extends Menu {
                 do {
                     String choose = Menu.prompt("Which property would you like to delete?", true);
                     int pickedNumber = Integer.parseInt(choose);
-                    //TODO do number format exception for pickedNumber?
+                    if ((residenceData.size() < pickedNumber) || (pickedNumber > residenceData.size())) {
+                        System.out.println("\nProperty number does not exist. Please try again.");
+                        return;
+                    }
                     //Asks user to confirm their selection, loops choice if no is selected
                     choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
                     if (choice.toUpperCase().charAt(0) == 'Y') {
@@ -126,8 +120,6 @@ public class RemoveMenu extends Menu {
                         System.out.println("Enter valid selection.");
                     }
                 } while (choice.toUpperCase().charAt(0) != 'Y');
-
-            MainMenu.displayAll();
 
             //Writes new list to file
             Storage.storeData("data.txt", residenceData);

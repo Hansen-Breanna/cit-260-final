@@ -181,4 +181,23 @@ public class Storage {
 
         return newData;
     }
+
+    /**
+     * The returnData method
+     * This method creates an arraylist and loads the file into it
+     * @return
+     */
+    public static ArrayList<Residence> returnData() {
+        //Load data from file and create ArrayList
+        ArrayList<Residence> newData = new ArrayList<>();
+        try {
+            newData = Storage.loadData("data.txt");
+        } catch (FileIsEmptyException fiee) {
+            //Do nothing - Catch if file is empty
+        } catch (Exception ex) {
+            System.err.println("Error loading file: " + ex.getMessage());
+            System.exit(1);
+        }
+        return newData;
+    }
 }

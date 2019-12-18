@@ -70,14 +70,20 @@ public class MainMenu extends Menu {
            return menu.display();
 		//If user enters 4, this block runs
         } else if (key == '4') {
-            // Display the Remove Menu title and options
-            RemoveMenu rmenu = new RemoveMenu();
-            return rmenu.display();
+            ArrayList<Residence> newData = Storage.returnData();
+            if (newData.size() != 0) {
+                // Display the Remove Menu title and options
+                RemoveMenu rmenu = new RemoveMenu();
+                return rmenu.display();
+            } else {
+                System.out.println("\nThere are currently no properties in the list to remove.");
+            }
 		//Else user enters anything other than above options, main menu prints again
         } else {
             System.out.println("Enter valid selection for Main Menu.");
             return true;
         }
+        return true;
     }
 
     public static void changeRateAndLoan() {
