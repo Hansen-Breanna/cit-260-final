@@ -54,6 +54,12 @@ public class RemoveMenu extends Menu {
      */
     @Override
     protected boolean handleMenuSelection(char key) {
+        ArrayList<Residence> newData = Storage.returnData();
+        if (newData.size() == 0) {
+            System.out.println();
+            // Display the Main Menu title and options
+            new MainMenu().display();
+        }
         //If user enters X, this block runs and menu quits
         if (key == 'X' || key == 'x') {
             //Exits program
