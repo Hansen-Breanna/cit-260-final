@@ -103,7 +103,7 @@ public class Multiplex extends Residence {
         Double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
                 this.getLoanPeriod());
         Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
-        Double netProfit = this.monthlyNetProfit(monthlyPayment, rentalIncome, this.getTaxes());
+        Double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getUtilities());
 
 		//Returns the string for each object of a Multiplex to the table
 		return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f" +

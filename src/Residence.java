@@ -125,7 +125,7 @@ public class Residence {
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome) {
 		//Calculate and return rentalIncome
-        return rentalIncome - (monthlyPayment + (taxes / 12));
+        return rentalIncome - (monthlyPayment + (taxes / 12f));
     }
 	
 	/**

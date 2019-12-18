@@ -99,12 +99,12 @@ public class Condo extends Residence {
      */
     @Override
     public String toString() {
-        Double downPayment = super.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
-        Double pricePerSqFoot = super.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
-        Double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
+        Double downPayment = this.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
+        Double pricePerSqFoot = this.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
+        Double monthlyPayment = this.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
                 this.getLoanPeriod());
         Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
-        Double netProfit = this.monthlyNetProfit(monthlyPayment, rentalIncome, this.getTaxes());
+        Double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getHoaFee());
 
         //Returns the string for each object of a Multiplex to the table
         return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f  " +

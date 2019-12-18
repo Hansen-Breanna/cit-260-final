@@ -72,9 +72,9 @@ public class House extends Residence {
         Double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
                 this.getLoanPeriod());
         Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
-        Double netProfit = this.monthlyNetProfit(monthlyPayment, rentalIncome, this.getTaxes());
+        Double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome);
 
-        //String of each object in arraylist that is a house
+        //String of each object in ArrayList that is a House
         return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f  " +
                         "$%-,9.2f  $%-,8.2f   %-7.2f", this.getAddress(), this.getBedrooms(), this.getBathrooms(),
                 this.getSqfeet(), this.getPurchasePrice(), this.getTaxes(), downPayment, pricePerSqFoot,
