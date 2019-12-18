@@ -151,7 +151,7 @@ public class MainMenu extends Menu {
                 int loanYears = Integer.parseInt(loanPeriod);
 
                 //Make sure rate is not less than 1% or greater than/equal to 100%
-                if (Residence.loanPeriod < 1 || Residence.loanPeriod > 30) {
+                if (loanYears < 0 || loanYears > 30) {
                     System.out.println("The loan period must be a positive value that is between 1 and 30 " +
                             "inclusive.\n");
                 }
