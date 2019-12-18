@@ -269,8 +269,8 @@ public class AddMenu extends Menu {
                 //Create new House instance
                 if (checkAcreage > 0) {
                     newHouse = new House(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
-                            Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
-                            checkAcreage);
+                            Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
+                            Double.parseDouble(userInput[5]), checkAcreage);
                     checkDouble = true;
                 }
             } catch (NumberFormatException e) {
@@ -299,8 +299,8 @@ public class AddMenu extends Menu {
                 if (checkHoa > 0) {
                     String amenities = prompt("Enter amenities (ex. pool, tennis court): ", true);
                     newCondo = new Condo(userInput[0], Integer.parseInt(userInput[1]), Double.parseDouble(userInput[2]),
-                            Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]),
-                            checkHoa, amenities);
+                            Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
+                            Double.parseDouble(userInput[5]), checkHoa, amenities);
                     checkDouble = true;
                 }
             } catch (NumberFormatException e) {
@@ -333,8 +333,9 @@ public class AddMenu extends Menu {
                     if (utilitiesCost > -1) {
                         //Create new Multiplex
                         newMulti = new Multiplex(userInput[0], Integer.parseInt(userInput[1]),
-                                Double.parseDouble(userInput[2]), Integer.parseInt(userInput[3]), Double.parseDouble(userInput[4]),
-                                Double.parseDouble(userInput[5]), numUnits, utilitiesCost);
+                                Double.parseDouble(userInput[2]), Integer.parseInt(userInput[3]),
+                                Double.parseDouble(userInput[4]), Double.parseDouble(userInput[5]), numUnits,
+                                utilitiesCost);
                         checkVal = true;
                     } else {
                         System.out.println("Please enter a number greater than 0 for utilities.");

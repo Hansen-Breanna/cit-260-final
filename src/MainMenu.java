@@ -152,7 +152,8 @@ public class MainMenu extends Menu {
 
                 //Make sure rate is not less than 1% or greater than/equal to 100%
                 if (Residence.loanPeriod < 1 || Residence.loanPeriod > 30) {
-                    System.out.println("The loan period must be a positive value that is between 1 and 30 inclusive.\n");
+                    System.out.println("The loan period must be a positive value that is between 1 and 30 " +
+                            "inclusive.\n");
                 }
                 //If the input fits within the requested values
                 else {
