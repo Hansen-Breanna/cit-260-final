@@ -101,7 +101,7 @@ public class Multiplex extends Residence {
         double downPayment = super.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
         double pricePerSqFoot = super.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
         double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
-                this.getLoanPeriod());
+                this.getLoanPeriod(), downPayment);
         double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
         double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getUtilities());
 

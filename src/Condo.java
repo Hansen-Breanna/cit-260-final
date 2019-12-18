@@ -99,7 +99,7 @@ public class Condo extends Residence {
         double downPayment = this.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
         double pricePerSqFoot = this.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
         double monthlyPayment = this.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
-                this.getLoanPeriod());
+                this.getLoanPeriod(), downPayment);
         double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
         double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getHoaFee());
 

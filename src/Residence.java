@@ -21,7 +21,7 @@ public class Residence {
 	//Loan time period in years
     protected static int loanPeriod = 30;
 	//Required percentage down for investment property
-    protected final static double PERCENT_DOWN = 0.2;
+    protected final static double PERCENT_DOWN = 0.25;
 	//Number to multiply square footage by to calculate rental income
     protected final static double RENT_PER_SQFT = 0.7;
 
@@ -91,15 +91,16 @@ public class Residence {
      * @param loanPeriod
      * @return monthlyPayment
      */
-    public double monthlyPayment(double purchasePrice, double interestRate, int loanPeriod) {
+    public double monthlyPayment(double purchasePrice, double interestRate, int loanPeriod, double downPayment) {
         //Multiply years by 12 to get total months
 		double termInMonths = loanPeriod * 12;
 		//Divide interest rate by hundred to get fraction. 
 		//Divide by 12 to get monthly interest rate
         double monthlyRate = (interestRate / 100) / 12;
-		//Calculate and return  monthly payment by multiplying purchasePrice and monthlyRate
+        double loanAmount = purchasePrice - downPayment;
+		//Calculate and return  monthly payment by multiplying loanAmount and monthlyRate
 		//Divide by (1 - Math.pow(1 + monthlyRate, -termInMonths)
-        return (purchasePrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -termInMonths));
+        return (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -termInMonths));
     }
 
     /**

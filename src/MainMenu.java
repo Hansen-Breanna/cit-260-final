@@ -139,7 +139,7 @@ public class MainMenu extends Menu {
                     System.out.format("Your new interest rate is: %5.3f%%\n", Residence.interestRate);
                 }
             } catch (NumberFormatException ex) {
-                System.out.println("The rate must be a positive value that is between 1 and 100.\n,");
+                System.out.println("The rate must be a positive value that is between 1 and 100.\n");
             }
         } while (!validInput);
 
