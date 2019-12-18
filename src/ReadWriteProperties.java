@@ -65,6 +65,7 @@ public class ReadWriteProperties {
 
             // load a properties file
             prop.load(input);
+            //Set values for interestRate and loanPeriod
             setInterestRate(Double.parseDouble(prop.getProperty("interestRate")));
             setLoanPeriod(Integer.parseInt(prop.getProperty("loanPeriod")));
         } catch (IOException ex) {
@@ -107,10 +108,11 @@ public class ReadWriteProperties {
         //get property values
         try {
             props.loadProperties();
+            //Change values in Residence file of loanPeriod and interestRate
             Residence.loanPeriod = props.getLoanPeriod();
             Residence.interestRate = props.getInterestRate();
         } catch (IOException e) {
-            System.out.println("Error loading properties.");
+            System.out.println("Error reading file.");
         }
     }
 }

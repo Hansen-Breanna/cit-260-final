@@ -53,6 +53,7 @@ public class RemoveMenu extends Menu {
      */
     @Override
     protected boolean handleMenuSelection(char key) {
+        //Check if data file is empty
         ArrayList<Residence> newData = Storage.returnData();
         if (newData.size() == 0) {
             System.out.println();
@@ -99,16 +100,21 @@ public class RemoveMenu extends Menu {
         ArrayList<Residence> residenceData = Storage.returnData();
 
         try {
+            //Display table by type
             tableType(residenceData, type);
-
-            //Prompts user to choose a property to delete.
             System.out.println();
+
+            //Intiailize variables for choosing
             String choice = "";
             String choose = "";
             int pickedNumber = 0;
+
+            //Prompts user to choose a property to delete.
                 do {
-                    choose = Menu.prompt("Which property would you like to delete? (choose X for none or if list is empty.):",
+                    choose = Menu.prompt("Which property would you like to delete? (choose X for none or if" +
+                                    " list is empty):",
                             true);
+                    //Change choice to integer if not an X or x
                     if (choose.toUpperCase().charAt(0) != 'X') {
                         pickedNumber = Integer.parseInt(choose);
                     } else {
@@ -122,7 +128,8 @@ public class RemoveMenu extends Menu {
                         return;
                     }
                     //Asks user to confirm their selection, loops choice if no is selected
-                    choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ", true);
+                    choice = Menu.prompt("You selected " + choose + ". Is this correct? (Y or N) ",
+                            true);
                     if (choice.toUpperCase().charAt(0) == 'Y') {
                         //remove selected data
                         int number = pickedNumber - 1;
@@ -157,8 +164,11 @@ public class RemoveMenu extends Menu {
         int count = 0;
         switch (type) {
             case "House":
+                //Create new instance
                 House newHouse = new House();
+                //Display table header
                 System.out.println(newHouse.tableHeader());
+                //Display table data
                 for (Residence residence: residenceData) {
                     count ++;
                     if (residence instanceof House) {
@@ -169,8 +179,11 @@ public class RemoveMenu extends Menu {
                 }
                 break;
             case "Condo":
+                //Create new instance
                 Condo newCondo = new Condo();
+                //Display table header
                 System.out.println(newCondo.tableHeader());
+                //Display table data
                 for (Residence residence: residenceData) {
                     count ++;
                     if (residence instanceof Condo) {
@@ -181,8 +194,11 @@ public class RemoveMenu extends Menu {
                 }
                 break;
             case "Multiplex":
+                //Create new instance
                 Multiplex newMulti = new Multiplex();
+                //Display table header
                 System.out.println(newMulti.tableHeader());
+                //Display table data
                 for (Residence residence: residenceData) {
                     count ++;
                     if (residence instanceof Multiplex) {

@@ -57,10 +57,12 @@ public class MainMenu extends Menu {
             return false;
         //Else if user enters 1, this block runs
         } else if (key == '1') {
+            //Change interest rate and loan period
             changeRateAndLoan();
             return true;
         //If user enters 2, this block runs
         } else if (key == '2') {
+            //Display all addresses and data
             displayAll();
             return true;
         //If user enters 3, this block runs
@@ -70,7 +72,10 @@ public class MainMenu extends Menu {
            return menu.display();
 		//If user enters 4, this block runs
         } else if (key == '4') {
-            ArrayList<Residence> newData = Storage.returnData();
+            //Return data file back to check if empty
+            ArrayList<Residence> newData;
+            newData = Storage.returnData();
+            //Run if data file isn't empty
             if (newData.size() != 0) {
                 // Display the Remove Menu title and options
                 RemoveMenu rmenu = new RemoveMenu();
@@ -86,6 +91,10 @@ public class MainMenu extends Menu {
         return true;
     }
 
+    /**
+     * The changeRateAndLoan Method
+     * This method prints out prompts to change the interest rate and loan period. New values are saved to a file
+     */
     public static void changeRateAndLoan() {
         //Needed a boolean condition for the do-while loop
         boolean validInput = false;
@@ -94,10 +103,11 @@ public class MainMenu extends Menu {
         ReadWriteProperties props = new ReadWriteProperties();
         try {
             props.loadProperties();
+            //Change values in Residence file of loanPeriod and interestRate
             Residence.loanPeriod = props.getLoanPeriod();
             Residence.interestRate = props.getInterestRate();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error reading file.");
         }
 
         //Keeps current interest rate and loan period display out of the loop so it doesn't display if user has to
@@ -107,13 +117,13 @@ public class MainMenu extends Menu {
         System.out.println("Current loan period in years is: " + Residence.loanPeriod);
 
         //Sets up a try-catch in a do-while loop, so interest rate option will loop again if it catches
-        // Numberformatexception
         do {
             try {
                 //Initial prompt for new interest rate
                 String newRate = prompt("Enter a new interest rate percent (example: 5.25): ",
                         true);
                 double rate = Double.parseDouble(newRate);
+                //Set new rate to property and variable
                 props.setInterestRate(rate);
                 Residence.interestRate = rate;
 
@@ -131,7 +141,7 @@ public class MainMenu extends Menu {
             } catch (NumberFormatException ex) {
                 System.out.println("The rate must be a positive value that is between 1 and 100.\n,");
             }
-        } while (validInput == false);
+        } while (!validInput);
 
         do {
             validInput = false;
@@ -139,7 +149,7 @@ public class MainMenu extends Menu {
                 //Prompt to enter loan period
                 String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
                 int loanYears = Integer.parseInt(loanPeriod);
-                Residence.loanPeriod =loanYears;
+
                 //Make sure rate is not less than 1% or greater than/equal to 100%
                 if (Residence.loanPeriod < 1 || Residence.loanPeriod > 30) {
                     System.out.println("The loan period must be a positive value that is between 1 and 30 inclusive.\n");
@@ -160,7 +170,7 @@ public class MainMenu extends Menu {
             } catch (NumberFormatException ex) {
                 System.out.println("The loan period must be a positive value that is between 1 and 30.");
             }
-        } while (validInput == false);
+        } while (!validInput);
 
         //Let user know main menu will reload
         System.out.println();
@@ -176,7 +186,8 @@ public class MainMenu extends Menu {
      */
     public static void displayAll() {
         //Load data from file and create ArrayList
-        ArrayList<Residence> newData = Storage.returnData();
+        ArrayList<Residence> newData;
+        newData = Storage.returnData();
 
         //Create instance for each subclass type of property
         House newHouse = new House();

@@ -67,12 +67,14 @@ public class House extends Residence {
      */
     @Override
     public String toString() {
-        Double downPayment = super.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
-        Double pricePerSqFoot = super.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
-        Double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
+
+        //Calculation methods from Residence class
+        double downPayment = super.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
+        double pricePerSqFoot = super.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
+        double monthlyPayment = super.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
                 this.getLoanPeriod());
-        Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
-        Double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome);
+        double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
+        double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome);
 
         //String of each object in ArrayList that is a House
         return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f  " +

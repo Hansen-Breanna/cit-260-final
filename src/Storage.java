@@ -8,6 +8,7 @@ import java.util.Scanner;
  * Provides methods to store and load data from files
  */
 public class Storage {
+
     /**
      * The storeData method
      * Store the data in the specified file
@@ -55,8 +56,8 @@ public class Storage {
     }
 
     /**
+     * The loadData method
      * Load the data from the specified file
-     *
      * @param filename The name of the file containing the data.
      * @return The list of objects loaded from the file.
      * @throws IOException
@@ -73,6 +74,7 @@ public class Storage {
             throw new IOException("Cannot find or read file");
         }
 
+        //Initialize ArrayList
         ArrayList<Residence> newData = new ArrayList<>();
 
         //Initialize line number

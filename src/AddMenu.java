@@ -87,16 +87,17 @@ public class AddMenu extends Menu {
     private static boolean addRes(String type) {
 
         //Load data from file and create ArrayList
-        ArrayList<Residence> newData = Storage.returnData();
+        ArrayList<Residence> newData;
+        newData = Storage.returnData();
 
         //Create instance for each subclass type of property
         House newHouse = new House();
         Condo newCondo = new Condo();
         Multiplex newMultiplex = new Multiplex();
 
-        //Call tableHeader method to display table header and loop printing list of type of property.
+        //Pass type in and call tableHeader method to display table header and loop printing list of type of property.
         //House header and list
-        if (type == "House") {
+        if (type.equals("House")) {
             System.out.println(newHouse.tableHeader());
             for (Residence r : newData) {
                 if (r instanceof House) {
@@ -106,7 +107,7 @@ public class AddMenu extends Menu {
             }
             System.out.println();
         //Condo header and list
-        } else if (type == "Condo") {
+        } else if (type.equals("Condo")) {
             System.out.println(newCondo.tableHeader());
             for (Residence r : newData) {
                 if (r instanceof Condo) {
@@ -128,14 +129,13 @@ public class AddMenu extends Menu {
         }
 
         //Display prompts for Residence variables from method. Store values in array
-        final int NUMBER_OF_INDEXES = 6;
-        String[] userInput = readNumbers(NUMBER_OF_INDEXES);
+        String[] userInput = readNumbers();
 
         //Display prompts for each type of residence and add instance to array list
-        if (type == "House") {
+        if (type.equals("House")) {
             newHouse = addHouse(userInput);
             newData.add(newHouse);
-        } else if (type == "Condo") {
+        } else if (type.equals("Condo")) {
             newCondo = addCondo(userInput);
             newData.add(newCondo);
         } else {
@@ -162,12 +162,11 @@ public class AddMenu extends Menu {
     /**
      * The readNumbers method
      * This method returns an array of values the user inputted for Residence variables
-     * @param NUMBER_OF_INDEXES
      * @return array
      */
-    private static String[] readNumbers(int NUMBER_OF_INDEXES) {
+    private static String[] readNumbers() {
         //Create initial array
-        String[] userValues = new String[NUMBER_OF_INDEXES];
+        String[] userValues = new String[6];
 
         //Display all Residence prompts to user, validate, and add to array
         try {
@@ -181,7 +180,7 @@ public class AddMenu extends Menu {
             do {
                 String beds = prompt("Enter number of bedrooms: ", true);
                 try {
-                    Integer checkBeds = Integer.parseInt(beds);
+                    int checkBeds = Integer.parseInt(beds);
                     userValues[1] = beds;
                     if (checkBeds > 0) {
                         checkVal = true;
@@ -189,7 +188,7 @@ public class AddMenu extends Menu {
                 } catch (NumberFormatException e) {
                     System.out.println("Input an integer.");
                 }
-            } while (checkVal == false);
+            } while (!checkVal);
             //Bathrooms
             do {
                 checkVal = false;
@@ -203,13 +202,13 @@ public class AddMenu extends Menu {
                 } catch (NumberFormatException e) {
                     System.out.println("Input a number.");
                 }
-            } while (checkVal == false);
+            } while (!checkVal);
             //Square footage
             do {
                 checkVal = false;
                 String sqft = prompt("Enter square footage (ex. 1500): ", true);
                 try {
-                    Integer checkSqFt = Integer.parseInt(sqft);
+                    int checkSqFt = Integer.parseInt(sqft);
                     userValues[3] = sqft;
                     if (checkSqFt > 0) {
                         checkVal = true;
@@ -217,7 +216,7 @@ public class AddMenu extends Menu {
                 } catch (NumberFormatException e) {
                     System.out.println("Input an integer.");
                 }
-            } while (checkVal == false);
+            } while (!checkVal);
             //Price
             do {
                 checkVal = false;
@@ -231,7 +230,7 @@ public class AddMenu extends Menu {
                 } catch (NumberFormatException e) {
                     System.out.println("Input a number.");
                 }
-            } while (checkVal == false);
+            } while (!checkVal);
             //Taxes
             do {
                 checkVal = false;
@@ -245,7 +244,7 @@ public class AddMenu extends Menu {
                 } catch (NumberFormatException e) {
                     System.out.println("Input a number.");
                 }
-            } while (checkVal == false);
+            } while (!checkVal);
         } catch (Exception ex) {
             System.err.println("Error: input must be an integer.");
         }
@@ -277,7 +276,7 @@ public class AddMenu extends Menu {
             } catch (NumberFormatException e) {
                 System.out.println("Input a number.");
             }
-        } while (checkDouble == false);
+        } while (!checkDouble);
 
         //Return instance
         return newHouse;
@@ -307,7 +306,7 @@ public class AddMenu extends Menu {
             } catch (NumberFormatException e) {
                 System.out.println("Input a number.");
             }
-        } while (checkDouble == false);
+        } while (!checkDouble);
         return newCondo;
     }
 
@@ -325,7 +324,9 @@ public class AddMenu extends Menu {
             //Units
             String units = prompt("Enter number of units: ", true);
             try {
+                //Parse string
                 int numUnits = Integer.parseInt(units);
+                //Check for positive number
                 if (numUnits > 0) {
                     String utilities = prompt("Enter monthly utilities (ex 225): ", true);
                     double utilitiesCost = Double.parseDouble(utilities);
@@ -344,7 +345,7 @@ public class AddMenu extends Menu {
             } catch (NumberFormatException e) {
                 System.out.println("Input a number.");
             }
-        } while (checkVal == false);
+        } while (!checkVal);
         return newMulti;
     }
 }

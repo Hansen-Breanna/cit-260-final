@@ -70,10 +70,8 @@ public class Condo extends Residence {
      * @return monthlyNetProfit
      */
     public double monthlyNetProfit(double monthlyPayment, double taxes, double rentalIncome, double hoaFee) {
-        //Equation for calculating monthly net profit
-		double monthlyNetProfit = rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
-		//Return net profit value
-        return monthlyNetProfit;
+        //Return net profit value
+        return rentalIncome - (monthlyPayment + (taxes / 12) + hoaFee);
     }
 
 	/**
@@ -98,12 +96,12 @@ public class Condo extends Residence {
      */
     @Override
     public String toString() {
-        Double downPayment = this.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
-        Double pricePerSqFoot = this.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
-        Double monthlyPayment = this.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
+        double downPayment = this.downPayment(this.getPurchasePrice(), PERCENT_DOWN);
+        double pricePerSqFoot = this.pricePerSqFt(this.getPurchasePrice(), this.getSqfeet());
+        double monthlyPayment = this.monthlyPayment(this.getPurchasePrice(), this.getInterestRate(),
                 this.getLoanPeriod());
-        Double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
-        Double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getHoaFee());
+        double rentalIncome = this.rentalIncome(this.getSqfeet(), RENT_PER_SQFT);
+        double netProfit = this.monthlyNetProfit(monthlyPayment, this.getTaxes(), rentalIncome, this.getHoaFee());
 
         //Returns the string for each object of a Condo to the table
         return String.format("%-50s   %-4d   %-5.2f   %-,6d   $%-,11.2f  $%-,9.2f  $%-,10.2f   $%-,7.2f  $%-,9.2f  " +
