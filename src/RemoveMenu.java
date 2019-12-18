@@ -107,7 +107,7 @@ public class RemoveMenu extends Menu {
                 do {
                     String choose = Menu.prompt("Which property would you like to delete?", true);
                     int pickedNumber = Integer.parseInt(choose);
-                    if ((residenceData.size() < pickedNumber) || (pickedNumber > residenceData.size())) {
+                    if ((residenceData.size() < pickedNumber) || (pickedNumber < 1)) {
                         System.out.println("\nProperty number does not exist. Please try again.");
                         return;
                     }

@@ -1,8 +1,12 @@
 //imports
 import menu.Menu;
 import menu.MenuItem;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.Properties;
 
 /**
  * Method creates Main Menu to display to user
@@ -90,6 +94,16 @@ public class MainMenu extends Menu {
         //Needed a boolean condition for the do-while loop
         boolean validInput = false;
 
+        //Create new properties instance
+        ReadWriteProperties props = new ReadWriteProperties();
+        try {
+            props.loadProperties();
+            Residence.loanPeriod = props.getLoanPeriod();
+            Residence.interestRate = props.getInterestRate();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //Keeps current interest rate and loan period display out of the loop so it doesn't display if user has to
         //re-enter
         System.out.println();
@@ -104,6 +118,7 @@ public class MainMenu extends Menu {
                 String newRate = prompt("Enter a new interest rate percent (example: 5.25): ",
                         true);
                 double rate = Double.parseDouble(newRate);
+                props.setInterestRate(rate);
                 Residence.interestRate = rate;
 
                 //Make sure the rate is not less than 1%, or not greater than or equal to 100%
@@ -128,14 +143,17 @@ public class MainMenu extends Menu {
                 //Prompt to enter loan period
                 String loanPeriod = prompt("Enter the loan period in years (ex. 30): ", true);
                 int loanYears = Integer.parseInt(loanPeriod);
-
+                Residence.loanPeriod =loanYears;
                 //Make sure rate is not less than 1% or greater than/equal to 100%
                 if (Residence.loanPeriod < 1 || Residence.loanPeriod > 30) {
-                    System.out.println("The loan period must be a positive value that is between 1 and 30.\n");
+                    System.out.println("The loan period must be a positive value that is between 1 and 30 inclusive.\n");
                 }
                 //If the input fits within the requested values
                 else {
+                    //props.setLoanPeriod(loanYears);
                     Residence.loanPeriod = loanYears;
+                    props.setLoanPeriod(loanYears);
+
                     //This line ends the loop
                     validInput = true;
 
