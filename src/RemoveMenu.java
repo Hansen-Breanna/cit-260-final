@@ -111,15 +111,20 @@ public class RemoveMenu extends Menu {
 
             //Prompts user to choose a property to delete.
                 do {
-                    choose = Menu.prompt("Which property would you like to delete? (choose X for none or if" +
-                                    " list is empty):",
-                            true);
-                    //Change choice to integer if not an X or x
-                    if (choose.toUpperCase().charAt(0) != 'X') {
-                        pickedNumber = Integer.parseInt(choose);
-                    } else {
-                        System.out.println("Property list is empty or none chosen.");
-                        return;
+                    try {
+                        choose = Menu.prompt("Which property would you like to delete? (choose X for none or if" +
+                                        " list is empty): ",
+                                true);
+
+                        //Change choice to integer if not an X or x
+                        if (choose.toUpperCase().charAt(0) != 'X') {
+                            pickedNumber = Integer.parseInt(choose);
+                        } else {
+                            System.out.println("Property list is empty or none chosen.");
+                            return;
+                        }
+                    }catch(NumberFormatException exception){
+                        System.out.println("That is not a valid selection. Please try again.");
                     }
 
                     //Check to see if user enters an invalid number
@@ -148,7 +153,7 @@ public class RemoveMenu extends Menu {
             Storage.storeData("data.txt", residenceData);
 
             //Notifies user property is removed
-            System.out.println("Choice " + choose + "has been removed from the list.");
+            System.out.println("\nChoice " + choose + "has been removed from the list.");
         } catch (IOException ex) {
             System.out.println("Could not find file.");
         }
